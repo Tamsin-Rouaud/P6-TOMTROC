@@ -11,6 +11,8 @@ require_once 'config/autoload.php';  // Charger l'autoloader pour inclure automa
 $router = new Router();
 
 // Définir les routes de l'application
+// La route 'helloWorld' appelle le contrôleur 'HelloWorldController' et sa méthode 'showHelloWorld'
+$router->addRoute('helloWorld', 'HelloWorldController', 'showHelloWorld');
 
 // Définir une route par défaut (si aucune action n'est spécifiée dans l'URL)
 // La route 'default' appelle le contrôleur 'HomeController' et sa méthode 'index'

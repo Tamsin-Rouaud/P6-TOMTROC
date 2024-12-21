@@ -1,0 +1,116 @@
+/********** AVAILABLEBOOKS **********/
+
+section {
+    margin: 0;
+}
+
+.books {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 300px;
+    padding-right: 250px;
+    background-color: #FAF9F7;
+}
+
+.partOne h1 {
+    margin: 0;
+    padding: 0;
+     
+}
+
+.partOne {
+    padding-top: 150px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    margin-bottom: 50px;
+    
+}
+
+.exchangeBooks {
+    display: flex;
+    border: solid 1px #F0F0F0;
+    border-radius: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    width: 322px;
+    background-color: white;
+}
+
+#search input {
+    border: none;
+    background-color: transparent;
+}
+
+#searchButton {
+    border: none;
+    margin-left: 5px;
+    margin-right: 10px;
+    background-color: white;
+    
+}
+
+
+#search {
+    border: none;
+    outline: none; /* Retire la bordure bleue de focus */
+}
+
+
+#search::placeholder {
+    color: #A6A6A6;
+    font-size: 1em;
+   
+}
+
+.bookBlock {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.bookImgBlock {
+    
+    background-color: white;
+    height: 324px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding-right: 22px;
+}
+
+.bookImgBlockText {
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-left: 20px;
+    font-size: 0.9em;
+    font-weight: normal;
+    justify-content: flex-start;
+}
+
+.bookImgBlockText p {
+    font-size: 1em;
+    color: #A6A6A6;
+    padding-bottom:10px;
+}
+
+.bookImgBlockText h3 {
+    font-size: 1.1em;
+    font-weight: normal;
+    padding-bottom: 10px;
+}
+
+.bookImgBlockText p:last-of-type {
+    padding-top: 10px;
+    font-style: italic;
+    font-size: 0.75em;
+}

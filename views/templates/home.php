@@ -43,7 +43,7 @@
             <div class="imgBlock">
                 <img src="images/milkHoney.jpg" alt="Milk & honey">
                 <div class="imgBlockText">
-                    <h3>Mil & honey</h3>
+                    <h3>Milk & honey</h3>
                     <p>Rupi Kaur</p>
                     <p>Vendu par : Hugo1990_12</p>
                 </div>

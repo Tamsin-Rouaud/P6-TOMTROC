@@ -1,0 +1,36 @@
+/********** FOOTER **********/
+
+footer {
+    display: flex;
+    font-size: 0.9em;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 61px;
+    background-color: white;
+
+}
+
+.footerUl {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+
+}
+
+footer ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    
+}
+
+li {
+    padding-right: 30px;
+    
+}
+
+#logoTT {
+    width: 22px;
+    
+}

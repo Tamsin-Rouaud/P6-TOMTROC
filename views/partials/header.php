@@ -1,4 +1,4 @@
-<div class="header">
+<header>
     <nav>
         <ul>
             <div class="firstPart">
@@ -13,4 +13,4 @@
             </div>
         </ul  >
     </nav>
-</div>
+</header>

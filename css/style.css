@@ -3,23 +3,28 @@
 /********* RESET CSS *********/
 
 * {
-    margin: 0;
+    margin: 0 auto;
     box-sizing: border-box;
     
 }
+
+input, label, form, p, h3 {
+    margin: 0;
+    
+}
+
 
 a {
     text-decoration: none;
     
 }
 
-.button a {
-    color: white;
-}
-
-
-
 /********** GENERAL **********/
+
+* {
+    max-width: 1440px;
+
+}
 
 body {
     display: flex;
@@ -30,9 +35,12 @@ body {
     background-color: #F5F3EF;
     max-width: 1440px;
     margin: 0 auto;
-
-
     
+}
+
+main {
+    width: 1440px;
+
 }
 
 h1 {
@@ -42,6 +50,7 @@ h1 {
     padding-bottom: 15px;
     padding-right: 10px;
     margin-top: 25px;
+
 }
 
 .button {
@@ -50,324 +59,16 @@ h1 {
     padding: 20px 45px;
     border-radius: 10px;
     margin-top: 40px;
+
+}
+
+.button a {
+    color: white;
+
 }
 
 section {
     margin-bottom: 40px;
     margin-top: 50px;
-    
-
-}
-
-/********** HEADER **********/
-
-.header {
-    display: flex;
-    background-color: #F5F3EF;
-    height: 80px;
-    width: 100%;
-    align-items: center;
-}
-
-.header ul {
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-}
-
-.header li {
-    display: flex;
-    padding-right: 60px;
-    align-items: center;
-
-}
-
-.firstPart li:first-of-type {
-    padding-left: 60px;
-}
-
-.header span {
-    background-color: black;
-    color: white;
-    width: 11px;
-    height: 15px;
-    border-radius: 30px;
-    text-align: center;
-    font-size: 0.7em;
-    margin-left: 3px;
-}
-
-.icon {
-    padding-right: 3px;
-    height: 13px;
-    
-}
-nav {
-    width: 100%;
-    height: 80px;
-}
-
-.firstPart, .secondPart {
-    display: flex;
-    height: 80px;
-    align-items: center;
-    padding-left: 80px;
-    padding-right: 60px;
-}
-
-
-#logo {
-    background-color: #F5F3EF;
-    height: 51px;
-    
-}
-
-/********** HOME **********/
- /** First Section **/  
-.firstSection {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding-top: 40px;
-    
-    
-}
-
-.homeFirstSection {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 60%;
-    margin: 0 auto;
-        
-}
-
-.homeFirstSection article {
-    
-    width: 42%;
-    padding-right: 40px;
-    margin-right: 65px;
-    
-    
-}
-
-.homeFirstSection figcaption {
-    text-align: right;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-family: inter;
-    font-size: 12px;
-    font-style: italic;
-    font-weight: 300;
-    color: #A6A6A6;
-}
-
-.homeFirstSection aside {
-    justify-content: flex-end;
-}
-
-.homeFirstSection img {
-    object-fit: cover;
-    height: 539px;
-}
-
- /** Second Section **/
-
- .secondSection {
-    width: 100%;
- }
- .homeSecondSection {
-    background-color: #FAF9F7;
-
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding-bottom: 40px;
- }
-
- .homeSecondSection h1 {
-    text-align: center;
-    padding-top: 40px;
- }
- .imgGroupBlocks {
-    display: flex;
-    padding-top: 60px;
-    justify-content: center;
-    
- }
-
- .imgBlock {
-    margin-right: 40px;
-    background-color: white;
-    height: 324px;
- }
-
- .imgBlock img {
-    width: 200px;
-    object-fit: cover;
-    padding: 0;
-
- }
-
- .imgBlockText {
-    display: flex;
-    flex-direction: column;
-    padding-top: 15px;
-    padding-left: 20px;
-    font-size: 0.9em;
-    font-weight: normal;
- }
-
-.imgBlockText h3 {
-    font-size: 1em;
-    font-weight: normal;
-}
- .imgBlockText p {
-    color: grey;
-    padding-top: 10px;
-    font-size: 1em;
- }
-
- .imgBlockText p:last-of-type {
-    font-size: 0.8em;
-    font-style: italic;
-    padding-top: 20px;
-
- }
-
- .seeAllBooks {
-
-    display: flex;
-    justify-content: center;
-    border: none;
- }
-
-    /** Third section **/
-    .thirdSection {
-        width: 100%;
-     }
-     .homeThirdSection {
-        background-color: #F5F3EF;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        padding-bottom: 30px;
-     }
-    
-     .homeThirdSection h1 {
-        text-align: center;
-        padding-bottom: 20px;
-        
-     }
-
-#ptitle {
-        width: 28%;
-        text-align: center;
-     }
-     .textGroupBlocks {
-        display: flex;
-        padding-top: 50px;
-        justify-content: center;
-        
-        
-     }
-    
-     .textBlock {
-        margin-right: 40px;
-        padding-left: 23px;
-        padding-right: 23px;
-        background-color: white;
-        height: 139px;
-        width: 215px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        font-size: 0.85em;
-     }
- 
-     .seeAllBooksTransparent {
-    
-        display: flex;
-        justify-content: center;
-        border: 2px solid #00AC66;
-        background-color: transparent;
-        
-     }
-
-     .seeAllBooksTransparent a {
-        color: #00AC66;
-        font-weight: bold;
-     }
-
-    /** Fourth section **/
-
-    /** Fifth section **/
-
-.fifthSection {
-    display: flex;
-    justify-content: center;
-}
-.homeFifthSection {
-    width: 30%;
-    padding-bottom: 40px;
-    padding-left: 25px;
-    
-   
-}
-
-.fifthSection h1 {
-    padding-bottom: 25px;
-}
-.fifthSection p {
-    padding-bottom: 20px;
-    padding-right: 20px;
-    font-size: 1em;
-}
-
-
-.fifthSection span {
-    display: block;
-    font-style: italic;
-    color: #A6A6A6;
-    font-size: 0.85em;
-    padding-bottom: 20px;
-}
-
-.signature {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 10px;
-    align-items: center;
-}
-
-#heart {
-    display: flex;
-    justify-content: flex-end;
-}
-
-/********** FOOTER **********/
-.footer {
-    display: flex;
-    font-size: 0.9em;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-    height: 61px;
-    background-color: white;
-
-}
-
-ul {
-    display: flex;
-    list-style: none;
-    align-items: center;
-}
-
-li {
-    padding-right: 30px;
-    
-}
-
-#logoTT {
-    width: 22px;
+  
 }

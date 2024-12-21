@@ -11,16 +11,25 @@ require_once 'config/autoload.php';  // Charger l'autoloader pour inclure automa
 $router = new Router();
 
 // Définir les routes de l'application
-// La route 'helloWorld' appelle le contrôleur 'HelloWorldController' et sa méthode 'showHelloWorld'
-$router->addRoute('helloWorld', 'HelloWorldController', 'showHelloWorld');
 
+// La route 'availableBooks' appelle le contrôleur 'AvailableBooksCOntroller' et sa méthode 'showAvailableBooks'
+$router->addRoute('availableBooks', 'AvailableBooksController', 'showAvailableBooks');
+// La route 'register' appelle le contrôleur 'userController' et sa méthode 'showRegister'
+$router->addRoute('register', 'UserController', 'showRegister');
+
+// La route 'search' appelle le contrôleur 'searchController' et sa méthode showSearch'
+$router->addRoute('search', 'searchController', 'showSearch');
 // Définir une route par défaut (si aucune action n'est spécifiée dans l'URL)
 // La route 'default' appelle le contrôleur 'HomeController' et sa méthode 'index'
 $router->addRoute('default', 'HomeController', 'index');
 
 // Récupérer l'action depuis l'URL ou définir 'default' si aucune action n'est spécifiée
-// Si l'URL contient ?action=<action>, on récupère la valeur de 'action', sinon on utilise 'default'
 $action = $_GET['action'] ?? 'default';  // Si l'action n'est pas présente dans l'URL, utiliser 'default'
+
+// Si le paramètre `search` est présent dans l'URL, on définit l'action à 'search'
+if (isset($_GET['search'])) {
+    $action = 'search';  // On définit l'action comme 'search' pour appeler le contrôleur 'SearchController'
+}
 
 // Essayer d'exécuter la route en appelant la méthode 'dispatch' du routeur avec l'action récupérée
 try {
@@ -31,4 +40,3 @@ try {
     $errorController = new ErrorController();  // Créer une instance du contrôleur d'erreurs
     $errorController->showError($e->getMessage());  // Appeler la méthode 'showError' du contrôleur d'erreurs et afficher le message
 }
-?>

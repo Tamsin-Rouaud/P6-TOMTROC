@@ -1,0 +1,69 @@
+
+/********** HEADER **********/
+
+header {
+    display: flex;
+    background-color: #F5F3EF;
+    height: 80px;
+    width: 1440px;
+    align-items: center;
+    position: fixed;
+       
+}
+
+header ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+        
+}
+
+header li {
+    display: flex;
+    padding-right: 60px;
+    align-items: center;
+    
+}
+
+.firstPart li:first-of-type {
+    padding-left: 60px;
+
+}
+
+header span {
+    background-color: black;
+    color: white;
+    width: 11px;
+    height: 15px;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 0.7em;
+    margin-left: 3px;
+}
+
+.icon {
+    padding-right: 3px;
+    height: 13px;
+    
+}
+
+nav {
+    width: 100%;
+    height: 80px;
+    margin: 0;
+}
+
+.firstPart, .secondPart {
+    display: flex;
+    height: 80px;
+    align-items: center;
+    padding-left: 80px;
+    padding-right: 60px;
+}
+
+#logo {
+    background-color: #F5F3EF;
+    height: 51px;
+    
+}

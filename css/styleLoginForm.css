@@ -1,0 +1,85 @@
+.connexionBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 ;
+    background-color: #F5F5F5;
+
+}
+
+#connexionTitle {
+    padding-bottom: 40px;
+    margin: 0;
+    text-align: left;
+}
+
+.connexionText {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    padding-left: 160px;
+    width: 482px;
+}
+
+.formInput {
+    display: flex;
+    flex-direction: column;
+    color: #A6A6A6;
+    font-size: 0.9em;
+    padding-bottom: 30px;
+    width: 100%;
+        
+}
+
+.formInput label {
+    padding-bottom: 10px;
+
+}
+
+.formInput input {
+    border: #F0F0F0;
+    height: 50px;
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 10px;
+
+}
+
+.connexionImg {
+    margin: 0;
+
+}
+
+.subscribe {
+    color: white;
+    width: 100%;
+    font-size: 1em;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+
+.subscribe a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    
+}
+
+.connexionText p {
+    padding-top: 30px;
+    color: #292929;
+    font-size: 0.9em;
+
+}
+
+.connexionText p a {
+    text-decoration: underline;
+
+}

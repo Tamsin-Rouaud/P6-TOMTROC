@@ -4,7 +4,7 @@
             <h1>Rejoignez nos lecteurs passionnés</h1>
             <p>Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux 
             de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.</p>
-            <button class= "button"><a href="#">Découvrir</a></button>
+            <button class= "button"><a href="index.php?action=availableBooks">Découvrir</a></button>
         </article>
         <aside>
             <img src="images/homeFirstImg.jpg" alt="Hamza">
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <button class= "button seeAllBooks"><a href="#">Voir tous les livres</a></button>
+        <button class= "button seeAllBooks"><a href="index.php?action=availableBooks">Voir tous les livres</a></button>
     </section>
 </div>
 
@@ -71,7 +71,7 @@
                 <p>Proposez un échange et discutez avec d'autres passionnés de lecture.</p>
             </div>
         </div>
-        <button class= "button seeAllBooksTransparent"><a href="#">Voir tous les livres</a></button>
+        <button class= "button seeAllBooksTransparent"><a href="index.php?action=availableBooks">Voir tous les livres</a></button>
     </section>
 </div>
 <div class="fourthsection">

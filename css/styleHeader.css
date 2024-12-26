@@ -19,12 +19,22 @@ header ul {
         
 }
 
-header li {
+nav ul div li {
     display: flex;
     padding-right: 60px;
     align-items: center;
+
     
 }
+
+ul div li a {
+    color: black;
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .firstPart li:first-of-type {
     padding-left: 60px;
@@ -32,10 +42,11 @@ header li {
 }
 
 header span {
+    display: inline-block;
     background-color: black;
     color: white;
-    width: 11px;
-    height: 15px;
+    width: 10px;
+    height: 14px;
     border-radius: 30px;
     text-align: center;
     font-size: 0.7em;
@@ -67,3 +78,8 @@ nav {
     height: 51px;
     
 }
+
+nav ul li a.active {
+    font-weight: bold;
+}
+

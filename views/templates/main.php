@@ -13,10 +13,13 @@
     <link rel="stylesheet" href="./css/styleHeader.css">
     <!-- Lien fichier style footer -->
     <link rel="stylesheet" href="./css/styleFooter.css">
-    <!-- Lien fichier style home.php -->
+    <!-- Lien fichier style home -->
     <link rel="stylesheet" href="./css/styleHomePage.css">
-    <!-- Lien fichier style availableBooks.php -->
+    <!-- Lien fichier style availableBooks -->
     <link rel="stylesheet" href="./css/styleAvailableBooks.css">
+    <!-- Lien fichier style styleLoginForm -->
+    <link rel="stylesheet" href="./css/styleLoginForm.css">
+
 
 </head>
 

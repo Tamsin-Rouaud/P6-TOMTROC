@@ -14,9 +14,17 @@ $router = new Router();
 
 // La route 'availableBooks' appelle le contrôleur 'AvailableBooksCOntroller' et sa méthode 'showAvailableBooks'
 $router->addRoute('availableBooks', 'AvailableBooksController', 'showAvailableBooks');
-// La route 'register' appelle le contrôleur 'userController' et sa méthode 'showRegister'
-$router->addRoute('register', 'UserController', 'showRegister');
 
+// Route pour la gestion des utilisateurs
+// Cette route sera à afficher le formulaire de connexion et traite sa soumission
+$router->addRoute('loginForm', 'UserController', 'showLoginForm');
+// Cette route sert à afficher le formulaire d'inscription et à traiter sa soumission
+$router->addRoute('register', 'UserController', 'showRegisterForm');
+
+
+
+// La route 'registerForm' appelle le contrôleur 'userController' et sa méthode 'showLoginForm'
+$router->addRoute('registerForm', 'UserController', 'showRegisterForm');
 // La route 'search' appelle le contrôleur 'searchController' et sa méthode showSearch'
 $router->addRoute('search', 'searchController', 'showSearch');
 // Définir une route par défaut (si aucune action n'est spécifiée dans l'URL)

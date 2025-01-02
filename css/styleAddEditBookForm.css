@@ -1,0 +1,159 @@
+/*** AddBookForm ***/
+
+.addEditBookForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 100px;
+    padding-left: 70px;
+    padding-bottom: 60px;
+    margin: auto;
+    background-color: #faf9f7;
+}
+
+.addEditBookForm button {
+    margin-top: 20px;
+    width: 322px;
+    height: 63px;
+}
+
+.addEditBookForm h1 {
+    margin: 0;
+    padding-left: 125px;
+    font-size: 1.625em;
+}
+
+.addEditBookForm p {
+    padding-bottom: 20px;
+    font-size: 0.88em;
+    color: #a6a6a6;
+    padding-left: 125px;
+    
+}
+
+.addEditBookForm p:first-child {
+    color: #292929;
+}
+
+.addEditBookForm p a{
+
+    color: #a6a6a6;
+}
+
+.arrow {
+    padding-right: 5px;
+}
+
+/*** AddBookContainer ***/
+
+.addEditBookContainer {
+    display: flex;
+    width: 81.4%;
+    padding-left: 40px;
+    background-color: #fff;
+    padding: 60px;
+    
+    border-radius: 15px;
+    height: 941px;
+}
+
+
+
+.addEditBookContainer .formInput input{
+    background-color: #edf2f6;
+    width: 435px;
+    padding-left: 20px;
+}
+
+.addEditBookContainer .formInput label {
+    color: #a6a6a6;
+}
+
+.addEditBookContainer img {
+    width: 488px;
+    /* padding-top: 20px; */
+    border: solid 1px #edf2f6;
+}
+
+.addEditBookContainer p {
+    text-align: right;
+    
+}
+
+.addEditBookContainer p a {
+    color: #292929;
+    text-decoration: underline;
+    
+}
+
+/*** LeftBlock ***/
+
+.leftBlock {
+    margin: 0;
+    padding-right: 80px;
+    
+    padding-bottom: 60px;
+}
+
+.leftBlock p:first-child {
+    text-align: left;
+    padding-left: 0;
+    color:  #a6a6a6;
+}
+
+
+/*** Id addBook et EditBook ***/
+
+.addEditBookContainer .formInput #addBookDescription,
+.addEditBookContainer .formInput #getBookDescription {
+    max-width: 435px;
+    max-height: 356px;
+    min-width: 435px;
+    min-height: 356px;
+
+}
+
+#addBookDescription, 
+#getBookDescription {
+    margin: 0;
+    padding-top: 18px;
+    background-color: #edf2f6;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 1em;
+    padding-left: 20px;
+    padding-right: 20px;
+        
+}
+
+
+
+#addBookIsAvailable, 
+#getBookIsAvailable {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding-top: 18px;
+    background-color: #edf2f6;
+    width: 435px;
+    border: none;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 1em;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#addBookIsAvailable option, 
+#getBookIsAvailable option {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+
+

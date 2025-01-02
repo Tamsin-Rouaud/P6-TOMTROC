@@ -2,7 +2,7 @@
 
 /** Entité représentant les livres disponible à l'échange. */
 
-class AvailableBooks extends AbstractEntity
+class Book extends AbstractEntity
 {
     private int $idBook;
     private string $title;

@@ -95,4 +95,6 @@ class Utils {
         // Si la variable existe dans $_REQUEST, on retourne sa valeur, sinon on retourne la valeur par défaut.
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
+
+
 }

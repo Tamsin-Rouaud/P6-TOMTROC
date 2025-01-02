@@ -1,8 +1,16 @@
 <?php
 
+
 ini_set('display_errors', 1);  // Affiche les erreurs
 ini_set('display_startup_errors', 1);  // Affiche les erreurs lors du démarrage de PHP
 error_reporting(E_ALL);  // Active l'affichage de toutes les erreurs
+
+
+// Permet de servir directement les fichiers statiques (CSS, JS, images)
+if (file_exists(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) {
+    return false;
+}
+
 
 // Charger les configurations et les classes nécessaires
 require_once './config/config.php';  // Charger la configuration de l'application
@@ -13,7 +21,7 @@ $router = new Router();
 // Définir les routes de l'application
 
 // La route 'availableBooks' appelle le contrôleur 'AvailableBooksCOntroller' et sa méthode 'showAvailableBooks'
-$router->addRoute('availableBooks', 'AvailableBooksController', 'showAvailableBooks');
+$router->addRoute('availableBooks', 'BookController', 'showBooks');
 
 // Route pour la gestion des utilisateurs
 // Cette route sera à afficher le formulaire de connexion et traite sa soumission
@@ -21,7 +29,24 @@ $router->addRoute('loginForm', 'UserController', 'showLoginForm');
 // Cette route sert à afficher le formulaire d'inscription et à traiter sa soumission
 $router->addRoute('register', 'UserController', 'showRegisterForm');
 
+// Route pour la page "Mon compte"
+$router->addRoute('myAccount', 'UserController', 'showMyAccount');
 
+// Route pour ajouter un livre via la page mon compte
+$router->addRoute('addBookForm', 'BookController', 'showAddBookForm');
+$router->addRoute('addBook', 'BookController', 'addBook');
+
+// Route pour afficher le formulaire de modification d'un livre
+$router->addRoute('editBookForm', 'BookController', 'showEditBookForm');
+
+// Route pour traiter la soumission du formulaire de modification
+$router->addRoute('editBook', 'BookController', 'editBook');
+
+// Route pour afficher les 4 premiers livres
+$router->addRoute('limitedBooks', 'BookController', 'showLimitedBooks');
+
+// Route pour afficher tous les livres
+$router->addRoute('allBooks', 'BookController', 'showAllBooks');
 
 // La route 'registerForm' appelle le contrôleur 'userController' et sa méthode 'showLoginForm'
 $router->addRoute('registerForm', 'UserController', 'showRegisterForm');

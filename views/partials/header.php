@@ -15,7 +15,7 @@ function is_active($page) {
             </div>
             <div class="secondPart">
                 <li><a class="<?= is_active('index.php') ?>" href="./index.php"><img class="icon" src="images/iconMail.png" alt="Ma messagerie">Messagerie  <span>1</span></a></li>
-                <li><a class="<?= is_active('index.php') ?>" href="./index.php"><img class="icon" src="images/iconAccount.png" alt="Mon compte"> Mon compte</a></li>
+                <li><a class="<?= is_active('index.php?action=myAccount') ?>" href="./index.php?action=myAccount"><img class="icon" src="images/iconAccount.png" alt="Mon compte"> Mon compte</a></li>
                 <li><a class="<?= is_active('index.php?action=loginForm') ?>" href="./index.php?action=loginForm">Connexion</a></li>
             </div>
         </ul  >

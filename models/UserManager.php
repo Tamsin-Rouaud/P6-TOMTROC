@@ -82,4 +82,12 @@ class UserManager extends AbstractEntityManager
     return $errors;
 }
 
+public function findUserById(int $userId)
+{
+    $sql = "SELECT id_users, username, email FROM users WHERE id_users = :id";
+    $params = [':id' => $userId];
+    return $this->db->query($sql, $params)->fetch();
+}
+
+
 }

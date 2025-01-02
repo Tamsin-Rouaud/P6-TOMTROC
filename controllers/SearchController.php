@@ -15,7 +15,7 @@ class SearchController {
             $view = new View('Résultats de recherche');
             $view->render('search', ['results' => $results, 'searchTerm' => $searchTerm]);
         } else {
-            // Si aucune recherche n'est fournie, afficher un message ou rediriger
+            // Si aucune recherche n'est fournie, afficher un message
             echo "Aucun terme de recherche fourni.";
         }
     }

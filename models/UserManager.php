@@ -89,5 +89,38 @@ public function findUserById(int $userId)
     return $this->db->query($sql, $params)->fetch();
 }
 
+/**
+     * Met à jour le chemin de l'image d'un utilisateur.
+     *
+     * @param int $userId
+     * @param string $imagePath
+     * @return void
+     */
+    public function updateUserImagePath(int $userId, string $imagePath): void
+    {
+        $sql = "UPDATE users SET image_path = :imagePath WHERE id = :userId";
+        $params = [
+            ':imagePath' => $imagePath,
+            ':userId' => $userId,
+        ];
+
+        $this->db->query($sql, $params);
+    }
+
+    /**
+     * Récupère l'image actuelle d'un utilisateur.
+     *
+     * @param int $userId
+     * @return string
+     */
+    public function getUserImagePath(int $userId): string
+    {
+        $sql = "SELECT image_path FROM users WHERE id = :userId";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchColumn() ?? 'uploads/users/defaultAvatar.png';
+    }
 
 }

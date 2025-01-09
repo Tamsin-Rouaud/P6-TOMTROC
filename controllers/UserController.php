@@ -42,7 +42,10 @@ class UserController {
             if (empty($errors)) {
                 $user = $userManager->findUserByEmail($email);
                 if ($user && password_verify($password, $user['password'])) {
-                    session_start();
+                    if (session_status() === PHP_SESSION_NONE) {
+                        session_start();
+                    }
+                    
                     // Stockage des informations utilisateur dans la session
                     $_SESSION['user'] = [
                         'id' => $user['id_users'],
@@ -117,4 +120,20 @@ class UserController {
      * Connexion de l'utilisateur après validation des informations.
      * @return void
      */
-}
+
+     public function logout() {
+        // Démarrer la session et détruire les données utilisateur
+        session_start();
+        session_unset();
+        session_destroy();
+    
+        // Rediriger l'utilisateur vers la page de connexion après déconnexion
+        header('Location: index.php?action=loginForm');
+        exit();
+    }
+    
+
+
+    }
+
+

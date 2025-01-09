@@ -34,16 +34,15 @@ class Utils {
      * @return void
      */
     public static function redirect(string $action, array $params = []) : void
-    {
-        // Construction de l'URL en ajoutant les paramètres si fournis.
-        $url = "index.php?action=$action";
-        foreach ($params as $paramName => $paramValue) {
-            $url .= "&$paramName=$paramValue";
-        }
-        // Redirection HTTP vers l'URL construite.
-        header("Location: $url");
-        exit();
+{
+    $url = "index.php?action=" . urlencode($action);
+    foreach ($params as $paramName => $paramValue) {
+        $url .= "&" . urlencode($paramName) . "=" . urlencode($paramValue);
     }
+    header("Location: $url");
+    exit();
+}
+
 
     /**
      * Génère le code JavaScript à insérer dans un bouton pour afficher une boîte de confirmation.
@@ -96,5 +95,47 @@ class Utils {
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
 
-
+    public static function handleImageUpload($file, $uploadDir, $defaultImage, $oldImagePath = null) {
+        // Dossier cible pour l'upload
+        $targetDir = "./uploads/$uploadDir/";
+    
+        // Vérifie et crée le dossier cible s'il n'existe pas
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+    
+        // Si aucun fichier n'a été téléchargé, retourne l'image par défaut
+        if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
+            return $oldImagePath ? $oldImagePath : "$targetDir$defaultImage"; // Retourne l'ancienne image si elle existe, sinon l'image par défaut
+        }
+    
+        // Vérifie le type MIME et la taille maximale
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        $maxFileSize = 2 * 1024 * 1024; // 2 Mo
+    
+        // Si l'image téléchargée n'est pas valide, retourne l'image par défaut
+        if (!in_array(mime_content_type($file['tmp_name']), $allowedMimeTypes) || $file['size'] > $maxFileSize) {
+            return $oldImagePath ? $oldImagePath : "$targetDir$defaultImage"; // Retourne l'ancienne image en cas d'erreur
+        }
+    
+        // Supprime l'ancienne image si elle existe et n'est pas l'image par défaut
+        if ($oldImagePath && $oldImagePath !== "$targetDir$defaultImage" && file_exists($oldImagePath)) {
+            unlink($oldImagePath); // Supprime l'ancienne image
+        }
+    
+        // Génère un nom unique pour l'image téléchargée
+        $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $uniqueName = uniqid('img_') . '.' . $fileExtension;
+        $targetFilePath = $targetDir . $uniqueName;
+    
+        // Déplace l'image vers le dossier cible
+        if (move_uploaded_file($file['tmp_name'], $targetFilePath)) {
+            return $targetFilePath; // Retourne le chemin de l'image enregistrée
+        }
+    
+        // En cas d'échec, retourne l'ancienne image ou l'image par défaut
+        return $oldImagePath ? $oldImagePath : "$targetDir$defaultImage"; // Si l'upload échoue, retourne l'ancienne image ou l'image par défaut
+    }
+    
+    
 }

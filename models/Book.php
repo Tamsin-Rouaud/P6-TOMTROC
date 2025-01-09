@@ -86,7 +86,7 @@ class Book extends AbstractEntity
      */
     public function getImagePath() : string 
     {
-        return $this->title;
+        return $this->imagePath;
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-
+// session_start();
 
 ini_set('display_errors', 1);  // Affiche les erreurs
 ini_set('display_startup_errors', 1);  // Affiche les erreurs lors du démarrage de PHP
@@ -42,14 +42,12 @@ $router->addRoute('editBookForm', 'BookController', 'showEditBookForm');
 // Route pour traiter la soumission du formulaire de modification
 $router->addRoute('editBook', 'BookController', 'editBook');
 
-// Route pour afficher les 4 premiers livres
-$router->addRoute('limitedBooks', 'BookController', 'showLimitedBooks');
-
 // Route pour afficher tous les livres
 $router->addRoute('allBooks', 'BookController', 'showAllBooks');
 
-// La route 'registerForm' appelle le contrôleur 'userController' et sa méthode 'showLoginForm'
-$router->addRoute('registerForm', 'UserController', 'showRegisterForm');
+// Route pour se déconnecter
+$router->addRoute('logout', 'UserController', 'logout');
+
 // La route 'search' appelle le contrôleur 'searchController' et sa méthode showSearch'
 $router->addRoute('search', 'searchController', 'showSearch');
 // Définir une route par défaut (si aucune action n'est spécifiée dans l'URL)

@@ -57,7 +57,7 @@
         <tbody>
             <?php foreach ($books as $book): ?>
                 <tr>
-                    <td class="photo"><img src="images/<?= $book['image_path']; ?>" alt="Photo du livre"></td>
+                    <td class="photo"><img src="<?= $book['image_path']; ?>" alt="Photo du livre"></td>
                     <td class="title"><?= htmlspecialchars($book['title']); ?></td>
                     <td class="author"><?= htmlspecialchars($book['author_name']); ?></td>
                     <td class="description">
@@ -72,7 +72,7 @@
                         </button>
                     </td>
                     <td class="editDelete">
-                        <a href="index.php?action=editBookForm&id_books=<?= $book['id_books'] ?>">
+                        <a href="#">
                             <button class="btnChoice btnEdit">Éditer</button>
                         </a>
                         <button class="btnChoice btnDelete">Supprimer</button>
@@ -82,9 +82,7 @@
         </tbody>
     </table>
 
-    <div class="buttonAllBooks">
-        <a href="index.php?action=showAllBooks" class="button">Afficher tous les livres</a>
-    </div>
+    
 </div>
 
 

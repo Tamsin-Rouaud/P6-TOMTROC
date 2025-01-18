@@ -62,32 +62,37 @@
         </thead>
         
         <tbody>
-            <?php foreach ($books as $book): ?>
-                
-                <tr>
-                    <td class="photo"><img src="<?= $book['image_path']; ?>" alt="Photo du livre"></td>
-                    <td class="title"><?= htmlspecialchars($book->getTitle()) ?></td>
-                    <td class="author"><?= htmlspecialchars($book['author_name']); ?></td>
-                    <td class="description">
-                        <span class="tooltip" data-tooltip="<?= htmlspecialchars($book['description']); ?>">
-                            <?= htmlspecialchars(substr($book['description'], 0, 87)); ?>...
-                        </span>
-                    </td>
+    <?php foreach ($books as $book): ?>
+        <tr>
+            <td class="photo">
+                <img src="<?= htmlspecialchars($book->getImagePath(), ENT_QUOTES, 'UTF-8'); ?>" alt="Photo du livre">
+            </td>
+            <td class="title">
+                <?= htmlspecialchars($book->getTitle(), ENT_QUOTES, 'UTF-8'); ?>
+            </td>
+            <td class="author">
+                <?= htmlspecialchars($book->getAuthorName(), ENT_QUOTES, 'UTF-8'); ?>
+            </td>
+            <td class="description">
+                <span class="tooltip" data-tooltip="<?= htmlspecialchars($book->getDescription(), ENT_QUOTES, 'UTF-8'); ?>">
+                    <?= htmlspecialchars(substr($book->getDescription(), 0, 87), ENT_QUOTES, 'UTF-8'); ?>...
+                </span>
+            </td>
+            <td class="available">
+                <button class="<?= $book->getIsAvailable() ? 'available' : 'not-available'; ?>">
+                    <?= $book->getIsAvailable() ? 'disponible' : 'non dispo.'; ?>
+                </button>
+            </td>
+            <td class="editDelete">
+                <a href="#">
+                    <button class="btnChoice btnEdit">Éditer</button>
+                </a>
+                <button class="btnChoice btnDelete">Supprimer</button>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
 
-                    <td class="available">
-                        <button class="<?= $book['is_available'] ? 'available' : 'not-available'; ?>">
-                            <?= $book['is_available'] ? 'disponible' : 'non dispo.'; ?>
-                        </button>
-                    </td>
-                    <td class="editDelete">
-                        <a href="#">
-                            <button class="btnChoice btnEdit">Éditer</button>
-                        </a>
-                        <button class="btnChoice btnDelete">Supprimer</button>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
     </table>
 
     

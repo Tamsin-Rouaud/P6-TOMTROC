@@ -14,6 +14,7 @@
          */
         public function getAllBooks(): array
 {
+
     $query = $this->db->query("SELECT * FROM books");
     $books = [];
     while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
@@ -60,8 +61,8 @@
     
     // Transformer chaque ligne en objet Book
     $books = [];
-    foreach ($result as $row) {
-        $books[] = new Book($row);
+    foreach ($result as $data) {
+        $books[] = new Book($data);
     }
 
     return $books;

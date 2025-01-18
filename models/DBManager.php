@@ -63,16 +63,25 @@ class DBManager
      * @return PDOStatement : le résultat de la requête SQL sous forme de PDOStatement.
      */
     public function query(string $sql, ?array $params = null) : PDOStatement
-    {
-        // Si aucun paramètre n'est passé, on exécute une requête simple (non préparée)
-        if ($params == null) {
-            $query = $this->db->query($sql);
+{
+    // Si aucun paramètre n'est passé, on exécute une requête simple (non préparée)
+    if ($params == null) {
+        $query = $this->db->query($sql);
+    } else {
+        // Si des paramètres sont passés, on prépare la requête et on exécute avec les paramètres
+        $query = $this->db->prepare($sql);
+        
+        // Vérifier si des paramètres nommés sont présents
+        if ($params && isset($params[0])) {
+            // Si le premier élément du tableau est une valeur (paramètres positionnels)
+            $query->execute(array_values($params)); // Exécute avec des paramètres positionnels
         } else {
-            // Si des paramètres sont passés, on prépare la requête et on exécute avec les paramètres
-            $query = $this->db->prepare($sql);
-            $query->execute($params);
+            // Si c'est un tableau associatif avec des paramètres nommés
+            $query->execute($params); // Exécute avec des paramètres nommés
         }
-        // Retourne le résultat de la requête
-        return $query;
     }
+    // Retourne le résultat de la requête
+    return $query;
+}
+
 }

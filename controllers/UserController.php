@@ -2,138 +2,140 @@
 
 class UserController {   
 
-        /**
+    /**
      * Affiche la page d'administration.
      * @return void
      */
-    public function showMyAccount() : void
+    public function showMyAccount(): void
 {
     // Vérifie si l'utilisateur est connecté
-    $this->checkIfUserIsConnected();
+    Utils::checkIfUserIsConnected();
+
+    // Récupère l'utilisateur connecté depuis la session
+    $userData = $_SESSION['user'];
+    $email = $userData['email']; // Extrait l'email depuis la session
     
-    // Récupère les informations utilisateur directement depuis la session
-    $user = $_SESSION['user'];
-    
-    // Récupération des livres associés à cet utilisateur
-    $BookManager = new BookManager();
-    $userBooks = $BookManager->findBooksByUserId($user['id']);
-    
-    // Affiche la vue "Mon compte"
-    $view = new View("Mon compte");
-    $view->render("myAccount", [
-        'user' => $user,
-        'books' => $userBooks,
-    ]);
+    try {
+        // Récupère l'objet utilisateur depuis la base de données
+        $userManager = new UserManager();
+        $user = $userManager->findUserByEmail($email);
+
+        // Vérifie si l'utilisateur existe
+        if (!$user) {
+            throw new Exception("Utilisateur introuvable.");
+        }
+
+        // Calcul de la durée d'adhésion
+        $membershipDuration = $this->getMembershipDuration($user->getDateCreationUser()->format('Y-m-d'));
+
+
+        // Récupère les livres de l'utilisateur
+        $bookManager = new BookManager();
+        $userBooks = $bookManager->findBooksByUserId((int)$user->getIdUser()) ?? [];
+
+        // Génère la vue
+        $view = new View("Mon compte");
+        $view->render("myAccount", [
+            'user' => $user, // Objet utilisateur
+            'books' => $userBooks, // Livres appartenant à l'utilisateur
+            'membershipDuration' => $membershipDuration, // Durée d'adhésion calculée
+        ]);
+    } catch (Exception $e) {
+        // Log de l'erreur pour le débogage
+        error_log("Erreur lors du chargement de la page Mon compte : " . $e->getMessage());
+
+        // Redirection vers la page de connexion en cas d'erreur
+        Utils::redirect('loginForm');
+    }
 }
 
-
-
-    public function showLoginForm() {
+    public function showLoginForm(): void
+    {
         $errors = [];
         $userManager = new UserManager();
-    
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = $_POST['email'] ?? null;
-            $password = $_POST['password'] ?? null;
-    
-            // Validation des données
+            $email = Utils::request('email');
+            $password = Utils::request('password');
+
             $errors = $userManager->validateUserDataLogin($email, $password);
-    
+
             if (empty($errors)) {
                 $user = $userManager->findUserByEmail($email);
-                if ($user && password_verify($password, $user['password'])) {
-                    if (session_status() === PHP_SESSION_NONE) {
-                        session_start();
-                    }
-                    
-                    // Stockage des informations utilisateur dans la session
+
+                if ($user && password_verify(trim($password), $user->getPassword())) {
+                   
                     $_SESSION['user'] = [
-                        'id' => $user['id_users'],
-                        'username' => $user['username'],
-                        'email' => $user['email'],
+                        'id' => $user->getIdUser(),
+                        'username' => $user->getUsername(),
+                        'email' => $user->getEmail(),
                     ];
-                    header('Location: index.php?action=myAccount'); // Redirige vers l'accueil
-                    exit;
+                    
+                    Utils::redirect('myAccount');
                 } else {
                     $errors[] = "Email ou mot de passe incorrect.";
                 }
             }
         }
-    
+
         $view = new View('Connexion');
         $view->render('loginForm', ['errors' => $errors]);
     }
-    
-    
 
-    public function showRegisterForm() {
+    public function showRegisterForm(): void
+    {
         $errors = [];
         $userManager = new UserManager();
-    
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = $_POST['email'] ?? null;
-            $username = $_POST['username'] ?? null;
-            $password = $_POST['password'] ?? null;
-    
-            // Validation des données
+            $email = Utils::request('email');
+            $username = Utils::request('username');
+            $password = Utils::request('password');
+
             $errors = $userManager->validateUserData($email, $username, $password);
-    
+
             if (empty($errors)) {
                 $userManager->createUser($username, $email, password_hash($password, PASSWORD_DEFAULT));
-                header('Location: index.php?action=registerForm'); // Redirige vers le formulaire de connexion
-                exit;
+                Utils::redirect('loginForm');
             }
         }
-    
+
         $view = new View('Inscription');
         $view->render('registerForm', ['errors' => $errors]);
     }
-    
-    /**
-     * Vérifie que l'utilisateur est connecté.
-     * @return void
-     */
-    private function checkIfUserIsConnected() : void
-{
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    
-    if (empty($_SESSION['user'])) {
-        Utils::redirect("loginForm");
-    }
-}
 
-
-    /**
-     * Affiche le formulaire de connexion.
-     * @return void
-     */
-    public function displayConnectionForm() : void 
+    public function logout(): void
     {
-        // Affichage du formulaire de connexion.
-        $view = new View("Connexion");
-        $view->render("loginForm");
-    }
 
-    /**
-     * Connexion de l'utilisateur après validation des informations.
-     * @return void
-     */
-
-     public function logout() {
-        // Démarrer la session et détruire les données utilisateur
-        session_start();
         session_unset();
         session_destroy();
-    
-        // Rediriger l'utilisateur vers la page de connexion après déconnexion
-        header('Location: index.php?action=loginForm');
-        exit();
-    }
-    
 
-
+        Utils::redirect('loginForm');
     }
 
+    public function getMembershipDuration(string $creationDate): string
+    {
+        $creationDateTime = new DateTime($creationDate);
+        $currentDateTime = new DateTime();
 
+        $interval = $creationDateTime->diff($currentDateTime);
+
+        $durationParts = [];
+        if ($interval->y > 0) {
+            $durationParts[] = $interval->y . ' an' . ($interval->y > 1 ? 's' : '');
+        }
+        if ($interval->m > 0) {
+            $durationParts[] = $interval->m . ' mois';
+        }
+        if ($interval->d > 0) {
+            $durationParts[] = $interval->d . ' jour' . ($interval->d > 1 ? 's' : '');
+        }
+
+        if (count($durationParts) > 1) {
+            $lastPart = array_pop($durationParts);
+            return implode(', ', $durationParts) . ' et ' . $lastPart;
+        }
+
+        return !empty($durationParts) ? implode(', ', $durationParts) : 'moins d\'un jour';
+    }
+}

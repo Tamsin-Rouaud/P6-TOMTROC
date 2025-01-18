@@ -11,8 +11,7 @@ if (file_exists(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) {
     return false;
 }
 
-
-// Charger les configurations et les classes nécessaires
+// Charge les configurations et les classes nécessaires
 require_once './config/config.php';  // Charger la configuration de l'application
 require_once 'config/autoload.php';  // Charger l'autoloader pour inclure automatiquement les classes
 
@@ -27,7 +26,7 @@ $router->addRoute('availableBooks', 'BookController', 'showBooks');
 // Cette route sera à afficher le formulaire de connexion et traite sa soumission
 $router->addRoute('loginForm', 'UserController', 'showLoginForm');
 // Cette route sert à afficher le formulaire d'inscription et à traiter sa soumission
-$router->addRoute('register', 'UserController', 'showRegisterForm');
+$router->addRoute('showRegisterForm', 'UserController', 'showRegisterForm');
 
 // Route pour la page "Mon compte"
 $router->addRoute('myAccount', 'UserController', 'showMyAccount');
@@ -36,11 +35,14 @@ $router->addRoute('myAccount', 'UserController', 'showMyAccount');
 $router->addRoute('addBookForm', 'BookController', 'showAddBookForm');
 $router->addRoute('addBook', 'BookController', 'addBook');
 
-// Route pour afficher le formulaire de modification d'un livre
-$router->addRoute('editBookForm', 'BookController', 'showEditBookForm');
+// // Route pour afficher le formulaire de modification d'un livre
+// $router->addRoute('editBookForm', 'BookController', 'showEditBookForm');
 
-// Route pour traiter la soumission du formulaire de modification
+// Route pour récupérer et gérer la soumission du formulaire de modification
 $router->addRoute('editBook', 'BookController', 'editBook');
+
+// Ajout d'une nouvelle route pour la suppression d'un livre
+$router->addRoute('deleteBook', 'BookController', 'deleteBook');
 
 // Route pour afficher tous les livres
 $router->addRoute('allBooks', 'BookController', 'showAllBooks');

@@ -1,168 +1,186 @@
 <?php
 
-/**
- * Classe BookManager
- * Cette classe gère toutes les opérations relatives aux livres dans la base de données.
- */
-class BookManager extends AbstractEntityManager {
+    /**
+     * Classe BookManager
+     * Cette classe gère toutes les opérations relatives aux livres dans la base de données.
+     */
+    class BookManager extends AbstractEntityManager {
 
     
-    /**
-     * Méthode pour récupérer tous les livres présents dans la base de données.
-     * 
-     * @return array Liste de tous les livres.
-     */
-        public function getAllBooks() {
-            $query = $this->db->query("SELECT * FROM books"); 
-            return $query->fetchAll(PDO::FETCH_ASSOC); // Retourne tous les résultats sous forme de tableau associatif.
-        }
+        /**
+         * Méthode pour récupérer tous les livres présents dans la base de données.
+         * 
+         * @return array Liste de tous les livres.
+         */
+        public function getAllBooks(): array
+{
+    $query = $this->db->query("SELECT * FROM books");
+    $books = [];
+    while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+        $books[] = new Book($row);
+    }
+    return $books;
+}
 
-    /**
-     * Méthode pour récupérer tous les livres appartenant à un utilisateur spécifique.
-     * 
-     * @param int $ownerId L'ID de l'utilisateur propriétaire des livres.
-     * @return array Liste des livres appartenant à l'utilisateur.
-     */
-        public function findBooksByUserId(int $ownerId) {
-            $sql = "SELECT * FROM books WHERE owner_id = :ownerId";
-            $params = [':ownerId' => $ownerId]; // Définit les paramètres pour la requête préparée.
-            return $this->db->query($sql, $params)->fetchAll(); // Exécute la requête et retourne les résultats.
-        }
 
-    /**
-     * Méthode pour récupérer les détails d'un livre à partir de son ID.
-     * 
-     * @param int $id L'ID du livre.
-     * @return array|false Les détails du livre ou false si non trouvé.
-     */
-        public function getBookById($id) {
-            $sql = "SELECT * FROM books WHERE id_book = :id"; 
-            $params = [':id' => $id]; // Paramètre pour éviter les injections SQL.
-            return $this->db->query($sql, $params)->fetch(); // Retourne les détails du livre en tableau associatif.
-        }
-
-    /**
-     * Méthode pour ajouter un nouveau livre à la base de données.
-     * 
-     * @param string $title Le titre du livre.
-     * @param string $author_name Le nom de l'auteur.
-     * @param string $description La description du livre.
-     * @param int $owner_id L'ID de l'utilisateur propriétaire du livre.
-     * @param bool $is_available Disponibilité du livre (1 = disponible, 0 = non disponible).
-     */
-       // Méthode pour ajouter un livre, en utilisant l'objet Book
-public function createBook(Book $book) {
+        public function getBookById($id)
+{
     $db = DBManager::getInstance()->getPDO();
-
-    // Requête SQL pour insérer un nouveau livre
-    $sql = "INSERT INTO books (title, author_name, description, owner_id, is_available, image_path, creation_date, update_date)
-            VALUES (:title, :author_name, :description, :owner_id, :is_available, :image_path, NOW(), NOW())";
-
-    // Préparation de la requête SQL
+    $sql = "SELECT * FROM books WHERE id_book = :id_book";
     $stmt = $db->prepare($sql);
+    $stmt->execute([':id_book' => $id]);
 
-    // Exécution de la requête avec les données extraites de l'objet Book
-    $stmt->execute([
-        ':title' => $book->getTitle(),
-        ':author_name' => $book->getAuthorName(),
-        ':description' => $book->getDescription(),
-        ':owner_id' => $book->getOwnerId(),
-        ':is_available' => $book->getIsAvailable(),
-        ':image_path' => $book->getImagePath(),
-    ]);
+    $bookData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($bookData) {
+        $book = new Book();
+        $book->setIdBook($bookData['id_book']);
+        $book->setTitle($bookData['title']);
+        $book->setAuthorName($bookData['author_name']);
+        $book->setDescription($bookData['description']);
+        $book->setIsAvailable($bookData['is_available']);
+        $book->setImagePath($bookData['image_path']);
+        return $book;
+    }
+
+    return null; // Aucun livre trouvé
 }
 
+
+        /**
+        * Méthode pour récupérer tous les livres appartenant à un utilisateur spécifique.
+        */
+        public function findBooksByUserId(int $ownerId): array
+{
+    $sql = "SELECT * FROM books WHERE owner_id = :ownerId";
+    $params = [':ownerId' => $ownerId];
     
+    // Récupérer les résultats en tableau associatif
+    $result = $this->db->query($sql, $params)->fetchAll(PDO::FETCH_ASSOC) ?: [];
+    
+    // Transformer chaque ligne en objet Book
+    $books = [];
+    foreach ($result as $row) {
+        $books[] = new Book($row);
+    }
 
-    /**
-     * Méthode pour mettre à jour les informations d'un livre existant.
-     * 
-     * @param int $id L'ID du livre à mettre à jour.
-     * @param string $title Le nouveau titre du livre.
-     * @param string $author Le nouveau nom de l'auteur.
-     * @param string $description La nouvelle description du livre.
-     * @param bool $isAvailable Nouvelle disponibilité du livre.
-     * @param string|null $image_path Le chemin de la nouvelle image du livre (optionnel).
-     */
-        public function updateBook($id, $title, $author, $description, $isAvailable, $image_path = null) {
-            // Préparer la requête de mise à jour
-            $sql = "UPDATE books 
-                    SET title = :title, author_name = :author, description = :description, 
-                        is_available = :isAvailable, update_date = NOW()";
+    return $books;
+}
 
-            // Si une image est fournie, ajouter le champ image_path à la requête
-            if ($image_path !== null) {
-                $sql .= ", image_path = :image_path";
-            }
-
-            // Ajouter la condition WHERE
-            $sql .= " WHERE id_book = :id";
-
-            // Définir les paramètres pour la requête préparée
-            $params = [
-                ':id' => $id,
-                ':title' => $title,
-                ':author' => $author,
-                ':description' => $description,
-                ':isAvailable' => $isAvailable
-            ];
-
-            // Ajouter le chemin de l'image si une nouvelle image est fournie
-            if ($image_path !== null) {
-                $params[':image_path'] = $image_path;
-            }
-
-            // Exécuter la requête de mise à jour
-            $this->db->query($sql, $params);
-        }
-
-    /**
-     * Méthode pour supprimer un livre de la base de données en fonction de son ID,
-     * uniquement si l'utilisateur est le propriétaire du livre.
-     * 
-     * @param int $id L'ID du livre à supprimer.
-     * @param int $userId L'ID de l'utilisateur qui tente de supprimer le livre.
-     * @return bool Retourne true si la suppression a réussi, sinon false.
-     */
-        public function deleteBook($id, $userId) {
-            // Vérifier si l'utilisateur est le propriétaire du livre
-            $sql = "SELECT owner_id FROM books WHERE id_book = :id";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([':id' => $id]);
-            
-            // Récupérer l'ID du propriétaire du livre
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            // Si le livre n'existe pas ou l'utilisateur n'est pas le propriétaire, retourner false
-            if (!$result || $result['owner_id'] != $userId) {
-                return false;
-            }
-
-            // Si l'utilisateur est le propriétaire, supprimer le livre
-            $sql = "DELETE FROM books WHERE id_book = :id";
-            $stmt = $this->db->prepare($sql);
-            
-            // Exécuter la requête de suppression
-            return $stmt->execute([':id' => $id]);
-        }
-
-        public function deleteBookWithImage($id, $userId) {
-            // Récupère les informations du livre
-            $book = $this->getBookById($id);
+        /**
+         * Méthode pour récupérer les détails d'un livre à partir de son ID.
         
-            if ($book && $book['owner_id'] == $userId) {
-                // Supprime l'image associée (si ce n'est pas l'image par défaut)
-                $imagePath = $book['image_path'];
-                if ($imagePath !== 'uploads/books/defaultBook.png' && file_exists($imagePath)) {
-                    unlink($imagePath);
+         */
+        public function findBookById(int $bookId): ?Book
+{
+    $sql = "SELECT * FROM books WHERE id_book = :id_book";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute(['id_book' => $bookId]);
+    $bookData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $bookData ? new Book($bookData) : null;
+}
+
+
+        
+
+        /**
+         * Compte le nombre de livres d'un utilisateur.
+         * 
+         * @param int $userId ID de l'utilisateur.
+         * @return int Nombre de livres appartenant à l'utilisateur.
+         */
+        public static function getUserBookCount(int $userId): int {
+            $bookManager = new BookManager();
+            $books = $bookManager->findBooksByUserId($userId);
+            return count($books); // Retourne le nombre total de livres
+        }
+   
+        /**
+         * Méthode pour ajouter un livre, en utilisant l'objet Book
+         */
+        public function createBook(Book $book) {
+            try {
+                $db = DBManager::getInstance()->getPDO();
+                $sql = "INSERT INTO books (title, author_name, description, owner_id, is_available, image_path, creation_date, update_date)
+                        VALUES (:title, :author_name, :description, :owner_id, :is_available, :image_path, NOW(), NOW())";
+                $stmt = $db->prepare($sql);
+                $stmt->execute([
+                    ':title' => $book->getTitle(),
+                    ':author_name' => $book->getAuthorName(),
+                    ':description' => $book->getDescription(),
+                    ':owner_id' => $book->getOwnerId(),
+                    ':is_available' => $book->getIsAvailable(),
+                    ':image_path' => $book->getImagePath(),
+                ]);
+            } catch (PDOException $e) {
+                throw new Exception("Erreur lors de l'ajout du livre : " . $e->getMessage());
+            }
+        }
+    
+        /**
+         * Méthode pour mettre à jour un livre existant.
+         * 
+         * @param Book $book L'objet Book contenant les informations à mettre à jour.
+         */
+        public function updateBook(Book $book)
+        {
+            try {
+                // Récupérer la connexion à la base de données
+                $db = DBManager::getInstance()->getPDO();
+
+                // Requête SQL de mise à jour
+                $sql = "UPDATE books 
+                        SET title = :title, 
+                            author_name = :author_name, 
+                            description = :description, 
+                            is_available = :is_available, 
+                            image_path = :image_path, 
+                            update_date = NOW() 
+                        WHERE id_book = :id_book";
+                
+                // Préparation et exécution de la requête avec les paramètres
+                $stmt = $db->prepare($sql);
+                $stmt->execute([
+                    ':title' => $book->getTitle(),
+                    ':author_name' => $book->getAuthorName(),
+                    ':description' => $book->getDescription(),
+                    ':is_available' => $book->getIsAvailable(),
+                    ':image_path' => $book->getImagePath(),
+                    ':id_book' => $book->getId(), 
+                ]);
+            } catch (PDOException $e) {
+                throw new Exception("Erreur lors de la mise à jour du livre : " . $e->getMessage());
+            }
+        }
+
+        /**
+         * Méthode pour supprimer un livre de la base de données en fonction de son ID,
+         * uniquement si l'utilisateur est le propriétaire du livre.
+        */
+        public function deleteBookById(int $bookId): bool
+        {
+            $sql = "DELETE FROM books WHERE id_book = :id_book";
+            $statement = $this->db->prepare($sql);
+            return $statement->execute(['id_book' => $bookId]);
+        }
+
+
+        public function deleteBookWithImage(int $id, int $userId): bool {
+            try {
+                $book = $this->findBookById($id);
+                if ($book && $book->getOwnerId() === $userId) {
+                    $imagePath = $book->getImagePath();
+                    if ($imagePath !== 'uploads/books/defaultBook.png' && file_exists(__DIR__ . '/../../' . $imagePath)) {
+                        unlink(__DIR__ . '/../../' . $imagePath);
+                    }
+                    return $this->deleteBook($id, $userId);
                 }
-        
-                // Supprime le livre de la base
-                return $this->deleteBook($id, $userId);
+            } catch (Exception $e) {
+                error_log("Erreur lors de la suppression du livre : " . $e->getMessage());
             }
         
-            return false; // Retourne false si le livre n'existe pas ou si l'utilisateur n'est pas le propriétaire
+            return false;
         }
         
 }
-

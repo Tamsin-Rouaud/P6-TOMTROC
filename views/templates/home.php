@@ -96,8 +96,5 @@
             </p>
             <img id="heart" src="images/heart.png" alt="Coeur décoratif">
         </div>
-
-            
-        
     </section>
 </div>

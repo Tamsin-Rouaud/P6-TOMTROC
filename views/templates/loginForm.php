@@ -11,7 +11,7 @@
                 <input type="password" name="password" id="password" required>
             </div>    
             <button class="button subscribe" type="submit">Se connecter</button>
-            <p>Pas de compte ? <a href="index.php?action=registerForm">Inscrivez-vous</a></p>
+            <p>Pas de compte ? <a href="index.php?action=showRegisterForm">Inscrivez-vous</a></p>
         </form>
     
     <div class="connexionImg">

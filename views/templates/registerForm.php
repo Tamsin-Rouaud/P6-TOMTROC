@@ -1,5 +1,5 @@
 <section class="connexionBlock">
-    <form class="connexionText" method="POST" action="index.php?action=registerForm">
+    <form class="connexionText" method="POST" action="index.php?action=showRegisterForm">
         <h1 id="connexionTitle">Inscription</h1>
         <div class="formInput">
             <label for="username">Pseudo</label>

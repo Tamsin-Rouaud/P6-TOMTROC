@@ -31,6 +31,16 @@ $router->addRoute('showRegisterForm', 'UserController', 'showRegisterForm');
 // Route pour la page "Mon compte"
 $router->addRoute('myAccount', 'UserController', 'showMyAccount');
 
+// Route pour soumettre les modifications des informations utilisateurs
+$router->addRoute('updateUser', 'UserController', 'updateUser');
+
+// Route pour gérer la mise à jour de la photo de profil
+$router->addRoute('updateProfilePicture', 'UserController', 'updateProfilePicture');
+
+// Route pour afficher le formulaire de modification de la photo de profil
+$router->addRoute('addProfilePicture', 'UserController', 'showProfilePictureForm');
+
+
 // Route pour ajouter un livre via la page mon compte
 $router->addRoute('addBookForm', 'BookController', 'showAddBookForm');
 $router->addRoute('addBook', 'BookController', 'addBook');
@@ -41,8 +51,12 @@ $router->addRoute('addBook', 'BookController', 'addBook');
 // Route pour récupérer et gérer la soumission du formulaire de modification
 $router->addRoute('editBook', 'BookController', 'editBook');
 
+// Route pour gérer la soumission du formulaire de modification d'un livre
+$router->addRoute('updateBook', 'BookController', 'updateBook');
+
 // Ajout d'une nouvelle route pour la suppression d'un livre
 $router->addRoute('deleteBook', 'BookController', 'deleteBook');
+
 
 // Route pour afficher tous les livres
 $router->addRoute('allBooks', 'BookController', 'showAllBooks');

@@ -19,6 +19,7 @@ class UserController {
         // Récupère l'objet utilisateur depuis la base de données
         $userManager = new UserManager();
         $user = $userManager->findUserByEmail($email);
+        
 
         // Vérifie si l'utilisateur existe
         if (!$user) {
@@ -48,6 +49,28 @@ class UserController {
         Utils::redirect('loginForm');
     }
 }
+
+public function showProfilePictureForm() {
+    // Récupérer l'utilisateur
+    $userId = $_SESSION['user']['id'] ?? null;
+
+    // Vérifier si l'utilisateur est connecté
+    if (!$userId) {
+        Utils::redirect('loginForm');
+        exit;
+    }
+
+    // Récupérer l'utilisateur à partir de l'ID
+    $userManager = new UserManager();
+    $user = $userManager->findUserById($userId);
+
+    // Générer la vue de modification de la photo de profil
+    $view = new View("Mon avatar");
+    $view->render("addProfilePicture", [
+        'user' => $user, // Passer l'objet utilisateur à la vue
+    ]);
+}
+
 
     public function showLoginForm(): void
     {
@@ -138,4 +161,82 @@ class UserController {
 
         return !empty($durationParts) ? implode(', ', $durationParts) : 'moins d\'un jour';
     }
+
+    public function updateUser(): void
+    {
+        // Assurez-vous que l'ID de l'utilisateur est passé via le formulaire ou la route
+        $userId = $_POST['id_user'] ?? null;
+    
+        if (!$userId) {
+            // Gestion d'erreur si l'ID utilisateur est manquant
+            header('Location: myAccount.php?error=Utilisateur introuvable');
+            exit;
+        }
+    
+        // Récupérer l'utilisateur depuis la base de données
+        $userManager = new UserManager();
+        $user = $userManager->findUserById($userId);
+    
+        if (!$user) {
+            // Gestion d'erreur si l'utilisateur n'existe pas
+            header('Location: myAccount.php?error=Utilisateur introuvable');
+            exit;
+        }
+    
+        // Mettre à jour les informations de l'utilisateur
+        $user->setEmail($_POST['email']);
+        $user->setUsername($_POST['username']);
+        $user->setPassword($_POST['password']);  // N'oubliez pas de hacher le mot de passe si nécessaire
+    
+        // Appeler la méthode updateUser du manager avec l'objet User
+        if ($userManager->updateUser($user)) {
+            // Redirection vers la page d'accueil ou "mon compte" avec un message de succès
+            header('Location: myAccount.php?success=Mise à jour réussie');
+        } else {
+            // Gestion d'erreur si la mise à jour échoue
+            header('Location: myAccount.php?error=Mise à jour échouée');
+        }
+    }
+    public function updateProfilePicture()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $utils = new Utils();
+            $userManager = new UserManager();
+    
+            $idUser = $_POST['id_user'] ?? null;
+            $image = $_FILES['updateProfileImage'] ?? null;
+    
+            if (!$idUser || !$image) {
+                header('Location: addProfilePicture.php?error=ID utilisateur ou image manquants');
+                exit;
+            }
+    
+            // Vérification de la structure de $_FILES
+            if (!is_array($image) || !isset($image['tmp_name'], $image['error'])) {
+                header('Location: addProfilePicture.php?error=Erreur de téléchargement de fichier');
+                exit;
+            }
+    
+            $user = $userManager->findUserById($idUser);
+            if (!$user) {
+                header('Location: index.php?action=myAccount&error=Utilisateur introuvable');
+                exit;
+            }
+    
+            $uploadResult = $utils->handleImageUpload($image, 'users', 'defaultAvatar.png', $user->getImagePathUser());
+    
+            if (is_array($uploadResult) && isset($uploadResult['success']) && $uploadResult['success']) {
+                $user->setImagePathUser($uploadResult['path']);
+                $userManager->updateUser($user);
+                header('Location: index.php?action=myAccount&success=Photo mise à jour');
+            } else {
+                $error = $uploadResult['error'] ?? 'Erreur inconnue lors du téléchargement de l\'image';
+                header("Location: addProfilePicture.php?error=$error");
+            }
+        } else {
+            header('Location: addProfilePicture.php?error=Requête invalide');
+        }
+    }
+
+    
 }

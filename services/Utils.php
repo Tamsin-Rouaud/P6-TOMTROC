@@ -46,40 +46,116 @@ class Utils {
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
 
-    public static function handleImageUpload($file, $uploadDir, $defaultImage)
-    {
-        $targetDir = "./uploads/$uploadDir/";
+// Proposition handleupload
+    // public function handleImageUpload(array $file, string $uploadDir, string $defaultImage): array
+    // {
+    //     $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    //     $maxFileSize = 2 * 1024 * 1024; // 2 Mo
+    
+    //     if (!in_array($file['type'], $allowedMimeTypes)) {
+    //         return ['success' => false, 'error' => 'Format de fichier non supporté'];
+    //     }
+    //     if ($file['size'] > $maxFileSize) {
+    //         return ['success' => false, 'error' => 'Fichier trop volumineux'];
+    //     }
+    
+    //     $fileName = uniqid() . '_' . basename($file['name']);
+    //     $targetPath = $uploadDir . $fileName;
+    
+    //     if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+    //         return ['success' => true, 'path' => $targetPath];
+    //     } else {
+    //         return ['success' => false, 'error' => 'Erreur lors du téléchargement'];
+    //     }
+    // }
+    
 
-        if (!is_dir($targetDir)) {
-            mkdir($targetDir, 0777, true);
-        }
 
-        if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
-            return "$targetDir$defaultImage";
-        }
 
-        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
-        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-        $maxFileSize = 2 * 1024 * 1024;
 
-        $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
-        if (!in_array($fileExtension, $allowedExtensions) || 
-            !in_array(mime_content_type($file['tmp_name']), $allowedMimeTypes) || 
-            $file['size'] > $maxFileSize) {
-            return "$targetDir$defaultImage";
-        }
 
-        $uniqueName = uniqid('img_') . '.' . $fileExtension;
-        $targetFilePath = $targetDir . $uniqueName;
+    public static function handleImageUpload($file, $uploadDir, $defaultImage, $currentImagePath = null)
+{
+    $targetDir = "./uploads/$uploadDir/";
 
-        if (move_uploaded_file($file['tmp_name'], $targetFilePath)) {
-            return $targetFilePath;
-        }
-
-        error_log("Échec du déplacement de l'image vers $targetFilePath");
-        return "$targetDir$defaultImage";
+    // Créer le répertoire si nécessaire
+    if (!is_dir($targetDir)) {
+        mkdir($targetDir, 0777, true);
     }
+
+    // Si aucune image n'est téléchargée ou qu'une erreur est survenue
+    if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
+        error_log("Aucune nouvelle image téléchargée ou erreur détectée. Code erreur : " . ($file['error'] ?? 'non défini'));
+        return [
+            'success' => false,
+            'error' => 'Aucune image téléchargée ou erreur détectée.',
+            'path' => $currentImagePath ?? "$targetDir$defaultImage",
+        ];
+    }
+
+    // Vérifier les contraintes sur le fichier
+    $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $maxFileSize = 2 * 1024 * 1024; // 2 Mo
+
+    $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $mimeType = mime_content_type($file['tmp_name']);
+
+    if (!in_array($fileExtension, $allowedExtensions)) {
+        error_log("Extension de fichier non valide : $fileExtension");
+        return [
+            'success' => false,
+            'error' => 'Extension de fichier non valide.',
+        ];
+    }
+
+    if (!in_array($mimeType, $allowedMimeTypes)) {
+        error_log("Type MIME non valide : $mimeType");
+        return [
+            'success' => false,
+            'error' => 'Type MIME non valide.',
+        ];
+    }
+
+    if ($file['size'] > $maxFileSize) {
+        error_log("Fichier trop volumineux : {$file['size']} octets");
+        return [
+            'success' => false,
+            'error' => 'Fichier trop volumineux.',
+        ];
+    }
+
+    // Générer un nom unique pour le fichier
+    $uniqueName = uniqid('img_') . '.' . $fileExtension;
+    $targetFilePath = $targetDir . $uniqueName;
+
+    // Déplacer l'image téléchargée
+    if (move_uploaded_file($file['tmp_name'], $targetFilePath)) {
+        // Supprimer l'ancienne image si elle existe et n'est pas l'image par défaut
+        if ($currentImagePath && $currentImagePath !== "$targetDir$defaultImage" && file_exists($currentImagePath)) {
+            if (unlink($currentImagePath)) {
+                error_log("Ancienne image supprimée : $currentImagePath");
+            } else {
+                error_log("Échec de la suppression de l'image : $currentImagePath");
+            }
+        }
+
+        error_log("Nouvelle image téléchargée avec succès : $targetFilePath");
+        return [
+            'success' => true,
+            'path' => $targetFilePath,
+        ];
+    }
+
+    error_log("Échec du déplacement de l'image téléchargée vers $targetFilePath");
+    return [
+        'success' => false,
+        'error' => 'Échec du déplacement de l\'image téléchargée.',
+        'path' => $currentImagePath ?? "$targetDir$defaultImage",
+    ];
+}
+
 
     public static function deleteImage(string $imagePath): void
     {
@@ -90,22 +166,13 @@ class Utils {
         }
     }
 
-    // public static function startSession(): void
-    // {
-    //     if (session_status() === PHP_SESSION_NONE) {
-    //         session_start();
-    //     }
-    // }
+
 
     public static function checkIfUserIsConnected(): void
     {
-        // self::startSession();
-        // var_dump($_SESSION);
-        
+            
         if (empty($_SESSION['user'])) {
-            //debogage
-            // var_dump($_SESSION);
-            // die;
+         
             self::redirect("loginForm");
         }
     }

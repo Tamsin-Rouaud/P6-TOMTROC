@@ -232,12 +232,12 @@ tbody tr:nth-child(even) {
 }
 
 /* Disponible (vert) */
-.available-btn.available {
-    background-color: #00AC66; /* Vert */
+.is-available {
+    background-color: #6DC5A1; /* Vert */
 }
 
 /* Non disponible (rouge) */
-.available-btn.not-available {
+.not-available {
     background-color: #c56d6d; /* Rouge */
 }
 
@@ -269,6 +269,7 @@ tbody tr:nth-child(even) {
     font-weight: bold;
 }
 
+/*** Infobulle description  ***/
 .tooltip {
     position: relative;
     cursor: pointer;

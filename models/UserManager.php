@@ -59,9 +59,7 @@ class UserManager extends AbstractEntityManager
                 
         $userData = $result->fetch(PDO::FETCH_ASSOC);
 
-         // Débogage
-    // var_dump($userData); // Affiche les données de l'utilisateur récupéré
-
+       
         return $userData ? $this->mapToUser($userData) : null;
     }
 
@@ -74,23 +72,6 @@ class UserManager extends AbstractEntityManager
         return $userData ? $this->mapToUser($userData) : null;
     }
 
-
-    
-    // public function getProfileCreationDate(int $idUser): string {
-    //     $sql = "SELECT user_creation_date FROM users WHERE id_user = ?";
-        
-    //     // Utilisez un tableau indexé avec la valeur de l'ID utilisateur
-    //     $result = $this->db->query($sql, [$idUser]);
-        
-    //     $dateCreationProfile = $result->fetch(PDO::FETCH_ASSOC);
-    
-    //     if ($dateCreationProfile && isset($dateCreationProfile['user_creation_date'])) {
-    //         return $dateCreationProfile['user_creation_date'];
-    //     }
-    
-    //     throw new Exception("Utilisateur non trouvé ou date de création manquante.");
-    // }
-    
 
     public function updateUserImagePath(int $idUser, string $imagePath): void {
         $sql= "UPDATE users SET image_path = ? WHERE id_user = ?" ;
@@ -145,6 +126,30 @@ class UserManager extends AbstractEntityManager
         return $errors;
     }
 
-    
+    public function updateUser(User $user): bool
+{
+    $sql = 'UPDATE users 
+            SET email = :email, 
+                username = :username, 
+                password = :password, 
+                image_path = :image_path
+                
+            WHERE id_user = :id_user';
+
+    $params = [
+        ':email' => $user->getEmail(),
+        ':username' => $user->getUsername(),
+        ':password' => $user->getPassword(),
+        ':image_path' => $user->getImagePathUser(),
+        ':id_user' => $user->getIdUser(),
+    ];
+
+    // Utilisation de la méthode query avec paramètres nommés
+    $stmt = $this->db->query($sql, $params);
+
+    // Retourne vrai si l'exécution de la requête a réussi
+    return $stmt->rowCount() > 0;
+}
+
 
 }

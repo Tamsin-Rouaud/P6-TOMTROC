@@ -1,5 +1,7 @@
-<section class="addEditBookForm">
-    <p><a href="index.php?action=myAccount"><img class="arrow" src="./images/arrow.png" alt="Retour">retour</a></p>
+<section class="addEditBookProfileForm">
+    <p>
+        <a href="index.php?action=myAccount"><img class="arrow" src="./images/arrow.png" alt="Retour">retour</a>
+    </p>
     <h1>Ajouter un livre</h1>
     <div class="addEditBookContainer">
         <div class="leftBlock">
@@ -50,7 +52,7 @@
 
 <!-- JavaScript pour gérer l'upload d'image et la prévisualisation -->
 <script>
-    // Lorsque l'utilisateur clique sur "Insérer une photo", ouvrir le sélecteur de fichier
+    // Lorsque l'utilisateur clique sur "Insérer une photo", ouvre le sélecteur de fichier
     document.getElementById('insertPhotoLink').addEventListener('click', function() {
         document.getElementById('addBookImage').click();
     });

@@ -92,7 +92,7 @@
          */
         public function getImagePathUser():string
         {
-            return $this->imagePathUser;
+            return $this->imagePathUser ?? './uploads/users/defaultAvatar.png';
         }
 
         /**

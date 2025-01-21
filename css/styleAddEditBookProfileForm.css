@@ -1,6 +1,6 @@
 /*** AddBookForm ***/
 
-.addEditBookForm {
+.addEditBookProfileForm {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -11,19 +11,19 @@
     background-color: #faf9f7;
 }
 
-.addEditBookForm button {
+.addEditBookProfileForm button {
     margin-top: 20px;
     width: 322px;
     height: 63px;
 }
 
-.addEditBookForm h1 {
+.addEditBookProfileForm h1 {
     margin: 0;
     padding-left: 125px;
     font-size: 1.625em;
 }
 
-.addEditBookForm p {
+.addEditBookProfileForm p {
     padding-bottom: 20px;
     font-size: 0.88em;
     color: #a6a6a6;
@@ -31,11 +31,11 @@
     
 }
 
-.addEditBookForm p:first-child {
+.addEditBookProfileForm p:first-child {
     color: #292929;
 }
 
-.addEditBookForm p a{
+.addEditBookProfileForm p a{
 
     color: #a6a6a6;
 }
@@ -152,8 +152,36 @@
 }
 
 
+/***** AddProfilePicture   *****/
 
+.profileContainer {
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+    margin: 0;
+}
 
+.profilePicture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    margin-left: 122px;
+    margin-right: 150px;
+    
+}
 
+.profilePicture a {
+    padding-left: 100px;
+    font-size: 1.5em;
+}
 
+.profilePicture img {
+    border-radius: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 
+#profileImagePreview {
+    border-radius: 100%;padding-bottom: 5px;
+}

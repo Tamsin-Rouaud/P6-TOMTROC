@@ -24,8 +24,8 @@
     <link rel="stylesheet" href="css/styleLoginForm.css">
     <!-- Lien fichier style styleMyAccount -->
     <link rel="stylesheet" href="css/styleMyAccount.css">
-    <!-- Lien fichier style styleAddEditBookForm -->
-    <link rel="stylesheet" href="css/styleAddEditBookForm.css">
+    <!-- Lien fichier style styleAddEditBookProfileForm -->
+    <link rel="stylesheet" href="css/styleAddEditBookProfileForm.css">
 
 </head>
 

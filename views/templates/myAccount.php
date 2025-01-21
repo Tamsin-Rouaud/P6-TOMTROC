@@ -1,12 +1,28 @@
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+?>
+
 <section class="myAccount">
     <h1 id="titleMyAccount" >Mon compte</h1>
     <div class="myAccountBox">
         <div class="boxProfile">
             <div class="profile">
                 <div class="profileBlock" >
-                    <img src="./images/profileIcon.png" alt="Photo de profil">
-                    <a href="javascript:void(0);" id="insertProfilePicture">modifier</a>
+                    <img 
+                        class="profilePicture"
+                        id="profileImagePreview"                    
+                        src="<?= !empty($user->getImagePathUser()) && file_exists($user->getImagePathUser()) ? htmlspecialchars($user->getImagePathUser()) : './uploads/users/defaultAvatar.png' ?> "
+                        alt="Photo de profil"
+                        >
+                        <!-- Lien pour ouvrir le sélecteur de fichier -->
+               
+                <a href="./index.php?action=addProfilePicture">Modifier</a>
+                </p>
+
+ 
                     <input type="file" id="addProfileImage" name="addProfileImage" enctype="multipart/form-data" accept="image/*" style="display:none;">
+
                 </div>
                 <div class="underline">
 
@@ -27,22 +43,32 @@
         </div>
 
         <div class="boxInformationProfile">
-            <form class="informationProfile">
+            <form class="informationProfile" method="POST" action="index.php?action=updateUser">
                 <h4>Vos informations personnelles</h4>
                 <div class="formInput">
+                <input type="hidden" name="id_user" value="<?= htmlspecialchars($user->getIdUser()) ?>">
                     <label for="email">Adresse email</label>
-                    <input type="email" id="email" name="email" value="<?= htmlspecialchars($user->getEmail() ?? '', ENT_QUOTES, 'UTF-8'); ?>" required>
+                    <input type="email" id="email" name="email" value="<?= htmlspecialchars($user->getEmail() ?? '', ENT_QUOTES, 'UTF-8'); ?>" >
                 </div>
                 <div class="formInput">
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" value="<?= htmlspecialchars($user->getPassword() ?? '', ENT_QUOTES, 'UTF-8'); ?>" required>
+
+<!-- Lequel des deux inputs récupérer ? Celui avec le vrai mot de passe ou l'autre ? -->
+                    
+<!-- Proposition A (required ou pas ? -->
+<!-- <input type="password" id="password" name="password" value="<?//= htmlspecialchars($user->getPassword() ?? '', ENT_QUOTES, 'UTF-8'); ?>">; -->
+
+<!-- Proposition B -->
+<input type="password" id="password" name="password" value="<?= htmlspecialchars("********" ?? '', ENT_QUOTES, 'UTF-8'); ?>" >;
+
+
                 </div>
                 <div class="formInput">
                     <label for="username">Pseudo</label>
-                    <input type="text" id="username" name="username" value="<?= htmlspecialchars($user->getUsername() ?? '', ENT_QUOTES, 'UTF-8'); ?>" required>
+                    <input type="text" id="username" name="username" value="<?= htmlspecialchars($user->getUsername() ?? '', ENT_QUOTES, 'UTF-8'); ?>" >
                 </div>
                 <div class="buttonSave">
-                    <button class="button save" type="submit"><a href="#">Enregistrer</a></button>
+                    <button class="button save" type="submit">Enregistrer</button>
                 </div>
             </form>
         </div>
@@ -79,15 +105,30 @@
                 </span>
             </td>
             <td class="available">
-                <button class="<?= $book->getIsAvailable() ? 'available' : 'not-available'; ?>">
+                <button class="<?= $book->getIsAvailable() ? 'is-available' : 'not-available'; ?>">
                     <?= $book->getIsAvailable() ? 'disponible' : 'non dispo.'; ?>
                 </button>
             </td>
             <td class="editDelete">
-                <a href="#">
-                    <button class="btnChoice btnEdit">Éditer</button>
-                </a>
-                <button class="btnChoice btnDelete">Supprimer</button>
+            
+            <a class="btnChoice btnEdit" href="index.php?action=editBook&id_book=<?= $book->getIdBook(); ?>">Éditer</a>
+    
+            <form method="POST" action="index.php?action=deleteBook" style="display:inline;">
+    <input type="hidden" name="id_book" value="<?= $book->getIdBook(); ?>">
+    <!-- <button type="submit" class="btnChoice btnDelete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')">
+        Supprimer
+    </button> -->
+    <a class="btnChoice btnDelete" href="index.php?action=deleteBook&id_book=<?php echo $book->getIdBook(); ?>" 
+   <?php echo Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce livre ?"); ?>>
+   Supprimer
+</a>
+
+</form>
+
+
+            <!-- <a class="btnChoice btnDelete" href="index.php?action=deleteBook&id=<?//= $book->getIdBook(); ?>" 
+   onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')">Supprimer</a> -->
+                
             </td>
         </tr>
     <?php endforeach; ?>
@@ -102,20 +143,23 @@
 </section>
 <!-- JavaScript pour gérer l'upload d'image et la prévisualisation -->
 <script>
-    // Lorsque l'utilisateur clique sur "Insérer une photo", ouvrir le sélecteur de fichier
-    document.getElementById('insertProfilePicture').addEventListener('click', function() {
-        document.getElementById('addProfileImage').click();
-    });
-
-    // Lorsque l'utilisateur sélectionne une image, prévisualiser l'image sélectionnée
     document.getElementById('addProfileImage').addEventListener('change', function(e) {
-        if (e.target.files && e.target.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(event) {
-                // Mettre à jour l'image de prévisualisation avec le fichier sélectionné
-                document.getElementById('bookImagePreview').src = event.target.result;
-            };
-            reader.readAsDataURL(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+        if (!file.type.startsWith('image/')) {
+            alert('Veuillez sélectionner un fichier image.');
+            return;
         }
-    });
+        if (file.size > 2 * 1024 * 1024) { // Limite de 2 Mo
+            alert('La taille du fichier doit être inférieure à 2 Mo.');
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            document.getElementById('profileImagePreview').src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
 </script>

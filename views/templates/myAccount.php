@@ -10,7 +10,7 @@ error_reporting(E_ALL);
             <div class="profile">
                 <div class="profileBlock" >
                     <img 
-                        class="profilePicture"
+                        class="BlockProfilePicture"
                         id="profileImagePreview"                    
                         src="<?= !empty($user->getImagePathUser()) && file_exists($user->getImagePathUser()) ? htmlspecialchars($user->getImagePathUser()) : './uploads/users/defaultAvatar.png' ?> "
                         alt="Photo de profil"
@@ -53,13 +53,8 @@ error_reporting(E_ALL);
                 <div class="formInput">
                     <label for="password">Mot de passe</label>
 
-<!-- Lequel des deux inputs récupérer ? Celui avec le vrai mot de passe ou l'autre ? -->
-                    
-<!-- Proposition A (required ou pas ? -->
-<!-- <input type="password" id="password" name="password" value="<?//= htmlspecialchars($user->getPassword() ?? '', ENT_QUOTES, 'UTF-8'); ?>">; -->
 
-<!-- Proposition B -->
-<input type="password" id="password" name="password" value="<?= htmlspecialchars("********" ?? '', ENT_QUOTES, 'UTF-8'); ?>" >;
+<input type="password" id="password" name="password" value="" placeholder="********"  >;
 
 
                 </div>

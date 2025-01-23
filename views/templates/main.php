@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="css/styleMyAccount.css">
     <!-- Lien fichier style styleAddEditBookProfileForm -->
     <link rel="stylesheet" href="css/styleAddEditBookProfileForm.css">
+    <!-- Lien fichier style styleSearch -->
+    <link rel="stylesheet" href="css/styleSearch.css">
 
 </head>
 

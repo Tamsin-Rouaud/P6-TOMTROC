@@ -43,11 +43,13 @@
 .profileBlock {
     display: flex;
     flex-direction: column;
-   
-}
+    /* justify-content: center;
+    align-items: center;*/
+} 
 
 .profileBlock img {
     width: 135px;
+    
 }
 
 .profileBlock a {
@@ -101,12 +103,13 @@
     padding-top: 40px;
 }
 
+
 .save {
     margin-top: 0;
     height: 63px;
     width: 47%;
     border: #00AC66 solid 1px;
-    
+    padding: 0;
     background-color: #f5f3ef;
     font-weight: bold;
 }

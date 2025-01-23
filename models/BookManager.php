@@ -9,7 +9,16 @@
     
         public function getAllBooks(): array
 {
-    $sql = "SELECT * FROM books";
+    $sql = "SELECT 
+                b.*, 
+                u.username AS owner_name 
+            FROM 
+                books b
+            JOIN 
+                users u 
+            ON 
+                b.owner_id = u.id_user
+";
     $query = $this->db->query($sql);
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
 

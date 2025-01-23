@@ -22,6 +22,7 @@ a {
 /********** GENERAL **********/
 
 * {
+
     max-width: 1440px;
     color: #292929;
 
@@ -34,13 +35,15 @@ body {
     font-family: Inter, arial, 'sans-serif';
     font-weight: 300;
     background-color: #F5F3EF;
+   
     max-width: 1440px;
     margin: 0 auto;
     
 }
 
 main {
-    width: 1440px;
+    width: 100%;
+    max-width: 1440px;
 
 }
 

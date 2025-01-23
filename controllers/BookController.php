@@ -158,6 +158,7 @@ if ($imageUploadResult['success']) {
     }
 
 
+
 // UPDATE
 public function updateBook()
 {
@@ -179,24 +180,21 @@ public function updateBook()
         // Chemin de l'image actuelle
         $currentImagePath = $existingBook->getImagePath();
 
-        // Gestion de l'image
+        // Gestion de l'image (si un fichier est téléchargé)
         if (isset($_FILES['updateBookImage']) && $_FILES['updateBookImage']['error'] === UPLOAD_ERR_OK) {
-            $uploadService = new Utils();
+            $uploadResult = Utils::handleImageUpload(
+                $_FILES['updateBookImage'],  // Fichier envoyé
+                'books',                      // Sous-dossier
+                'defaultBook.png',            // Image par défaut
+                $currentImagePath            // Ancien chemin d'image
+            );
 
-            // Téléchargement de la nouvelle image
-            $newImagePath = $uploadService->handleImageUpload($_FILES['updateBookImage'], 'books', 'defaultBook.png');
-
-            // Suppression de l'ancienne image si elle n'est pas celle par défaut
-            if ($currentImagePath !== './uploads/books/defaultBook.png' && file_exists($currentImagePath)) {
-                if (unlink($currentImagePath)) {
-                    error_log("Ancienne image supprimée : $currentImagePath");
-                } else {
-                    error_log("Échec de la suppression de l'image : $currentImagePath");
-                }
+            if ($uploadResult['success']) {
+                $currentImagePath = $uploadResult['path']; // Nouveau chemin si l'upload réussit
+            } else {
+                // Facultatif : gérer une redirection ou afficher un message d'erreur
+                error_log("Erreur lors de l'upload de l'image : " . $uploadResult['error']);
             }
-
-            // Mettre à jour le chemin de l'image
-            $currentImagePath = $newImagePath;
         }
 
         // Instanciation du livre
@@ -206,7 +204,7 @@ public function updateBook()
         $book->setAuthorName($author_name);
         $book->setDescription($description);
         $book->setIsAvailable($is_available);
-        $book->setImagePath($currentImagePath);
+        $book->setImagePath($currentImagePath); // Utilisation du chemin d'image final
 
         // Mise à jour via BookManager
         try {
@@ -223,7 +221,6 @@ public function updateBook()
         exit;
     }
 }
-
 
 
 // DELETE

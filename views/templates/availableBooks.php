@@ -11,134 +11,16 @@
         </form>
     </div>
     <div class="bookBlock">
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
+        <?php foreach ($books as $book): ?>
+            <div class="bookImgBlock">
+                <img src="<?php echo htmlspecialchars($book->getImagePath()); ?>" alt="<?php echo htmlspecialchars($book->getTitle()); ?>">
+                <div class="bookImgBlockText">
+                    <h3><?php echo htmlspecialchars($book->getTitle()); ?></h3>
+                    <p><?php echo htmlspecialchars($book->getAuthorName()); ?></p>
+                    <p>Vendu par : <?php echo htmlspecialchars($book->getOwnerName()); ?></p>
+                </div>
             </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
-        <div class="bookImgBlock">
-            <img src="images/milkHoney.jpg" alt="Milk & honey">
-            <div class="bookImgBlockText">
-                <h3>Milk & honey</h3>
-                <p>Rupi Kaur</p>
-                <p>Vendu par : Hugo1990_12</p>
-            </div>
-        </div>
+        <?php endforeach; ?>
     </div>
 </section>
 

@@ -65,20 +65,59 @@ class UserManager extends AbstractEntityManager
 
 
     
+
+
     public function findUserById(int $idUser): ?User {
-        $sql = "SELECT * FROM users WHERE id_user = :id";
+        $sql = "SELECT id_user, username, image_path, user_creation_date FROM users WHERE id_user = :idUser";
         
-        $userData = $this->db->query($sql, [':id' => $idUser])->fetch();
-        return $userData ? $this->mapToUser($userData) : null;
+        // Utilise $this->db->query correctement
+        $result = $this->db->query($sql, [':idUser' => $idUser]);
+        
+        // Récupère les données utilisateur
+        $userData = $result->fetch(PDO::FETCH_ASSOC);
+        
+        if ($userData) {
+            $user = new User();
+            $user->setIdUser($userData['id_user']);
+            $user->setUsername($userData['username']);
+            $user->setImagePathUser($userData['image_path'] ?? 'uploads/users/defaultAvatar.png');
+    
+            // Initialisation de la date de création en tant qu'objet DateTime
+            if (!empty($userData['user_creation_date'])) {
+                $user->setDateCreationUser(new DateTime($userData['user_creation_date']));
+            } else {
+                // Valeur par défaut si la date est manquante
+                $user->setDateCreationUser(null);
+            }
+    
+            return $user;
+        }
+        
+        return null; // Aucun utilisateur trouvé
     }
+    
 
 
-    public function updateUserImagePath(int $idUser, string $imagePath): void {
-        $sql= "UPDATE users SET image_path = ? WHERE id_user = ?" ;
-        $params = [$imagePath, $idUser];
-        $result= $this->db->query($sql, $params);
-
+   
+    public function updateUserImagePath(int $idUser, string $newImagePath): void {
+        // Récupérer le chemin de l'image actuelle
+        $currentImagePath = $this->getUserImagePath($idUser);
+    
+        // Supprimer l'ancienne image si ce n'est pas l'image par défaut
+        if ($currentImagePath !== 'uploads/users/defaultAvatar.png' && file_exists($currentImagePath)) {
+            unlink($currentImagePath);
+        }
+    
+        // Mettre à jour avec le nouveau chemin
+        $sql = "UPDATE users SET image_path = ? WHERE id_user = ?";
+        $this->db->query($sql, [$newImagePath, $idUser]);
     }
+    
+
+
+
+
+
 
     public function getUserImagePath(int $idUser): string {
         $sql = "SELECT image_path FROM users WHERE id_user = ?";

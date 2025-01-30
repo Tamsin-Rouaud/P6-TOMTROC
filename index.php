@@ -22,6 +22,20 @@ $router = new Router();
 // La route 'availableBooks' appelle le contrôleur 'AvailableBooksCOntroller' et sa méthode 'showAvailableBooks'
 $router->addRoute('availableBooks', 'BookController', 'showBooks');
 
+// Cette route sert à afficher le détail d'un livre
+$router->addRoute('bookDetails', 'BookController', 'showBookDetails');
+
+// Cette route sert à afficher les livres d'un propriétaire unique
+$router->addRoute('profileDetails', 'UserController', 'showProfileDetails');
+
+// Route pour afficher les messages
+$router->addRoute('messaging', 'MessageController', 'showMessages');
+
+// Route pour envoyer un message
+$router->addRoute('sendMessage', 'MessageController', 'sendMessage');
+
+// $router->addRoute('conversationHistory', 'MessageCOntroller', 'showConversationHistory');
+
 // Route pour la gestion des utilisateurs
 // Cette route sera à afficher le formulaire de connexion et traite sa soumission
 $router->addRoute('loginForm', 'UserController', 'showLoginForm');

@@ -1,0 +1,24 @@
+.profileDetailsBlock {
+    display: flex;
+    padding-left: 180px;
+    padding-right: 120px;
+}
+
+.ownerBox {
+    height: 579px;
+}
+.writeMessage {
+    background-color: #f5f3ef;
+    font-weight: bold;
+    border: #00AC66 solid 1px;
+    color: #00AC66;
+}
+
+.writeMessage a {
+    color: #00AC66;
+}
+
+.ownerTable {
+    margin: 0;
+    padding-left: 20px;
+}

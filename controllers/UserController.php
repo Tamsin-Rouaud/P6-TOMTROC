@@ -214,6 +214,9 @@ public function showProfilePictureForm() {
     exit;
 }
 
+
+
+
     public function updateProfilePicture()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -254,6 +257,29 @@ public function showProfilePictureForm() {
             header('Location: addProfilePicture.php?error=Requête invalide');
         }
     }
+
+
+    public function showProfileDetails($userId) {
+        $bookManager = new BookManager();
+        $userManager = new UserManager();
+    
+        // Récupérer les informations de l'utilisateur
+        $user = $userManager->findUserById($userId);
+        if (!$user) {
+            throw new Exception("Propriétaire introuvable.");
+        }
+     // Calcul de la durée d'adhésion
+     $membershipDuration = $this->getMembershipDuration($user->getDateCreationUser()->format('Y-m-d'));
+        // Récupérer les livres de cet utilisateur
+        $books = $bookManager->findBooksByOwnerId($userId);
+    
+        // Afficher la vue
+        $view = new View("Détails du profil");
+        $view->render("profileDetails", ['user' => $user, 'books' => $books,
+        'membershipDuration' => $membershipDuration, // Durée d'adhésion calculée
+         ]);
+    }
+    
 
     
 }

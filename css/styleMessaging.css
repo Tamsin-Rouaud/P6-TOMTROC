@@ -1,0 +1,208 @@
+/* 
+
+.contact {
+   
+}
+
+.contactImg {
+    margin-right: 0;
+    width: 25%;
+}
+
+
+.contactImg img{
+    
+    border-radius: 50%;
+    
+}
+
+.contactText {
+    
+}
+
+.contactText p:first-child {
+    
+}
+
+.contactText p {
+   
+}
+
+
+
+.messagesContainer {
+     padding-left: 20px;
+}
+
+.messagesContainer img {
+    width: 50px;
+     height: 50px;
+      border-radius: 50%;
+}
+
+
+
+.mailingTitle h1 {
+
+}
+
+
+ */
+
+
+.mailing {
+    display: flex;
+    background-color: #f5f3ef;
+    /* margin-left: 30px; */
+    padding-bottom: 0px;
+}
+
+.mailingContainer {
+    width: 22%;
+    height: 893px;
+    padding-right: 20px;
+    background-color: #faf9f7;
+    margin-left: 183px;
+}
+
+.mailingTitle {
+    padding-bottom: 50px;
+    margin-left: 35px;
+    
+}
+.mailingTitle h1 {
+    font-family: 'Playfair Display','sans-serif';
+font-size: 1.625em;
+color: black;
+}
+
+.contact {
+    display: flex;
+    padding-bottom: 25px;
+    margin-left: 10px;
+    
+    align-items: center;
+    /* justify-content: space-between; */
+    
+}
+
+
+
+.contactImg img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.contactText {
+    margin-left: 15px;
+    width: 50%;
+}
+
+.contactText p:first-child {
+    font-size: 0.875em;
+    color: #292929;
+}
+
+.contactText p:last-child {
+    font-size: 0.75em;
+    color: #a6a6a6;
+}
+
+.contactTime {
+    width: 25%;
+}
+
+.contactTime small{
+    width: 25%;
+    text-align: right;
+    font-size: 0.75em;
+}
+
+.containerMessage {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.blockMessage {
+    display: flex;
+    flex-direction: column;
+
+}
+.messagesContainer {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 930px;
+    margin: 0;
+}
+
+/* .messageContainerTitle {
+    margin: 0;
+} */
+.blockMessage h3 {
+    
+    font-size: 0.875em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    width: 20%;
+    
+
+}
+
+.mailing h3 img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.messageUsername {
+    background-color: #f1f1f1;
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin: 0;
+    margin-left: 35px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.messageUsername div {
+    display: flex;
+
+}
+
+.messagesContainer small {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 35px;
+}
+.messagesContainer p {
+    color: #333;
+}
+
+textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    resize: none;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+

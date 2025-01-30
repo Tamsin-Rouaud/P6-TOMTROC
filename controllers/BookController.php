@@ -3,9 +3,11 @@
 class BookController {
 
     private BookManager $bookManager;
+    private UserManager $userManager;
 
     public function __construct() {
         $this->bookManager = new BookManager();
+        $this->userManager = new UserManager(); // Initialisation de UserManager
     }
 
     private function redirectToMyAccount(): void {
@@ -32,6 +34,73 @@ class BookController {
         $view = new View('Mon compte');
         $view->render('myAccount', ['books' => $books]);
     }
+
+    // // Récupération d'un livre par son id
+    // public function showBookDetails(): void
+    // {
+    //     // Vérifie si l'ID du livre est passé en paramètre GET
+    //     $bookId = $_GET['id_book'] ?? null;
+    
+    //     if (!$bookId || !ctype_digit($bookId)) {
+    //         // Redirection vers une page (par exemple `availableBooks`) si aucun ID valide n'est fourni
+    //         header('Location: index.php?action=availableBooks');
+    //         exit;
+    //     }
+    
+    //     // Récupère le livre à partir de son ID
+    //     $book = $this->bookManager->findBookById((int) $bookId);
+        
+    //     if (!$book) {
+    //         // Si aucun livre n'est trouvé, redirige l'utilisateur
+    //         header('Location: index.php?action=availableBooks');
+    //         exit;
+    //     }
+    
+    //     // Passe les données du livre à la vue
+    //     $view = new View('Détails du livre');
+    //     $view->render('bookDetails', ['book' => $book]);
+    // }
+    
+    // Contrôleur BookController
+    public function showBookDetails($id) {
+        $bookManager = new BookManager();
+        $userManager = new UserManager();
+    
+        // Récupérer les informations du livre avec l'ID
+        $book = $bookManager->findBookById($id);
+    
+        // Vérifier si le livre existe
+        if (!$book) {
+            throw new Exception("Livre introuvable avec l'ID : $id");
+        }
+    
+        // Récupérer l'ID du propriétaire du livre
+        $ownerId = $book->getOwnerId();
+    
+        // Récupérer les informations du propriétaire
+        $user = $userManager->findUserById($ownerId);
+    
+
+        // Vérifier si le propriétaire existe
+        if (!$user) {
+            throw new Exception("Propriétaire introuvable pour ce livre");
+        }
+    
+        // // Calcul de la durée d'adhésion
+        // $membershipDuration = $this->getMembershipDuration($user->getDateCreationUser()->format('Y-m-d'));
+        
+        // Afficher la vue avec les données du livre et du propriétaire
+        $view = new View("Afficher un livre");
+        $view->render("bookDetails", [
+            'book' => $book,
+            'user' => $user // Ajout des informations du propriétaire
+        ]);
+    }
+    
+
+    
+
+
 
     public function showAddBookForm(): void {
         $view = new View('Ajouter un livre');

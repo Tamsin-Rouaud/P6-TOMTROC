@@ -46,34 +46,6 @@ class Utils {
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
 
-// Proposition handleupload
-    // public function handleImageUpload(array $file, string $uploadDir, string $defaultImage): array
-    // {
-    //     $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
-    //     $maxFileSize = 2 * 1024 * 1024; // 2 Mo
-    
-    //     if (!in_array($file['type'], $allowedMimeTypes)) {
-    //         return ['success' => false, 'error' => 'Format de fichier non supporté'];
-    //     }
-    //     if ($file['size'] > $maxFileSize) {
-    //         return ['success' => false, 'error' => 'Fichier trop volumineux'];
-    //     }
-    
-    //     $fileName = uniqid() . '_' . basename($file['name']);
-    //     $targetPath = $uploadDir . $fileName;
-    
-    //     if (move_uploaded_file($file['tmp_name'], $targetPath)) {
-    //         return ['success' => true, 'path' => $targetPath];
-    //     } else {
-    //         return ['success' => false, 'error' => 'Erreur lors du téléchargement'];
-    //     }
-    // }
-    
-
-
-
-
-
 
     public static function handleImageUpload($file, $uploadDir, $defaultImage, $currentImagePath = null)
 {

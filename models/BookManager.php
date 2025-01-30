@@ -33,7 +33,7 @@
 
 
 
-public function getBookById(int $id): ?Book
+public function getBookByIdBook(int $id): ?Book
 {
     $sql = "SELECT * FROM books WHERE id_book = :id_book";
     $params = [':id_book' => $id];
@@ -42,6 +42,43 @@ public function getBookById(int $id): ?Book
 
     return $result ? new Book($result) : null;
 }
+
+public function mapToBook(array $data): Book {
+    $book = new Book();
+    
+    $book->setIdBook($data['id_book']);
+    $book->setTitle($data['title']);
+    $book->setAuthorName($data['author_name']);
+    $book->setImagePath($data['image_path']);
+    $book->setDescription($data['description']);
+    $book->setOwnerId($data['owner_id']);
+    $book->setIsAvailable($data['is_available']);
+    
+    // Vérifier si creation_date est valide
+    if (!empty($data['creation_date'])) {
+        try {
+            $book->setCreationDate(new DateTime($data['creation_date']));
+        } catch (Exception $e) {
+            $book->setCreationDate(null); // Affecte null en cas de problème
+        }
+    } else {
+        $book->setCreationDate(null); // Affecte null si creation_date est NULL
+    }
+
+    // Vérifier si update_date est valide
+    if (!empty($data['update_date'])) {
+        try {
+            $book->setUpdateDate(new DateTime($data['update_date']));
+        } catch (Exception $e) {
+            $book->setUpdateDate(null); // Affecte null en cas de problème
+        }
+    } else {
+        $book->setUpdateDate(null); // Affecte null si update_date est NULL
+    }
+
+    return $book;
+}
+
 
 
 
@@ -80,6 +117,22 @@ public function findBookById(int $bookId): ?Book
 }
 
         
+public function findBooksByOwnerId($ownerId) {
+    $sql = "SELECT * FROM books WHERE owner_id = :owner_id";
+    $params = [':owner_id' => $ownerId]; // Définir les paramètres
+
+    // Utiliser votre méthode query pour exécuter la requête
+    $statement = $this->db->query($sql, $params);
+
+    $books = [];
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $books[] = $this->mapToBook($row); // Mapper les résultats en objets Book
+    }
+
+    return $books; // Retourne le tableau d'objets Book
+}
+
+
 
 
         

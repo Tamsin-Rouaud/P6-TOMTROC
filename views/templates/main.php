@@ -28,6 +28,12 @@
     <link rel="stylesheet" href="css/styleAddEditBookProfileForm.css">
     <!-- Lien fichier style styleSearch -->
     <link rel="stylesheet" href="css/styleSearch.css">
+    <!-- Lien fichier style styleBookDetails -->
+    <link rel="stylesheet" href="css/styleBookDetails.css">
+    <!-- Lien fichier style stykeProfileDetails  -->
+    <link rel="stylesheet" href="css/styleProfileDetails.css" >
+    <!-- Lien fichier style styleMessaging -->
+    <link rel="stylesheet" href="css/styleMessaging.css" >
 
 </head>
 

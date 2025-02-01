@@ -1,65 +1,14 @@
-/* 
-
-.contact {
-   
-}
-
-.contactImg {
-    margin-right: 0;
-    width: 25%;
-}
-
-
-.contactImg img{
-    
-    border-radius: 50%;
-    
-}
-
-.contactText {
-    
-}
-
-.contactText p:first-child {
-    
-}
-
-.contactText p {
-   
-}
-
-
-
-.messagesContainer {
-     padding-left: 20px;
-}
-
-.messagesContainer img {
-    width: 50px;
-     height: 50px;
-      border-radius: 50%;
-}
-
-
-
-.mailingTitle h1 {
-
-}
-
-
- */
-
 
 .mailing {
     display: flex;
     background-color: #f5f3ef;
-    /* margin-left: 30px; */
+
     padding-bottom: 0px;
 }
 
 .mailingContainer {
     width: 22%;
-    height: 893px;
+    
     padding-right: 20px;
     background-color: #faf9f7;
     margin-left: 183px;
@@ -82,7 +31,7 @@ color: black;
     margin-left: 10px;
     
     align-items: center;
-    /* justify-content: space-between; */
+ 
     
 }
 
@@ -124,11 +73,18 @@ color: black;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    margin-left: 35px;
+    width: 55%;
+    margin-right: 120px;
+
+
 }
 
 .blockMessage {
     display: flex;
     flex-direction: column;
+    margin: 0;
+    margin-top: 30%;
 
 }
 .messagesContainer {
@@ -136,14 +92,15 @@ color: black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 930px;
+   
     margin: 0;
 }
 
-/* .messageContainerTitle {
+.messageContainerTitle {
     margin: 0;
-} */
-.blockMessage h3 {
+    margin-top: 40px;
+}
+.messageContainerTitle h3 {
     
     font-size: 0.875em;
     font-weight: 600;
@@ -155,10 +112,12 @@ color: black;
 }
 
 .mailing h3 img {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
+    margin: 0;
     margin-right: 10px;
+
 }
 
 .messageUsername {
@@ -180,29 +139,175 @@ color: black;
 .messagesContainer small {
     display: flex;
     justify-content: flex-start;
-    margin-left: 35px;
+    margin: 0;
 }
 .messagesContainer p {
     color: #333;
 }
 
 textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
+    width: 80%;
+    margin: 0;
     border-radius: 8px;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    resize: none;
-}
-
-button {
-    background-color: #28a745;
-    color: white;
+    color: #a6a6a6;
+    font-size: 0.875em;
+    padding-top: 15px;
+    height: 50px;
+    font-family: 'inter', 'sans serif';
+    padding-left: 20px;
+    outline: none;
     border: none;
-    padding: 0.8rem 1.2rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
+    
 }
 
+
+.formMessage {
+    margin: 80px 0 ;
+   
+}
+
+.formMessage form {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.buttonMessage {
+    
+    margin: 0;
+  width: 132px;
+    
+   
+    cursor: pointer;
+    
+}
+
+
+
+
+
+
+
+
+
+
+.messageWrapper {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* margin-bottom: 15px; */
+    min-width: 60%;
+    /* margin: 0; */
+    margin: 20px 0;
+}
+
+/* Messages envoyés */
+.sent {
+    justify-content: flex-end;
+    margin-left: auto; /* Aligne à droite */
+}
+
+/* Conteneur pour l'avatar et le contenu */
+.messageBody {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 0;
+    
+    /* max-width: calc(100% - 40px); Prend en compte l'espace de l'avatar */
+}
+.messageAvatar  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+}
+
+
+
+
+
+/* Avatar */
+.messageAvatar img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-top: 5px;
+    margin: 0;
+}
+
+/* Heure des messages */
+.messageTime {
+    font-size: 0.75em;
+    color: #6c757d;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.sent .messageTime {
+    text-align: right;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+/* Contenu des messages */
+.messageContent {
+    background-color: #fff; /* Couleur pour les messages reçus */
+    /* color: #721c24; */
+    padding: 10px 20px;
+    border-radius: 8px;
+    word-wrap: break-word;
+    margin: 0;
+    
+}
+
+.sent .messageContent {
+    background-color: #edf2f6; 
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+/* Style par défaut pour les contacts */
+/* .contact {
+    background-color: #faf9f7;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+} */
+
+/* Contact actif */
+.activeContact {
+    background-color: #ffffff; /* Blanc pour le contact sélectionné */
+   
+}
+
+
+/* Conteneur pour l'avatar et l'heure */
+.messageMeta {
+    display: flex;
+    align-items: center;
+    padding-bottom: 5px;
+    margin: 0;
+}
+
+/* Avatar des messages */
+.messageAvatar img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Heure des messages */
+.messageTime {
+    font-size: 0.75em;
+    color: #6c757d;
+}
+
+/* Pour les messages envoyés, alignement à droite */
+.sentTime {
+    text-align: right;
+    margin-bottom: 5px;
+}

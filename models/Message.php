@@ -8,6 +8,7 @@ class Message extends AbstractEntity
     private $created_at;
     private $contact_username;
     private $contact_image;
+    private $is_read;
 
     // Le constructeur appelle le constructeur parent pour gérer l'hydratation
     public function __construct(array $data = []) 
@@ -46,6 +47,11 @@ class Message extends AbstractEntity
         return $this->contact_image;
     }
 
+    public function getIsRead(): ?int
+    {
+        return $this->is_read;
+    }
+
     // Setters
     public function setFromUser(int $from_user): void 
     {
@@ -76,4 +82,16 @@ class Message extends AbstractEntity
     {
         $this->contact_image = $image;
     }
+
+    public function isSentByUser(int $userId): bool 
+    {
+        return $this->from_user == $userId;
+    }
+    
+    public function setIsRead(int $isRead): int
+    {
+        return $this->is_read = $isRead;
+    }
+
+
 }

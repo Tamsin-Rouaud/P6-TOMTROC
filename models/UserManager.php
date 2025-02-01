@@ -191,4 +191,13 @@ class UserManager extends AbstractEntityManager
 }
 
 
+public function getUserInfoById($userId) {
+    $sql = "SELECT id_user, username, image_path FROM users WHERE id_user = :userId";
+    $params=['userId' => $userId];
+    $stmt = $this->db->query($sql, $params);
+    // $stmt->execute(['userId' => $userId]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
 }

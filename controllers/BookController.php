@@ -35,32 +35,7 @@ class BookController {
         $view->render('myAccount', ['books' => $books]);
     }
 
-    // // Récupération d'un livre par son id
-    // public function showBookDetails(): void
-    // {
-    //     // Vérifie si l'ID du livre est passé en paramètre GET
-    //     $bookId = $_GET['id_book'] ?? null;
-    
-    //     if (!$bookId || !ctype_digit($bookId)) {
-    //         // Redirection vers une page (par exemple `availableBooks`) si aucun ID valide n'est fourni
-    //         header('Location: index.php?action=availableBooks');
-    //         exit;
-    //     }
-    
-    //     // Récupère le livre à partir de son ID
-    //     $book = $this->bookManager->findBookById((int) $bookId);
-        
-    //     if (!$book) {
-    //         // Si aucun livre n'est trouvé, redirige l'utilisateur
-    //         header('Location: index.php?action=availableBooks');
-    //         exit;
-    //     }
-    
-    //     // Passe les données du livre à la vue
-    //     $view = new View('Détails du livre');
-    //     $view->render('bookDetails', ['book' => $book]);
-    // }
-    
+       
     // Contrôleur BookController
     public function showBookDetails($id) {
         $bookManager = new BookManager();
@@ -86,9 +61,7 @@ class BookController {
             throw new Exception("Propriétaire introuvable pour ce livre");
         }
     
-        // // Calcul de la durée d'adhésion
-        // $membershipDuration = $this->getMembershipDuration($user->getDateCreationUser()->format('Y-m-d'));
-        
+               
         // Afficher la vue avec les données du livre et du propriétaire
         $view = new View("Afficher un livre");
         $view->render("bookDetails", [

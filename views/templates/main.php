@@ -38,6 +38,20 @@
 </head>
 
 <body>
+<?php
+// Vérifiez si l'utilisateur est connecté
+$unreadMessagesCount = 0;
+
+if (isset($_SESSION['user']['id'])) {
+    // Inclure le MessageManager si nécessaire
+    require_once 'models/MessageManager.php';
+    $messageManager = new MessageManager();
+
+    // Calculer le nombre de messages non lus pour l'utilisateur connecté
+    $unreadMessagesCount = $messageManager->countUnreadMessages($_SESSION['user']['id']);
+}
+?>
+
     <?php require 'views/partials/header.php'; ?>
     <main>
     <?= $content ?>

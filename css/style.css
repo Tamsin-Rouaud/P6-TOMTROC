@@ -57,13 +57,16 @@ h1 {
 
 }
 
-.button {
+
+
+button {
     background-color: #00AC66;
     border: none;
-    padding: 20px 45px;
     border-radius: 10px;
-    margin-top: 40px;
-
+    font-family: 'Inter', sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    color: white;
 }
 
 .button a {

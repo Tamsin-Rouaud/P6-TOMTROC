@@ -1,15 +1,15 @@
 <section class="connexionBlock">
     <form class="connexionText" method="POST" action="index.php?action=showRegisterForm">
         <h1 id="connexionTitle">Inscription</h1>
-        <div class="formInput">
+        <div class="formInputLogin">
             <label for="username">Pseudo</label>
             <input type="text" id="username" name="username" required>
         </div>
-        <div class="formInput">
+        <div class="formInputLogin">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" required>
         </div>  
-        <div class="formInput">
+        <div class="formInputLogin">
             <label for="password">Mot de passe</label>
             <input type="password" name="password" id="password">
         </div>

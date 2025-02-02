@@ -3,7 +3,7 @@
     <p>
         <a href="index.php?action=myAccount"><img class="arrow" src="./images/arrow.png" alt="Retour">retour</a>
     </p>
-    <h1>Modifier un livre</h1>
+    <h1>Modifier les informations</h1>
     <div class="addEditBookContainer">
         <div class="leftBlock">
             <p>Photo</p>
@@ -62,7 +62,7 @@
 </div>
     
 
-    <button class="button subscribe" type="submit">Modifier</button>
+    <button class="button subscribe" type="submit">Valider</button>
 </form>
 
     </div>

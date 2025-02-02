@@ -45,20 +45,20 @@ error_reporting(E_ALL);
         <div class="boxInformationProfile">
             <form class="informationProfile" method="POST" action="index.php?action=updateUser">
                 <h4>Vos informations personnelles</h4>
-                <div class="formInput">
+                <div class="formInputLogin">
                 <input type="hidden" name="id_user" value="<?= htmlspecialchars($user->getIdUser()) ?>">
                     <label for="email">Adresse email</label>
                     <input type="email" id="email" name="email" value="<?= htmlspecialchars($user->getEmail() ?? '', ENT_QUOTES, 'UTF-8'); ?>" >
                 </div>
-                <div class="formInput">
+                <div class="formInputLogin">
                     <label for="password">Mot de passe</label>
 
 
-<input type="password" id="password" name="password" value="" placeholder="********"  >;
+<input type="password" id="password" name="password" value="" placeholder="********"  >
 
 
                 </div>
-                <div class="formInput">
+                <div class="formInputLogin">
                     <label for="username">Pseudo</label>
                     <input type="text" id="username" name="username" value="<?= htmlspecialchars($user->getUsername() ?? '', ENT_QUOTES, 'UTF-8'); ?>" >
                 </div>

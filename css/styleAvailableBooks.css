@@ -11,6 +11,7 @@ section {
     padding-left: 300px;
     padding-right: 250px;
     background-color: #FAF9F7;
+    padding-bottom: 40px;
 }
 
 .partOne h1 {
@@ -58,6 +59,7 @@ section {
 #search {
     border: none;
     outline: none; /* Retire la bordure bleue de focus */
+    height: 20px;
 }
 
 
@@ -85,7 +87,7 @@ section {
     border-bottom-right-radius: 10px;
     margin-top: 20px;
     margin-bottom: 30px;
-    padding-right: 22px;
+    
 }
 
 .bookImgBlock img {
@@ -111,7 +113,7 @@ section {
 }
 
 .bookImgBlockText h3 {
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: normal;
     padding-bottom: 10px;
 }
@@ -122,3 +124,26 @@ section {
     font-size: 0.75em;
 }
 
+
+/***** Encart dispo/non dispo.  *****/
+
+.bookImageWrapper {
+    position: relative;
+    display: block;
+
+}
+
+.availabilityTag {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    background-color: #c56d6d; /* Rouge pour indisponible */
+    color: #fff;
+    padding: 5px 8px;
+    font-size: 0.5em;
+    font-weight: bold;
+    border-radius: 15px;
+    z-index: 1;
+    
+    
+}

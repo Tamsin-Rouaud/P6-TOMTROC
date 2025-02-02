@@ -22,7 +22,7 @@
     width: 482px;
 }
 
-.formInput {
+/* .formInput {
     display: flex;
     flex-direction: column;
     color: #A6A6A6;
@@ -30,21 +30,13 @@
     padding-bottom: 30px;
     width: 100%;
         
-}
+} */
 
-.formInput label {
-    padding-bottom: 10px;
 
-}
 
-.formInput input {
-    border: #F0F0F0;
-    height: 50px;
-    width: 100%;
-    border-radius: 5px;
-    outline: none;
-    padding-left: 10px;
-
+.formInputLogin {
+  margin: 0;
+  padding-bottom: 20px;
 }
 
 .connexionImg {

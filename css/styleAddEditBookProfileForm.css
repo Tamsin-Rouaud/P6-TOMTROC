@@ -24,7 +24,7 @@
 }
 
 .addEditBookProfileForm p {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     font-size: 0.88em;
     color: #a6a6a6;
     padding-left: 125px;
@@ -124,9 +124,15 @@
     font-size: 1em;
     padding-left: 20px;
     padding-right: 20px;
+    color: #292929;
+    margin-top: 10px;
         
 }
 
+.formInput  {
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
 
 
 #addBookIsAvailable, 
@@ -143,6 +149,8 @@
     font-size: 1em;
     padding-left: 20px;
     padding-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 #addBookIsAvailable option, 

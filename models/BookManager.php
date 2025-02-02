@@ -31,6 +31,57 @@
     return $books;
 }
 
+public function getLastAddedBooks() {
+    $sql = "SELECT b.*, u.username AS owner_name
+            FROM books b
+            JOIN users u ON b.owner_id = u.id_user
+            ORDER BY b.creation_date DESC
+            LIMIT 4";
+    $query = $this->db->query($sql);
+    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    // Debugging: Affiche les résultats SQL
+    // var_dump($results);
+    // exit;
+
+    $books = [];
+    foreach ($results as $result) {
+        $books[] = new Book($result);
+    }
+
+    return $books;
+}
+
+
+public function findBookByTitle(string $title): ?Book
+{
+    $sql = "SELECT * FROM books WHERE title LIKE :title LIMIT 1";
+    $params = [':title' => '%' . $title . '%'];
+    $stmt = $this->db->query($sql, $params);
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $data ? new Book($data) : null;
+}
+
+public function searchBooksByTitleOrAuthor(string $searchTerm): array {
+    $sql = "
+        SELECT b.*, u.username AS owner_name
+        FROM books b
+        JOIN users u ON b.owner_id = u.id_user
+        WHERE b.title LIKE :searchTerm
+        OR b.author_name LIKE :searchTerm
+    ";
+
+    $params = [':searchTerm' => '%' . $searchTerm . '%'];
+    $stmt = $this->db->query($sql, $params);
+
+    $books = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $books[] = new Book($row);
+    }
+
+    return $books;
+}
 
 
 public function getBookByIdBook(int $id): ?Book

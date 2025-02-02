@@ -4,7 +4,7 @@
             <h1>Rejoignez nos lecteurs passionnés</h1>
             <p>Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux 
             de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.</p>
-            <button class= "button"><a href="index.php?action=availableBooks">Découvrir</a></button>
+            <button class="button"><a href="index.php?action=availableBooks">Découvrir</a></button>
         </article>
         <aside>
             <img src="images/homeFirstImg.jpg" alt="Hamza">
@@ -16,47 +16,31 @@
     <section class="homeSecondSection">
         <h1>Les derniers livres ajoutés</h1>
         <div class="imgGroupBlocks">
-            <div class="imgBlock">
-                <img src="images/esther.jpg" alt="Esther">
-                <div class="imgBlockText">
-                    <h3>Esther</h3>
-                    <p>Alabaster</p>
-                    <p>Vendu par : <span>CamilleClubLit</span></p>
-                </div>
-            </div>
-            <div class="imgBlock">
-                <img src="images/kinfolkTable.jpg" alt="The kinfolk Table">
-                <div class="imgBlockText">
-                    <h3>The Kinfolk Table</h3>
-                    <p>Nathan Williams</p>
-                    <p>Vendu par : Nathalire</p>
-                </div>
-            </div>
-            <div class="imgBlock">
-                <img src="images/wabiSabi.jpg" alt="Wabi Sabi">
-                <div class="imgBlockText">
-                    <h3>Wabi Sabi</h3>
-                    <p>Beth Kempton</p>
-                    <p>Vendu par : Alexlecture</p>
-                </div>
-            </div>
-            <div class="imgBlock">
-                <img src="images/milkHoney.jpg" alt="Milk & honey">
-                <div class="imgBlockText">
-                    <h3>Milk & honey</h3>
-                    <p>Rupi Kaur</p>
-                    <p>Vendu par : Hugo1990_12</p>
-                </div>
-            </div>
+            <?php if (!empty($lastBooks)): ?>
+                <?php foreach ($lastBooks as $book): ?>
+                    <div class="imgBlock">
+                        <img src="<?= htmlspecialchars($book->getImagePath()) ?>" alt="<?= htmlspecialchars($book->getTitle()) ?>">
+                        <div class="imgBlockText">
+                            <h3><?= htmlspecialchars($book->getTitle()) ?></h3>
+                            <p><?= htmlspecialchars($book->getAuthorName()) ?></p>
+                            <p class="pSoldBy">Vendu par : <?= htmlspecialchars($book->getOwnerName()) ?></p>
+                           
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Aucun livre ajouté récemment.</p>
+            <?php endif; ?>
         </div>
-        <button class= "button seeAllBooks"><a href="index.php?action=availableBooks">Voir tous les livres</a></button>
+        <button class="button seeAllBooks">
+            <a href="index.php?action=availableBooks">Voir tous les livres</a>
+        </button>
     </section>
 </div>
-
 <div class="thirdSection">
     <section class="homeThirdSection">
         <h1>Comment ça marche ?</h1>
-        <p id="ptitle" >Échanger des livres avec TomTroc c'est simple et amusant ! Suivez ces étapes pour commencer :</p>
+        <p id="ptitle">Échanger des livres avec TomTroc c'est simple et amusant ! Suivez ces étapes pour commencer :</p>
         <div class="textGroupBlocks">
             <div class="textBlock">
                 <p>Inscrivez-vous gratuitement sur <br>notre plateforme.</p>
@@ -71,7 +55,9 @@
                 <p>Proposez un échange et discutez avec d'autres passionnés de lecture.</p>
             </div>
         </div>
-        <button class= "button seeAllBooksTransparent"><a href="index.php?action=availableBooks">Voir tous les livres</a></button>
+        <button class="button seeAllBooksTransparent">
+            <a href="index.php?action=availableBooks">Voir tous les livres</a>
+        </button>
     </section>
 </div>
 <div class="fourthsection">

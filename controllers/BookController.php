@@ -300,6 +300,57 @@ public function deleteBook(): void
     }
 }
 
+public function showLastAddedBooks() {
+    $bookManager = new BookManager();
+    $lastBooks = $bookManager->getLastAddedBooks();
+
+    // // Debugging: Affiche les résultats
+    // var_dump($lastBooks); 
+    // exit;
+
+    $view = new View('Accueil');
+    $view->render('home', ['lastBooks' => $lastBooks]);
+}
+
+
+public function searchResults() {
+    // Récupérer le terme de recherche saisi par l'utilisateur
+    $searchTerm = Utils::request('search', '');
+
+    if (empty($searchTerm)) {
+        // Si aucun terme n'est saisi, redirige vers la page des livres disponibles
+        Utils::redirect('availableBooks');
+        return;
+    }
+
+    // Effectuer une recherche dans la base de données pour les livres correspondants
+    $books = $this->bookManager->searchBooksByTitleOrAuthor($searchTerm);
+
+    if (count($books) === 1) {
+        // Si un seul livre correspond, redirige directement vers sa page de détails
+        $book = $books[0];
+        Utils::redirect('bookDetails', ['id' => $book->getIdBook()]);
+        return;
+    } elseif (empty($books)) {
+        // Si aucun livre ne correspond, affiche un message d'erreur
+        $view = new View('Aucun résultat');
+        $view->render('searchResults', [
+            'books' => [],
+            'searchTerm' => $searchTerm,
+            'errorMessage' => 'Aucun livre ne correspond à votre recherche.'
+        ]);
+        return;
+    }
+
+    // Si plusieurs livres correspondent, afficher une vue avec les résultats
+    $view = new View('Résultats de recherche');
+    $view->render('searchResults', [
+        'books' => $books,
+        'searchTerm' => $searchTerm,
+        'errorMessage' => ''
+    ]);
+}
+
 
 
     

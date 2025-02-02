@@ -19,6 +19,9 @@ $router = new Router();
 
 // Définir les routes de l'application
 
+$router->addRoute('lastBooks', 'BookController', 'showLastAddedBooks');
+
+
 // La route 'availableBooks' appelle le contrôleur 'AvailableBooksCOntroller' et sa méthode 'showAvailableBooks'
 $router->addRoute('availableBooks', 'BookController', 'showBooks');
 
@@ -79,7 +82,9 @@ $router->addRoute('allBooks', 'BookController', 'showAllBooks');
 $router->addRoute('logout', 'UserController', 'logout');
 
 // La route 'search' appelle le contrôleur 'searchController' et sa méthode showSearch'
-$router->addRoute('search', 'searchController', 'showSearch');
+$router->addRoute('searchResults', 'BookController', 'searchResults');
+
+
 // Définir une route par défaut (si aucune action n'est spécifiée dans l'URL)
 // La route 'default' appelle le contrôleur 'HomeController' et sa méthode 'index'
 $router->addRoute('default', 'HomeController', 'index');
@@ -87,9 +92,9 @@ $router->addRoute('default', 'HomeController', 'index');
 // Récupérer l'action depuis l'URL ou définir 'default' si aucune action n'est spécifiée
 $action = $_GET['action'] ?? 'default';  // Si l'action n'est pas présente dans l'URL, utiliser 'default'
 
-// Si le paramètre `search` est présent dans l'URL, on définit l'action à 'search'
-if (isset($_GET['search'])) {
-    $action = 'search';  // On définit l'action comme 'search' pour appeler le contrôleur 'SearchController'
+// Si le paramètre `searchResults` est présent dans l'URL, on définit l'action à 'searchResults'
+if (isset($_GET['searchResults'])) {
+    $action = 'searchResults';  // On définit l'action comme 'searchResults' pour appeler le contrôleur 'SearchController'
 }
 
 // Essayer d'exécuter la route en appelant la méthode 'dispatch' du routeur avec l'action récupérée

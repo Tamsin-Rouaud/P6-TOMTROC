@@ -1,26 +1,26 @@
 /*** My Account ***/
 
 .myAccount h1 {
-    margin: 0;
     padding-bottom: 40px;
-    margin-left: 110px;
+    margin-left: 130px;
 }
 
 .myAccount{
     display: flex;
     flex-direction: column;
-    width: 90%;
-    
-    margin: auto;
-    margin-top: 120px;
+    width: 93.43%;
+    padding-bottom: 40px;
+    padding-top: 150px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .myAccountBox {
     display: flex;
-    margin-left: 110px;
+    margin-left: 130px;
     width: 89.5%;
     height: 538px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     
 }
 
@@ -32,19 +32,17 @@
     justify-content: center;
     background-color: #f6f6f6;
     margin-left: 0;
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: #ffffff;
 }
 
-.profile {
-    margin: auto;
+.iconBook {
+    padding-right: 5px;
 }
-
 .profileBlock {
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center;*/
+    align-items: center;
 } 
 
 .profileBlock img {
@@ -94,7 +92,7 @@
 .boxInformationProfile {
     width: 48%;
     background-color: #ffffff;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .informationProfile {
@@ -113,7 +111,7 @@
     background-color: #f5f3ef;
     font-weight: bold;
     color: #00AC66;
-    margin-top: 20px;
+    margin: 0;
 }
 
 .save a {
@@ -124,20 +122,10 @@
     padding-bottom: 20px;
 }
 
-/* .informationProfile .formInput {
-    padding-bottom: 20px;
-    
-    
-} */
-
-
-
 .informationProfile input {
     background-color: #EDF2F6;
     
 }
-
-
 
 .underline {
     border: solid #f5f3ef 1px;
@@ -149,7 +137,7 @@
 .myBookBlock {
     margin-top: 30px;
     width: 87.5%;
-    margin-left: 110px;
+    margin-left: 130px;
     margin-bottom: 90px;
 }
 
@@ -193,19 +181,20 @@ tbody tr:nth-child(even) {
     background-color: #EDF2F6; /* Couleur pour les lignes paires */
 }
 
-
-
 .photo {
     padding-left: 95px; 
     width: 19%;
+
 }
 
 .title {
     width: 15.7%;
+
 }
 
 .author {
     width: 14.3%;
+
 }
 
 .description {
@@ -216,34 +205,33 @@ tbody tr:nth-child(even) {
     
 }
 
-
 .available {
     width: 13.3%;
     padding-left: 30px;
+
 }
 
 .available button {
-
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 20px;
     margin: 0;
-    width: 70px;
     height: 18px;
     font-size: 0.9em;
     color: white;
-}
+    padding: 10px 20px;
 
+}
 /* Disponible (vert) */
 .is-available {
-    background-color: #6DC5A1; /* Vert */
+    background-color: #6DC5A1; 
 }
 
 /* Non disponible (rouge) */
 .not-available {
-    background-color: #c56d6d; /* Rouge */
+    background-color: #c56d6d; 
 }
 
 .editDelete {
@@ -257,8 +245,6 @@ tbody tr:nth-child(even) {
     text-decoration: underline;
 
 }
-
-
 
 .btnDelete {
     color: #c56d6d;

@@ -1,13 +1,8 @@
 /********** AVAILABLEBOOKS **********/
 
-section {
-    margin: 0;
-}
-
 .books {
     display: flex;
     flex-direction: column;
-    width: 100%;
     padding-left: 300px;
     padding-right: 250px;
     background-color: #FAF9F7;
@@ -16,7 +11,6 @@ section {
 
 .partOne h1 {
     margin: 0;
-    padding: 0;
      
 }
 
@@ -38,7 +32,7 @@ section {
     justify-content: flex-start;
     align-items: center;
     height: 50px;
-    width: 322px;
+    width: 35%;
     background-color: white;
 }
 
@@ -52,16 +46,18 @@ section {
     margin-left: 5px;
     margin-right: 10px;
     background-color: white;
+    margin: 0;
+    padding: 5px 15px 5px;
     
 }
 
-
 #search {
     border: none;
-    outline: none; /* Retire la bordure bleue de focus */
+    outline: none;
     height: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
-
 
 #search::placeholder {
     color: #A6A6A6;
@@ -85,8 +81,7 @@ section {
     height: 324px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    margin: 20px 20px 30px 0;
     
 }
 
@@ -124,7 +119,6 @@ section {
     font-size: 0.75em;
 }
 
-
 /***** Encart dispo/non dispo.  *****/
 
 .bookImageWrapper {
@@ -137,13 +131,12 @@ section {
     position: absolute;
     top: 20px;
     right: 10px;
-    background-color: #c56d6d; /* Rouge pour indisponible */
+    background-color: #c56d6d;
     color: #fff;
     padding: 5px 8px;
     font-size: 0.5em;
     font-weight: bold;
     border-radius: 15px;
     z-index: 1;
-    
-    
+        
 }

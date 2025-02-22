@@ -16,39 +16,7 @@ class MessageManager extends AbstractEntityManager {
         $this->db->query($sql, $params);
     }
 
-    // public function getConversationHistory($userId) {
-    //     $sql = "
-    //         SELECT 
-    //             m.id_message, 
-    //             m.message_text, 
-    //             m.created_at, 
-    //             m.from_user, 
-    //             m.to_user, 
-    //             u1.username AS sender_username, 
-    //             u1.image_path AS sender_image,
-    //             u2.username AS recipient_username, 
-    //             u2.image_path AS recipient_image
-    //         FROM 
-    //             messages m
-    //         LEFT JOIN 
-    //             users u1 ON m.from_user = u1.id_user
-    //         LEFT JOIN 
-    //             users u2 ON m.to_user = u2.id_user
-    //         WHERE 
-    //             m.from_user = :currentUserId OR m.to_user = :currentUserId
-    //         ORDER BY 
-    //             m.created_at ASC;
-    //     ";
-    
-    //     // Paramètres de la requête
-    //     $params = [':currentUserId' => $userId];
-    
-    //     // Exécution de la requête
-    //     $stmt = $this->db->query($sql, $params);
-        
-    //     // Récupération des résultats
-    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // }
+
     
     public function getConversationHistory($userId) {
         $sql = "
@@ -80,36 +48,7 @@ class MessageManager extends AbstractEntityManager {
     
     
 
-    // public function getMessagesBetweenUsers($userId, $contactId) {
-    //     // Requête SQL pour récupérer les messages entre les deux utilisateurs
-    //     $sql = "SELECT * FROM messages 
-    //             WHERE (from_user = :userId AND to_user = :contactId) 
-    //             OR (from_user = :contactId AND to_user = :userId) 
-    //             ORDER BY created_at ASC";
-        
-    //     // Préparer les paramètres pour la requête
-    //     $params = [
-    //         ':userId' => $userId,
-    //         ':contactId' => $contactId
-    //     ];
     
-    //     // Utiliser la méthode query pour exécuter la requête avec les paramètres
-    //     $stmt = $this->db->query($sql, $params);
-    
-    //     // Récupérer les messages sous forme de tableau associatif
-    //     $messagesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-    //     // Créer les objets Message en passant les données à chaque instance
-    //     $messages = [];
-    //     foreach ($messagesData as $data) {
-    //         // Créer un nouvel objet Message avec les données
-    //         $message = new Message($data);
-    //         $messages[] = $message;
-    //     }
-    
-    //     return $messages;
-    // }
-
     public function getMessagesBetweenUsers($userId, $contactId) {
         $sql = "
             SELECT 
@@ -261,21 +200,6 @@ public function getContacts(int $userId): array {
     return $results;
 }
 
-
-
-
-
-     // Requête pour récupérer le pseudo et l'image de profil d'un utilisateur par ID
-    // public function getUserInfoById($userId) {
-       
-    //     $sql = "SELECT username, image_path FROM users WHERE id_user = :user_id";
-    //     $params = ['user_id' => $userId];
-    //     $stmt = $this->db->query($sql, $params);
-    //     // $stmt->execute(['user_id' => $userId]);
-        
-    //     // Retourne le résultat sous forme de tableau associatif
-    //     return $stmt->fetch(PDO::FETCH_ASSOC);
-    // }
 
 
     public function getUserInfoById($userId) {

@@ -17,13 +17,15 @@
     justify-content: space-around;
     width: 60%;
     margin: 0 auto;
+    padding-top: 150px;
         
 }
 
 .homeFirstSection article {
     
     width: 42%;
-    padding-right: 40px;
+    padding-right: 20px;
+    padding-left: 20px;
     margin-right: 65px;
         
 }
@@ -48,13 +50,6 @@
 .homeFirstSection img {
     object-fit: cover;
     height: 539px;
-
-}
-
-.button {
-    
-    padding: 20px 45px;
-    margin-top: 40px;
 
 }
 
@@ -95,8 +90,6 @@
     border-bottom-right-radius: 10px;
 
 }
-
-
 
  .imgBlock img {
     width: 200px;
@@ -199,6 +192,7 @@
     justify-content: center;
     border: 2px solid #00AC66;
     background-color: transparent;
+    margin-bottom: 40px;
 
 }
 
@@ -216,6 +210,7 @@
     display: flex;
     justify-content: center;
     margin: 0;
+    padding-bottom: 40px;
 }
 .homeFifthSection {
     width: 35%;

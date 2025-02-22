@@ -1,11 +1,11 @@
 .bookDetails {
-    /* padding-top: 80px; */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #faf9f7;
     width: 100%;
     max-width: 1440px;
+
 }
 
 .pictureBook {
@@ -15,19 +15,20 @@
     align-items: center;
     height: 863px;
     width: 50%;
+
 }
 
 .pictureBook img {
     width: 720px;
     height: 863px;
     object-fit: cover;
+
 }
 
 .aboutBook {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* align-items: center; */
     height: 863px;
     width: 50%;
     padding-left: 80px;
@@ -36,23 +37,22 @@
 }
 
 .titleBook {
-    /* padding-top: 40px; */
     padding-bottom: 20px;
     font-size: 2.25em;
     font-weight: normal;
     font-family: 'Playfair Display', 'sans-serif';
+
 }
 
 .authorTitle {
     color: #a6a6a6;
     padding-bottom: 40px;
+
 }
 
 .underlineAuthor {
-    /* display: flex;
-    justify-content: flex-start; */
     width: 27px;
-    border: solid 0.5px #a6a6a6;
+    border: solid 0.1px #a6a6a6;
     margin: 0;
     margin-bottom: 15px;
 
@@ -62,23 +62,23 @@
     background-color: #fff;
     width: 157px;
     border-radius: 30px;
-    
-    /* height: 60px; */
-   
     font-size: 14px;
     margin: 0;
     margin-bottom: 80px;
+
 }
 
 .profileDetails a {
     display: flex;
     align-items: center;
+
 }
 
 .profileDetails img {
     width: 48px;
     border-radius: 50px;
     margin: 5px;
+
 }
 
 .profileDetails p {
@@ -93,9 +93,15 @@
     color: #292929;
     padding-top: 25px;
     padding-bottom: 15px;
+
 }
 
 .pDescription {
     font-size: 14px;
+
 }
 
+.subscribe {
+    width: 100%;
+    
+}

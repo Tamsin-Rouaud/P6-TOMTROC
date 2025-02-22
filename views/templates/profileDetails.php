@@ -24,7 +24,7 @@
                     <h4><?= htmlspecialchars($user->getUsername() ?? 'Utilisateur inconnu', ENT_QUOTES, 'UTF-8'); ?></h4>
                     <p id="firstP">Membre depuis <?= htmlspecialchars($membershipDuration ?? 'inconnu'); ?></p>
                     <p id="secondP">BIBLIOTHEQUE</p>
-                    <p ><img src="./images/bookIcon.png" alt="icône de livre"><?php 
+                    <p ><img class="iconBook" src="./images/bookIcon.png" alt="icône de livre"><?php 
                         $bookCount = BookManager::getUserBookCount($user->getIdUser());
                         echo $bookCount . ' livre' . ($bookCount > 1 ? 's' : ''); 
                         ?></p>

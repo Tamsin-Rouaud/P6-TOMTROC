@@ -47,8 +47,8 @@
         value="<?= htmlspecialchars($book->getAuthorName()) ?>" 
        >
 </div>
-<div class="formInput">
-    <label for="getBookDescription">Description</label>
+<div class="formInput formInputDescription">
+    <label for="getBookDescription">Commentaire</label>
     <textarea 
         id="getBookDescription" 
         name="getBookDescription"><?= htmlspecialchars($book->getDescription()) ?></textarea>

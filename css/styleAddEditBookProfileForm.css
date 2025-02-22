@@ -4,17 +4,13 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding-top: 100px;
-    padding-left: 70px;
-    padding-bottom: 60px;
-    margin: auto;
     background-color: #faf9f7;
 }
 
 .addEditBookProfileForm button {
     margin-top: 20px;
-    width: 322px;
-    height: 63px;
+    width: 74%;
+
 }
 
 .addEditBookProfileForm h1 {
@@ -26,13 +22,8 @@
 .addEditBookProfileForm p {
     padding-bottom: 10px;
     font-size: 0.88em;
-    color: #a6a6a6;
     padding-left: 125px;
     
-}
-
-.addEditBookProfileForm p:first-child {
-    color: #292929;
 }
 
 .addEditBookProfileForm p a{
@@ -48,16 +39,11 @@
 
 .addEditBookContainer {
     display: flex;
-    width: 81.4%;
-    padding-left: 40px;
     background-color: #fff;
     padding: 60px;
-    
     border-radius: 15px;
-    height: 941px;
+    margin-left: 130px;
 }
-
-
 
 .addEditBookContainer .formInput input{
     background-color: #edf2f6;
@@ -71,7 +57,6 @@
 
 .addEditBookContainer img {
     width: 488px;
-    /* padding-top: 20px; */
     border: solid 1px #edf2f6;
 }
 
@@ -89,10 +74,8 @@
 /*** LeftBlock ***/
 
 .leftBlock {
-    margin: 0;
     padding-right: 80px;
-    
-    padding-bottom: 60px;
+
 }
 
 .leftBlock p:first-child {
@@ -101,29 +84,22 @@
     color:  #a6a6a6;
 }
 
-
 /*** Id addBook et EditBook ***/
 
 .addEditBookContainer .formInput #addBookDescription,
 .addEditBookContainer .formInput #getBookDescription {
-    max-width: 435px;
-    max-height: 356px;
-    min-width: 435px;
-    min-height: 356px;
+    height: 356px;
+    width: 100%;
 
 }
 
 #addBookDescription, 
 #getBookDescription {
-    margin: 0;
-    padding-top: 18px;
     background-color: #edf2f6;
     border: none;
     outline: none;
     border-radius: 5px;
     font-size: 1em;
-    padding-left: 20px;
-    padding-right: 20px;
     color: #292929;
     margin-top: 10px;
         
@@ -132,8 +108,9 @@
 .formInput  {
     padding-top: 20px;
     padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
 }
-
 
 #addBookIsAvailable, 
 #getBookIsAvailable {
@@ -142,7 +119,7 @@
     margin: 0;
     padding-top: 18px;
     background-color: #edf2f6;
-    width: 435px;
+    width: 100%;
     border: none;
     height: 50px;
     border-radius: 5px;
@@ -151,22 +128,23 @@
     padding-right: 20px;
     margin-top: 10px;
     margin-bottom: 20px;
+
 }
 
 #addBookIsAvailable option, 
 #getBookIsAvailable option {
     display: flex;
     justify-content: center;
-}
 
+}
 
 /***** AddProfilePicture   *****/
 
 .profileContainer {
     display: flex;
-    /* justify-content: space-around; */
     align-items: center;
     margin: 0;
+
 }
 
 .profilePicture {
@@ -182,14 +160,18 @@
 .profilePicture a {
     padding-left: 100px;
     font-size: 1.5em;
+
 }
 
 .profilePicture img {
     border-radius: 100%;
     padding-top: 20px;
     padding-bottom: 20px;
+
 }
 
 #profileImagePreview {
-    border-radius: 100%;padding-bottom: 5px;
+    border-radius: 100%;
+    padding-bottom: 5px;
+    
 }

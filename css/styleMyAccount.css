@@ -19,7 +19,7 @@
     display: flex;
     margin-left: 130px;
     width: 89.5%;
-    height: 538px;
+    /* height: 538px; */
     margin-bottom: 10px;
     
 }
@@ -99,6 +99,7 @@
     width: 57.85%;
     margin: auto;
     padding-top: 40px;
+    padding-bottom: 30px;
 }
 
 
@@ -142,7 +143,7 @@
 }
 
 table {
-    height: 579px;
+    /* height: 579px; */
     margin: 0;
     overflow: hidden;
     width: 100%;
@@ -291,3 +292,153 @@ tbody tr:nth-child(even) {
     opacity: 1;
 }
 
+@media screen and (max-width: 768px) {
+    .myAccountBox {
+        display: block;
+        margin:0;
+        width: 100%;
+        height: unset;
+        
+    }
+
+    .boxProfile {
+        width: 100%;
+        padding-bottom: 40px;
+        margin-bottom: 35px;
+        padding-top: 50px;
+        /* max-width: 335px; */
+        /* margin: 30px auto; */
+
+    }
+
+    .boxInformationProfile {
+        width: 100%;
+        /* max-width: 335px; */
+        padding-bottom: 40px;
+        margin: 0;
+        /* margin-bottom: 35px; */
+    }
+
+    .myAccount {
+        margin: auto;
+    }
+
+    .myAccount h1 {
+        margin-left: 20px;
+        padding-bottom: unset;
+        margin-bottom: 40px;
+    }
+
+    .save {
+        width: 100%;
+    }
+
+    .informationProfile {
+        margin-left: 25px;
+        margin-right: 25px;
+        padding-bottom: 0;
+        width: unset;
+    }
+
+
+
+
+
+
+}
+
+
+
+
+
+   /* Par défaut, on affiche la version desktop, on masque la mobile */
+.desktop-version {
+    display: block;
+  }
+  .mobile-version {
+    display: none;
+  }
+  
+  @media screen and (max-width: 768px) {
+    /* En mobile, on fait l'inverse */
+    .desktop-version {
+      display: none;
+    }
+    .mobile-version {
+      display: block;
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+    }
+  
+    .mobile-version .card {
+      background-color: #fff;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      padding: 50px;
+      
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .mobile-version .card-photo img {
+      width: 79px;
+      height: auto;
+      display: block;
+      margin-right: 20px;
+    }
+  
+    /* .mobile-version .card-info {
+      flex: 1;
+    } */
+  
+    .card-actions a {
+      margin-right: 10px;
+      text-decoration: underline;
+    }
+
+    .card-photo {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+
+    .card-title {
+        margin: 0;
+    }
+    .card-title h3 {
+        font-weight: normal;
+        
+    }
+    .photo-title {
+        margin: 0;
+        display: flex;
+        align-items: center;
+    }
+
+
+
+    .card-info p {
+        margin-bottom: 40px;
+        font-style: italic;
+    }
+
+    .is-available, .not-available {
+        display: block;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.875em;
+    }
+
+    .available-notAvailable {
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .card-actions a:last-of-type {
+        color: #cb2d2d;
+        margin-left: 25px;
+    }
+  }
+  

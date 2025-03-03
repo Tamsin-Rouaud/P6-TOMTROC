@@ -14,9 +14,16 @@ header ul {
     justify-content: space-between;
     align-items: center;
     height: 80px;
+    width: 100%;
         
 }
-
+/* NAVIGATION PRINCIPALE */
+nav {
+    display: flex;
+   justify-content: space-between;
+    align-items: center;
+ 
+}
 nav ul div li {
     display: flex;
     padding-right: 60px;
@@ -58,7 +65,13 @@ header span {
 .firstPart, .secondPart {
     display: flex;
     align-items: center;
+    margin-left: 30px;
 
+}
+
+.logo {
+    margin: 0;
+    margin-left: 140px;
 }
 
 #logo {
@@ -68,3 +81,73 @@ header span {
 }
 
 
+/* MENU BURGER (CACHÉ PAR DÉFAUT) */
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 5px;
+    transition: 0.3s;
+}
+
+/* RESPONSIVE */
+
+/* TABLETTE ET DESKTOP */
+@media screen and (min-width: 768px) {
+    .nav-links {
+        display: flex !important;
+    }
+}
+
+/* MOBILE */
+@media screen and (max-width: 768px) {
+    .burger {
+        display: block;
+        margin: 0;
+        margin-right: 20px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 20px;
+        width: 90%;
+        background-color: white;
+        padding: 10px;
+        height: auto;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    header ul {
+        display: none;
+    }
+
+    .firstPart li, .secondPart li {
+        padding-bottom: 5px;
+        margin-left: 40px;
+    }
+
+    .logo {
+        margin: 0;
+        margin-left: 30px;
+    }
+
+    .firstPart, .secondPart {
+        flex-direction: column;
+        align-items: unset;
+    }
+}

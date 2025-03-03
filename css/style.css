@@ -8,15 +8,13 @@
     
 }
 
-input, label, form, p, h3 {
+input, label, form, p, h3, a {
     margin: 0;
     
 }
 
-
 a {
     text-decoration: none;
-    margin: 0;
     
 }
 

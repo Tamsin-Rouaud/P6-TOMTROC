@@ -15,14 +15,16 @@
 
 .addEditBookProfileForm h1 {
     margin: 0;
-    padding-left: 125px;
+    padding-left: 130px;
     font-size: 1.625em;
+    padding-bottom: 25px;
 }
 
 .addEditBookProfileForm p {
-    padding-bottom: 10px;
+    padding-bottom: 25px;
     font-size: 0.88em;
-    padding-left: 125px;
+    padding-left: 130px;
+    padding-top: 30px;
     
 }
 
@@ -40,9 +42,10 @@
 .addEditBookContainer {
     display: flex;
     background-color: #fff;
-    padding: 60px;
+    padding: 20px 40px 60px;
     border-radius: 15px;
     margin-left: 130px;
+    width: 84.8%;
 }
 
 .addEditBookContainer .formInput input{
@@ -174,4 +177,47 @@
     border-radius: 100%;
     padding-bottom: 5px;
     
+}
+
+@media screen and (max-width: 768px) {
+
+    .addEditBookContainer {
+        flex-direction: column;
+        margin-left: 10px;
+        width: 100%;
+
+    }
+
+    .addEditBookContainer img {
+        width: 100%;
+        
+    }
+
+    .addEditBookProfileForm p {
+        padding-bottom: 10px;
+        padding-left: 0;
+    }
+
+    .addEditBookProfileForm h1 {
+        font-size: 2em;
+        padding-left: 40px;
+    }
+
+    .addEditBookProfileForm {
+        width:100%;
+        
+    }
+
+    .leftBlock {
+        padding: unset;
+        margin: 0;
+    }
+
+    .addEditBookProfileForm p a {
+        padding-left: 40px;
+    }
+
+    .addEditBookProfileForm button {
+        width: 100%;
+    }
 }

@@ -60,7 +60,7 @@
         </button>
     </section>
 </div>
-<div class="fourthsection">
+<div class="fourthSection">
     <img src="images/maskGroup.jpg" alt="image décorative bibliothèque">
 </div>
 <div class="fifthSection">

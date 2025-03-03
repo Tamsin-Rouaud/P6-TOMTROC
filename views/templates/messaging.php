@@ -13,7 +13,12 @@
             </div>
             <div class="contactText">
                 <p class="contactName"><?= htmlspecialchars($contact['username'] ?? 'Inconnu') ?></p>
-                <p class="contactLastMessage"><?= htmlspecialchars($contact['message_text'] ?? 'Aucun message') ?></p>
+                <p class="contactLastMessage">
+    <?= !empty($contact['message_text']) 
+        ? htmlspecialchars(mb_strimwidth($contact['message_text'], 0, 30, "...")) 
+        : "Aucun message" ?>
+</p>
+
             </div>
             <div class="contactTime">
                 <small><?= isset($contact['created_at']) ? date('H:i', strtotime($contact['created_at'])) : '' ?></small>

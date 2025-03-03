@@ -46,3 +46,26 @@
     text-decoration: underline;
 
 }
+
+@media screen and (max-width: 768px) {
+    .connexionBlock {
+        flex-direction: column;
+        padding-bottom: 0;
+
+    }
+
+    .connexionImg img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .connexionText {
+        padding-left: unset;
+        padding-bottom: 90px;
+        padding-top: 60px;
+    }
+
+    .connexionText p a {
+        text-decoration: none;
+    }
+}

@@ -69,8 +69,14 @@ error_reporting(E_ALL);
         </div>
     </div>
     
-    <div class="myBookBlock">
-    <table>
+
+
+
+
+
+    <div class="myBookBlock desktop-version">
+  <!-- Ton <table> classique -->
+  <table>
         <thead>
             <tr>
                 <th class="photo">PHOTO</th>
@@ -92,7 +98,7 @@ error_reporting(E_ALL);
                 <?= htmlspecialchars($book->getTitle(), ENT_QUOTES, 'UTF-8'); ?>
             </td>
             <td class="author">
-                <?= htmlspecialchars($book->getAuthorName(), ENT_QUOTES, 'UTF-8'); ?>
+                <?=htmlspecialchars($book->getAuthorName(), ENT_QUOTES, 'UTF-8'); ?>
             </td>
             <td class="description">
                 <span class="tooltip" data-tooltip="<?= htmlspecialchars($book->getDescription(), ENT_QUOTES, 'UTF-8'); ?>">
@@ -113,26 +119,73 @@ error_reporting(E_ALL);
     <!-- <button type="submit" class="btnChoice btnDelete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')">
         Supprimer
     </button> -->
-    <a class="btnChoice btnDelete" href="index.php?action=deleteBook&id_book=<?php echo $book->getIdBook(); ?>" 
+     <a class="btnChoice btnDelete" href="index.php?action=deleteBook&id_book=<?php echo $book->getIdBook(); ?>" 
    <?php echo Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce livre ?"); ?>>
    Supprimer
 </a>
 
-</form>
+</form> 
 
 
-            <!-- <a class="btnChoice btnDelete" href="index.php?action=deleteBook&id=<?//= $book->getIdBook(); ?>" 
-   onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')">Supprimer</a> -->
-                
+            
+                 
             </td>
         </tr>
     <?php endforeach; ?>
 </tbody>
 
     </table>
-
-    
 </div>
+
+<div class="myBookBlock mobile-version">
+  <?php foreach ($books as $book): ?>
+  <div class="card">
+    <div class="photo-title">
+    <div class="card-photo">
+      <img src="<?= htmlspecialchars($book->getImagePath(), ENT_QUOTES, 'UTF-8'); ?>" alt="Photo du livre">
+    </div>
+    <div class="card-title">
+        <h3><?= htmlspecialchars($book->getTitle()); ?></h3>
+        <p><?= htmlspecialchars($book->getAuthorName()); ?></p>
+        <p class="available-notAvailable">
+        <span class="<?= $book->getIsAvailable() ? 'is-available' : 'not-available'; ?>">
+          <?= $book->getIsAvailable() ? 'disponible' : 'non dispo.'; ?>
+        </span>
+      </p>
+    </div>
+    </div>
+    
+    <div class="card-info">
+      
+      <p><?= htmlspecialchars(substr($book->getDescription(), 0, 87)); ?>...</p>
+      
+      <div class="card-actions">
+        <a href="index.php?action=editBook&id_book=<?= $book->getIdBook(); ?>">Éditer</a>
+        <a href="index.php?action=deleteBook&id_book=<?= $book->getIdBook(); ?>"
+           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')">Supprimer</a>
+      </div>
+    </div>
+  </div>
+  <?php endforeach; ?>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
 
 
 </section>

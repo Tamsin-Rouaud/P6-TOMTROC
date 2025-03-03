@@ -140,3 +140,35 @@
     z-index: 1;
         
 }
+/* MOBILE */
+@media screen and (max-width: 768px) {
+    .partOne{
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .books {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+    }
+
+    .exchangeBooks {
+        width: 100%;
+    }
+
+    .bookBlock {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .bookImgBlock {
+        margin-bottom: 10px;
+        height: unset;
+    }
+    .bookImgBlock img {
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+    }
+}

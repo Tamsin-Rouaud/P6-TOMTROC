@@ -255,3 +255,130 @@
     margin: 0;
 }
 
+@media screen and (max-width: 768px) {
+    .homeFirstSection {
+        display: flex;
+        flex-direction: column-reverse;
+        padding-top: 0;
+        margin: 0;
+        width: 100%;
+        padding-bottom: 20px;
+    }
+
+    .homeFirstSection article {
+        margin: 0;
+        width: 100%;
+        /* padding-left: 50px; */
+    }
+
+    .button {
+        margin-top: 30px;
+        width: 100%;
+
+       
+    }
+
+    .seeAllBooks {
+        display: none;
+    }
+
+    .homeFirstSection h1 {
+        padding-right: 0;
+    }
+
+    .homeFirstSection img{
+        width: 377px;
+        height: 503px;
+        object-fit: cover;
+    }
+
+    .homeFirstSection figcaption {
+        padding-right: 10px;
+    }
+
+    .homeSecondSection {
+        padding-top: 0;
+        padding-bottom: 80px;
+    
+    }
+    .homeSecondSection h1 {
+        
+        padding-top: 20px;
+        padding-left: 70px;
+        padding-right: 80px;
+    }
+
+    .imgGroupBlocks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding-top: 10px;
+
+    }
+
+    .imgBlock {
+        margin: 10px;
+    }
+
+    .homeThirdSection {
+        padding-top: 20px;
+
+    }
+
+    .textGroupBlocks {
+        display: block;
+        padding-top: 20px;
+
+    }
+
+    .textBlock {
+        margin-bottom: 20px;
+        width: 80%;
+    }
+
+    #ptitle {
+        width: 80%;
+
+    }
+
+
+    .textBlock p {
+        margin: 0 auto;
+    }
+
+    .seeAllBooksTransparent {
+        width: 79%;
+    }
+
+    .fourthSection img {
+        width: 100%;
+        object-fit: cover;
+        height: 425px;
+    }
+
+    .fifthSection {
+        padding-bottom: 20px;
+    }
+    .homeFifthSection {
+        padding-top: 20px;
+        padding-left: 20px;
+        width: 100%;
+        padding-right: 40px;
+        padding-bottom: 0;
+    }
+
+    .signature {
+        display: block;
+        /* margin: 0 auto; */
+    }
+
+    #heart {
+        margin: 0 auto;
+        padding-top: 40px;
+    }
+
+    .imgBlock img {
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+    }
+}

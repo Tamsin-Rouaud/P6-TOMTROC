@@ -19,7 +19,7 @@
 
                 </div>
                 <div class="profileText">
-                    <!-- debogage -->
+                   
                
                     <h4><?= htmlspecialchars($user->getUsername() ?? 'Utilisateur inconnu', ENT_QUOTES, 'UTF-8'); ?></h4>
                     <p id="firstP">Membre depuis <?= htmlspecialchars($membershipDuration ?? 'inconnu'); ?></p>

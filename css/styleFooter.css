@@ -34,3 +34,21 @@ li {
     width: 22px;
     
 }
+
+/* MOBILE */
+@media screen and (max-width: 768px) {
+    footer {
+        justify-content: center;
+        height: unset;
+    }
+
+    footer ul {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    footer ul li {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}

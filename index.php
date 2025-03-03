@@ -37,7 +37,7 @@ $router->addRoute('messaging', 'MessageController', 'showMessages');
 // Route pour envoyer un message
 $router->addRoute('sendMessage', 'MessageController', 'sendMessage');
 
-// $router->addRoute('conversationHistory', 'MessageCOntroller', 'showConversationHistory');
+
 
 // Route pour la gestion des utilisateurs
 // Cette route sera à afficher le formulaire de connexion et traite sa soumission

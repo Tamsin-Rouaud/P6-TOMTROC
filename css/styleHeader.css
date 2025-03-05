@@ -89,11 +89,11 @@ header span {
 
 .burger span {
     display: block;
-    width: 25px;
-    height: 3px;
-    background-color: black;
+    width: 22px;
+    height: 2px;
+    background-color: #a6a6a6;
     margin: 5px;
-    transition: 0.3s;
+    
 }
 
 /* RESPONSIVE */

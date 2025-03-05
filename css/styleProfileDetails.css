@@ -21,4 +21,100 @@
 .ownerTable {
     margin: 0;
     padding-left: 20px;
+    display: flex;
 }
+
+.myBookBlock-mobile {
+    display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+    /* On masque la version desktop */
+    .ownerTable {
+      display: none;
+    }
+    /* On affiche la version mobile */
+    .mobile-version {
+      display: block;
+    }
+    
+    /* Layout mobile simplifié : 
+       on peut tout passer en bloc ou en flex
+    */
+    .profileDetailsBlock.mobile-version {
+      padding: 20px; /* Ex. un padding plus léger */
+      display: block;
+    }
+
+    .profileDetailsBlock {
+        flex-direction: column;
+        padding: 0;
+        width: 90%;
+
+    }
+  
+    .boxProfile.ownerBox {
+      margin-bottom: 30px;
+      height: auto; /* On enlève la hauteur fixe */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .profileBlock img {
+      width: 120px;  /* exemple */
+      height: auto;
+      border-radius: 50%;
+    }
+  
+    /* Les "cartes" de livres */
+    .myBookBlock-mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* espace entre cartes */
+    }
+  
+    .card {
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      display: flex;
+      gap: 20px;
+      display: flex;
+      flex-direction: column;
+     
+    }
+  
+    .card-photo img {
+      width: 80px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  
+    .card-info {
+        margin: 0;
+    }
+    .card-info h3 {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+  
+    .card-info p {
+      margin: 5px 0;
+    }
+
+    .myBookBlock-mobile p:last-child {
+        font-style: unset;
+    }
+
+    .card h3 {
+        font-weight: normal;
+
+    }
+
+    section.profileDetailsBlock {
+      margin-bottom: 40px;
+    }
+  }

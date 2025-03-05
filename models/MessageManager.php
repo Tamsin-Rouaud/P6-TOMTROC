@@ -113,36 +113,42 @@ class MessageManager extends AbstractEntityManager {
     }
     
     public function getContactsWithLastMessage($userId) {
-        $sql = "SELECT 
-    users.id_user, 
-    users.username, 
-    COALESCE(users.image_path, 'uploads/users/defaultUser.png') AS image_path, 
-    (SELECT message_text FROM messages 
-        WHERE (from_user = users.id_user AND to_user = :userId) 
-           OR (from_user = :userId AND to_user = users.id_user) 
-        ORDER BY created_at DESC 
-        LIMIT 1
-    ) AS message_text
-FROM users
-WHERE users.id_user != :userId
-AND users.id_user IN (
-    SELECT DISTINCT CASE 
-        WHEN from_user = :userId THEN to_user 
-        ELSE from_user 
-    END 
-    FROM messages 
-    WHERE from_user = :userId OR to_user = :userId
-)
-ORDER BY (SELECT created_at FROM messages 
-          WHERE (from_user = users.id_user AND to_user = :userId) 
-             OR (from_user = :userId AND to_user = users.id_user) 
-          ORDER BY created_at DESC 
-          LIMIT 1) DESC
-";
+    $sql = "SELECT 
+        users.id_user, 
+        users.username, 
+        COALESCE(users.image_path, 'uploads/users/defaultUser.png') AS image_path, 
+        (SELECT message_text FROM messages 
+            WHERE (from_user = users.id_user AND to_user = :userId) 
+               OR (from_user = :userId AND to_user = users.id_user) 
+            ORDER BY created_at DESC 
+            LIMIT 1
+        ) AS message_text,
+        (SELECT created_at FROM messages 
+            WHERE (from_user = users.id_user AND to_user = :userId) 
+               OR (from_user = :userId AND to_user = users.id_user) 
+            ORDER BY created_at DESC 
+            LIMIT 1
+        ) AS created_at
+    FROM users
+    WHERE users.id_user != :userId
+    AND users.id_user IN (
+        SELECT DISTINCT CASE 
+            WHEN from_user = :userId THEN to_user 
+            ELSE from_user 
+        END 
+        FROM messages 
+        WHERE from_user = :userId OR to_user = :userId
+    )
+    ORDER BY (SELECT created_at FROM messages 
+              WHERE (from_user = users.id_user AND to_user = :userId) 
+                 OR (from_user = :userId AND to_user = users.id_user) 
+              ORDER BY created_at DESC 
+              LIMIT 1) DESC";
         
-        $params = ['userId' => $userId];
-        $stmt = $this->db->query($sql, $params);
+    $params = ['userId' => $userId];
+    $stmt = $this->db->query($sql, $params);
         
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }

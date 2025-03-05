@@ -33,47 +33,82 @@
             </div>
         </div>
 
-<!-- Tableau  -->
+
+<!-- Tableau des livres pour version desktop -->
 <div class="myBookBlock ownerTable">
-    <table>
+      <table>
         <thead>
-            <tr>
-                <th class="photo">PHOTO</th>
-                <th class="title">TITRE</th>
-                <th class="author">AUTEUR</th>
-                <th class="description">DESCRIPTION</th>
-                
-                
-            </tr>
+          <tr>
+            <th class="photo">PHOTO</th>
+            <th class="title">TITRE</th>
+            <th class="author">AUTEUR</th>
+            <th class="description">DESCRIPTION</th>
+          </tr>
         </thead>
-        
         <tbody>
-    <?php foreach ($books as $book): ?>
-        <tr>
-            <td class="photo">
+          <?php foreach ($books as $book): ?>
+            <tr>
+              <td class="photo">
                 <img src="<?= htmlspecialchars($book->getImagePath(), ENT_QUOTES, 'UTF-8'); ?>" alt="Photo du livre">
-            </td>
-            <td class="title">
+              </td>
+              <td class="title">
                 <?= htmlspecialchars($book->getTitle(), ENT_QUOTES, 'UTF-8'); ?>
-            </td>
-            <td class="author">
+              </td>
+              <td class="author">
                 <?= htmlspecialchars($book->getAuthorName(), ENT_QUOTES, 'UTF-8'); ?>
-            </td>
-            <td class="description">
+              </td>
+              <td class="description">
                 <span class="tooltip" data-tooltip="<?= htmlspecialchars($book->getDescription(), ENT_QUOTES, 'UTF-8'); ?>">
-                    <?= htmlspecialchars(substr($book->getDescription(), 0, 87), ENT_QUOTES, 'UTF-8'); ?>...
+                  <?= htmlspecialchars(substr($book->getDescription(), 0, 87), ENT_QUOTES, 'UTF-8'); ?>...
                 </span>
-            </td>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+  </div><!-- /desktop-version -->
+
+
+ <!-- Affichage en cartes plutôt qu’en tableau pour version mobile -->
+    <div class="myBookBlock-mobile">
+      <?php foreach ($books as $book): ?>
+        <div class="card">
+            <div class="photo-title">
+            <div class="card-photo">
+            <img src="<?= htmlspecialchars($book->getImagePath(), ENT_QUOTES, 'UTF-8'); ?>" alt="Photo du livre">
+          </div>
+          <div class="card-info">
+            <h3><?= htmlspecialchars($book->getTitle(), ENT_QUOTES, 'UTF-8'); ?></h3>
+            <p><?= htmlspecialchars($book->getAuthorName(), ENT_QUOTES, 'UTF-8'); ?></p>
+            </div>
+          
             
+          </div>
+          <p class="description-mobile">
+              <?= htmlspecialchars(substr($book->getDescription(), 0, 87), ENT_QUOTES, 'UTF-8'); ?>...
+            </p>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
 
-        </tr>
-    <?php endforeach; ?>
-</tbody>
 
-    </table>
 
-    
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </section>

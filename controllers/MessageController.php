@@ -14,6 +14,11 @@ class MessageController {
         $this->userManager = new UserManager();
     }
 
+    // Méthode de détection mobile
+    private function isMobile(): bool {
+        return preg_match('/Mobile|Android|BlackBerry|iPhone|iPad|iPod/i', $_SERVER['HTTP_USER_AGENT']);
+    }
+
     /**
      * Affiche la messagerie avec les contacts et messages associés.
      */
@@ -26,12 +31,14 @@ class MessageController {
         $messagesData = [];
         $activeContact = null;
     
-        // Si aucun contact n'est sélectionné, rediriger vers la dernière conversation
+        // Si aucun contact n'est sélectionné, rediriger vers la dernière conversation (uniquement sur desktop)
         if (!$contactId && !empty($contacts)) {
-            $lastContactId = $contacts[0]['id_user'] ?? null;
-            if ($lastContactId) {
-                Utils::redirect('messaging', ['contact_id' => $lastContactId]);
-                return;
+            if (!$this->isMobile()) {  // uniquement en desktop
+                $lastContactId = $contacts[0]['id_user'] ?? null;
+                if ($lastContactId) {
+                    Utils::redirect('messaging', ['contact_id' => $lastContactId]);
+                    return;
+                }
             }
         }
     
@@ -56,29 +63,18 @@ class MessageController {
         ]);
     }
     
-    
-    
     /**
      * Gère l'envoi d'un message.
      */
     public function sendMessage() {
-        // Vérifie si l'utilisateur est connecté
         Utils::checkIfUserIsConnected();
-
-        // Récupérer les données du formulaire
         $contactId = $_GET['contact_id'] ?? null;
         $message = $_POST['message'] ?? null;
-
-        // Vérifie si les données nécessaires sont présentes
         if (!$contactId || !$message) {
             echo "Erreur : données manquantes.";
             return;
         }
-
-        // Sauvegarder le message dans la base de données
         $this->messageManager->sendMessage($_SESSION['user']['id'], $contactId, $message);
-
-        // Rediriger vers la messagerie avec le contact sélectionné
         Utils::redirect('messaging', ['contact_id' => $contactId]);
     }
 }

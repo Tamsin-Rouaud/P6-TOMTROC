@@ -1,0 +1,22 @@
+/* Style pour le titre principal de la page d'erreur */
+.errorPage h1 {
+    color: red;             /* Couleur rouge pour attirer l'attention */
+    font-size: 15em;        /* Taille très grande pour le code d'erreur (ex: 404) */
+    font-weight: bold;      /* Texte en gras */
+    text-align: center;     /* Centrage horizontal */
+    padding-top: 5%;        /* Espace au-dessus pour le positionnement vertical */
+}
+
+/* Style pour le bloc contenant les messages d'erreur */
+.errorBlock {
+    display: flex;
+    flex-direction: column; /* Organisation en colonne */
+    justify-content: center;/* Centrage vertical du contenu */
+    align-items: center;    /* Centrage horizontal du contenu */
+}
+
+/* Style pour les paragraphes à l'intérieur du bloc d'erreur */
+.errorBlock p {
+    padding-top: 2%;        /* Espace au-dessus de chaque paragraphe */
+    padding-bottom: 2%;     /* Espace en dessous de chaque paragraphe */
+}

@@ -1,20 +1,25 @@
 <?php
+/**
+ * Fichier d'exemple de configuration.
+ *
+ * Ce fichier doit être renommé en "config.php" une fois personnalisé avec vos propres identifiants.
+ * Il démarre la session et définit les constantes pour les chemins vers les templates de vues
+ * ainsi que les paramètres de connexion à la base de données.
+ */
 
-    // En fonction des routes utilisées, il est possible d'avoir besoin de la session ; on la démarre dans tous les cas. 
-    session_start();
+// Démarrer la session utilisateur, indispensable pour la gestion des états et des connexions
+session_start();
 
-    
-    // Définition du chemin vers les templates de vues
-    define('TEMPLATE_VIEW_PATH', './views/templates/'); // Le chemin vers les templates de vues.
+// Définition du chemin vers le dossier contenant les templates de vues
+define('TEMPLATE_VIEW_PATH', './views/templates/');
 
-    // Définition du chemin vers le template principal, ici 'main.php'
-    define('MAIN_VIEW_PATH', TEMPLATE_VIEW_PATH . 'main.php'); // Le chemin vers le template principal.
+// Définition du chemin complet vers le template principal (main.php)
+define('MAIN_VIEW_PATH', TEMPLATE_VIEW_PATH . 'main.php');
 
-    
-    // Insérer vos propres identifiants de BDD et renommer ce fichier config.php
-    define('DB_HOST', '');
-    define('DB_NAME', ''); 
-    define('DB_USER', '');
-    define('DB_PASS', '');
-
+// Informations de connexion à la base de données
+// Remplacez les valeurs vides par vos propres identifiants de base de données avant de renommer ce fichier en config.php
+define('DB_HOST', '');
+define('DB_NAME', '');
+define('DB_USER', '');
+define('DB_PASS', '');
 ?>

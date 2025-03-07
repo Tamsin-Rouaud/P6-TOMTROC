@@ -1,70 +1,81 @@
-.connexionBlock, #connexionTitle, .formInputLogin, .connexionImg, .subscribe, .subscribe a {
+/********** STYLES POUR LA PAGE DE CONNEXION **********/
+
+/* Réinitialisation des marges pour les éléments ciblés */
+.connexionBlock,
+#connexionTitle,
+.formInputLogin,
+.connexionImg,
+.subscribe,
+.subscribe a {
     margin: 0;
 }
 
+/* Conteneur principal de la page de connexion */
 .connexionBlock {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #F5F5F5;
-
 }
 
+/* Style du titre de la page de connexion */
 #connexionTitle {
     padding-bottom: 40px;
     text-align: left;
-
 }
 
+/* Conteneur du formulaire de connexion */
 .connexionText {
     display: flex;
     flex-direction: column;
     padding-left: 160px;
-
 }
 
+/* Espacement pour chaque champ de saisie dans le formulaire */
 .formInputLogin {
     padding-bottom: 20px;
-
 }
 
+/* Style pour le lien à l'intérieur du bouton de soumission */
 .subscribe a {
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
 
+/* Style des paragraphes dans le bloc de connexion (ex. lien inscription) */
 .connexionText p {
     padding-top: 30px;
     color: #292929;
     font-size: 0.9em;
-
 }
 
+/* Style des liens dans les paragraphes du bloc connexion */
 .connexionText p a {
     text-decoration: underline;
-
 }
 
+/********** RESPONSIVE (MOBILE) **********/
 @media screen and (max-width: 768px) {
     .connexionBlock {
         flex-direction: column;
         padding-bottom: 0;
-
     }
 
+    /* Adaptation de l'image pour la page de connexion sur mobile */
     .connexionImg img {
         width: 100%;
         object-fit: cover;
     }
 
+    /* Ajustement des paddings du formulaire de connexion sur mobile */
     .connexionText {
         padding-left: unset;
-        padding-bottom: 90px;
         padding-top: 60px;
+        padding-bottom: 90px;
     }
 
+    /* Suppression de la décoration des liens dans le bloc de connexion sur mobile */
     .connexionText p a {
         text-decoration: none;
     }

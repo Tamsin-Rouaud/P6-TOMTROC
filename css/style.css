@@ -1,37 +1,43 @@
+/* Importation des polices depuis Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
-/********* RESET CSS *********/
 
+/********* RESET CSS *********/
+/* Réinitialisation des marges et configuration du box-sizing pour tous les éléments */
 * {
     margin: 0 auto;
     box-sizing: border-box;
-    
 }
 
-input, label, form, p, h3, a {
+/* Réinitialisation spécifique pour certains éléments */
+input,
+label,
+form,
+p,
+h3,
+a {
     margin: 0;
-    
 }
 
+/* Suppression de la décoration des liens */
 a {
     text-decoration: none;
-    
 }
 
 /********** GENERAL **********/
-
+/* Style global appliqué à tous les éléments (limite de largeur, couleur et police par défaut) */
 * {
     max-width: 1440px;
     color: #292929;
     font-family: Inter, arial, 'sans-serif';
-
 }
 
+/* Style de fond pour le body */
 body {
     background-color: #F5F3EF;
-    
 }
 
+/* Style pour les titres principaux */
 h1 {
     font-family: 'playFair-display';
     font-size: 36px;
@@ -39,9 +45,9 @@ h1 {
     padding-bottom: 15px;
     padding-right: 10px;
     margin-top: 25px;
-
 }
 
+/* Style des boutons */
 button {
     background-color: #00AC66;
     border: none;
@@ -52,23 +58,24 @@ button {
     color: white;
 }
 
+/* S'assurer que les liens à l'intérieur des boutons restent blancs */
 .button a {
     color: white;
-
 }
 
+/* Ajout d'un padding vertical pour les sections */
 section {
     padding-top: 80px;
     padding-bottom: 80px;
-  
 }
 
+/* Style pour les labels */
 label {
     color: #A6A6A6;
     font-size: 0.975em;
-
 }
 
+/* Style pour les champs de saisie */
 input {
     border: #F0F0F0;
     height: 50px;
@@ -78,5 +85,4 @@ input {
     padding-left: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
-  
 }

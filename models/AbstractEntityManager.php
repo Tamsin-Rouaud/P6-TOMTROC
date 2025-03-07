@@ -1,18 +1,21 @@
 <?php
+/**
+ * Classe abstraite représentant un manager d'entités.
+ *
+ * Cette classe permet de centraliser l'accès à la base de données en récupérant
+ * automatiquement l'instance unique du gestionnaire de base de données (DBManager).
+ */
+abstract class AbstractEntityManager {
+
+    // Instance du gestionnaire de base de données
+    protected $db;
 
     /**
-     * Classe abstraite qui représente un manager. Elle récupère automatiquement le gestionnaire de base de données. 
+     * Constructeur de la classe.
+     *
+     * Récupère automatiquement l'instance unique de DBManager via le pattern Singleton.
      */
-    abstract class AbstractEntityManager {
-        
-        protected $db;
-
-        /**
-         * Constructeur de la classe.
-         * Il récupère automatiquement l'instance de DBManager. 
-         */
-        public function __construct() 
-        {
-            $this->db = DBManager::getInstance();
-        }
+    public function __construct() {
+        $this->db = DBManager::getInstance();
     }
+}

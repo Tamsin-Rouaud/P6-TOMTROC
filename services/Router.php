@@ -1,59 +1,58 @@
 <?php
+/**
+ * Classe Router
+ *
+ * Cette classe gère l'enregistrement et le dispatching des routes de l'application.
+ * Elle permet d'associer une action à un contrôleur et à une méthode, et de rediriger
+ * l'exécution vers la méthode correspondante en fonction de l'URL.
+ */
 class Router {
-    // Tableau pour stocker les routes
+    // Tableau associatif pour stocker les routes. La clé est l'action, la valeur est un tableau contenant le contrôleur et la méthode.
     private $routes = [];
 
-    // Méthode pour ajouter une route
+    /**
+     * Ajoute une route à l'application.
+     *
+     * Vérifie que le contrôleur et la méthode existent avant de les enregistrer.
+     *
+     * @param string $action L'action à associer à la route.
+     * @param string $controller Le nom du contrôleur.
+     * @param string $method La méthode du contrôleur à appeler.
+     * @throws Exception Si le contrôleur ou la méthode n'existe pas.
+     * @return void
+     */
     public function addRoute(string $action, string $controller, string $method) {
-        // Vérifie si le contrôleur existe
+        // Vérifie que la classe du contrôleur existe
         if (!class_exists($controller)) {
             throw new Exception("Le contrôleur '$controller' n'existe pas.");
         }
     
-        // Vérifie si la méthode existe dans le contrôleur
+        // Vérifie que la méthode existe dans le contrôleur
         if (!method_exists($controller, $method)) {
             throw new Exception("La méthode '$method' n'existe pas dans le contrôleur '$controller'.");
         }
     
-        // Enregistre la route dans le tableau des routes avec l'action comme clé
+        // Enregistre la route dans le tableau avec l'action comme clé
         $this->routes[$action] = ['controller' => $controller, 'method' => $method];
     }
     
-    // Méthode pour dispatcher (rediriger) vers la méthode du contrôleur approprié
-    // public function dispatch(string $action) {
-    //     if (!array_key_exists($action, $this->routes)) {
-    //         throw new Exception("Action '$action' non trouvée.");
-    //     }
-    
-    //     // Récupération du contrôleur et de la méthode associés
-    //     $controllerName = $this->routes[$action]['controller'];
-    //     $methodName = $this->routes[$action]['method'];
-    
-    //     // Vérification de l'existence du contrôleur
-    //     if (!class_exists($controllerName)) {
-    //         throw new Exception("Le contrôleur '$controllerName' n'existe pas.");
-    //     }
-    
-    //     // Instanciation du contrôleur
-    //     $controller = new $controllerName();
-    
-    //     // Vérification de l'existence de la méthode
-    //     if (!method_exists($controller, $methodName)) {
-    //         throw new Exception("La méthode '$methodName' n'existe pas dans le contrôleur '$controllerName'.");
-    //     }
-    
-    //     // Appel de la méthode du contrôleur
-    //     $controller->$methodName();
-    // }
-    
-
+    /**
+     * Dispatch (redirige) l'exécution vers la méthode du contrôleur associée à l'action.
+     *
+     * Récupère l'action demandée, instancie le contrôleur associé et appelle la méthode.
+     * Si un paramètre 'id' est présent dans l'URL, il est transmis à la méthode.
+     *
+     * @param string $action L'action à dispatcher.
+     * @throws Exception Si la route n'existe pas.
+     * @return void
+     */
     public function dispatch(string $action) {
-        // Vérifie si la route existe
+        // Vérifie que la route existe
         if (!isset($this->routes[$action])) {
-            throw new Exception("La route spécifiée n'existe pas : $action");
+            throw new Exception("La route \"$action\" n'existe pas.");
         }
     
-        // Récupère le contrôleur et la méthode associés à l'action
+        // Récupère les informations associées à la route
         $route = $this->routes[$action];
         $controllerName = $route['controller'];
         $methodName = $route['method'];
@@ -61,16 +60,14 @@ class Router {
         // Instancie le contrôleur
         $controller = new $controllerName();
     
-        // Récupère l'ID (ou d'autres paramètres) depuis l'URL
+        // Récupère un paramètre 'id' (ou d'autres paramètres si nécessaire) depuis l'URL
         $id = $_GET['id'] ?? null;
     
-        // Appelle la méthode en fonction des paramètres
+        // Appelle la méthode du contrôleur en passant l'ID si disponible, sinon sans paramètre
         if ($id !== null) {
-            $controller->$methodName((int)$id); // Passe l'ID en paramètre
+            $controller->$methodName((int)$id);
         } else {
-            $controller->$methodName(); // Appelle la méthode sans paramètre
+            $controller->$methodName();
         }
     }
-    
 }
-

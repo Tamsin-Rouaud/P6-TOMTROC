@@ -1,36 +1,37 @@
-
 /********** HEADER **********/
 
+/* Style global du header */
 header {
     background-color: #F5F3EF;
     width: 100%;
     position: fixed;
     z-index: 100;
-       
 }
 
+/* Style pour la liste à l'intérieur du header */
 header ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 80px;
     width: 100%;
-        
-}
-/* NAVIGATION PRINCIPALE */
-nav {
-    display: flex;
-   justify-content: space-between;
-    align-items: center;
- 
-}
-nav ul div li {
-    display: flex;
-    padding-right: 60px;
-    align-items: center;
-    
 }
 
+/* Style de la navigation principale */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Style pour les éléments de la navigation dans les div situées dans les ul */
+nav ul div li {
+    display: flex;
+    align-items: center;
+    padding-right: 60px;
+}
+
+/* Style des liens dans ces éléments de navigation */
 ul div li a {
     color: black;
     display: flex;
@@ -39,10 +40,12 @@ ul div li a {
     align-items: center;
 }
 
+/* Style pour un lien actif (par exemple, la page actuelle) */
 nav ul li a.active {
     font-weight: bold;
 }
 
+/* Style pour les spans, souvent utilisés pour afficher un badge (ex. nombre de notifications) */
 header span {
     display: inline-block;
     background-color: black;
@@ -53,35 +56,35 @@ header span {
     text-align: center;
     font-size: 0.7em;
     margin-left: 3px;
-
 }
 
+/* Style pour les icônes dans le header */
 .icon {
     padding-right: 3px;
     height: 13px;
-    
 }
 
-.firstPart, .secondPart {
+/* Conteneurs pour les parties gauche (firstPart) et droite (secondPart) du menu */
+.firstPart,
+.secondPart {
     display: flex;
     align-items: center;
     margin-left: 30px;
-
 }
 
+/* Style pour le logo, avec un margin spécifique */
 .logo {
     margin: 0;
     margin-left: 140px;
 }
 
+/* Style pour l'image du logo */
 #logo {
     background-color: #F5F3EF;
     height: 51px;
-    
 }
 
-
-/* MENU BURGER (CACHÉ PAR DÉFAUT) */
+/* MENU BURGER (caché par défaut) */
 .burger {
     display: none;
     cursor: pointer;
@@ -93,10 +96,9 @@ header span {
     height: 2px;
     background-color: #a6a6a6;
     margin: 5px;
-    
 }
 
-/* RESPONSIVE */
+/********** RESPONSIVE **********/
 
 /* TABLETTE ET DESKTOP */
 @media screen and (min-width: 768px) {
@@ -107,12 +109,14 @@ header span {
 
 /* MOBILE */
 @media screen and (max-width: 768px) {
+    /* Affichage du menu burger */
     .burger {
         display: block;
         margin: 0;
         margin-right: 20px;
     }
-
+    
+    /* Menu de navigation caché par défaut sur mobile */
     .nav-links {
         display: none;
         flex-direction: column;
@@ -125,28 +129,35 @@ header span {
         height: auto;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-
+    
+    /* Affichage du menu de navigation lorsque la classe 'active' est appliquée */
     .nav-links.active {
         display: flex;
         align-items: center;
         justify-content: center;
     }
-
+    
+    /* Masquer l'ul du header sur mobile (utilisation du menu burger à la place) */
     header ul {
         display: none;
     }
-
-    .firstPart li, .secondPart li {
-        padding-bottom: 5px;
+    
+    /* Style pour les éléments de navigation sur mobile */
+    .firstPart li,
+    .secondPart li {
         margin-left: 40px;
+        padding-bottom: 5px;
     }
-
+    
+    /* Réduction du margin pour le logo sur mobile */
     .logo {
         margin: 0;
         margin-left: 30px;
     }
-
-    .firstPart, .secondPart {
+    
+    /* Réorganisation des conteneurs firstPart et secondPart en colonne */
+    .firstPart,
+    .secondPart {
         flex-direction: column;
         align-items: unset;
     }

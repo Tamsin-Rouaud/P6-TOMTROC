@@ -73,14 +73,20 @@ Puis ouvrez un navigateur et accédez à `http://localhost:8000` ou `http://loca
 P6-TOMTROC/
 │-- config/            # Configuration du projet
 │-- controllers/       # Contrôleurs gérant la logique métier
+│-- css/               # Fichiers de styles
+│-- images/            # Images de base du projet
 │-- models/            # Modèles interagissant avec la base de données
+│-- services/          # Classes utilitaires (routeur, gestion des images, validations, etc.)
+│-- uploads/           # Images des utilisateurs et des livres
+│   │-- books/         # Image des livres téchargés (par un utilisateur)
+│   │-- users/         # Image des profils téléchargés (par un utilisateur)
 │-- views/             # Templates HTML/PHP pour l'affichage
 │   │-- partials/      # Fichiers partagés (header, footer)
-│-- public/            # Ressources accessibles publiquement (CSS, JS, images)
-│-- services/          # Classes utilitaires (gestion des images, validations, etc.)
-│-- uploads/           # Images des utilisateurs et des livres
+│   │-- templates/     # Fichiers partagés (main)
 │-- index.php          # Point d'entrée principal
+│-- menu.js            # JavaScript pour menu burger
 │-- README.md          # Documentation
+│-- tomtroc.sql        # Fichier sql pour base de données
 ```
 
 

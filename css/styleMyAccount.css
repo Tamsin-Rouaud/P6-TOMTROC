@@ -1,53 +1,57 @@
-/*** My Account ***/
+/********** MY ACCOUNT **********/
 
+/* Style du titre de la page "Mon Account" */
 .myAccount h1 {
     padding-bottom: 40px;
     margin-left: 130px;
 }
 
-.myAccount{
+/* Conteneur principal de la page My Account */
+.myAccount {
     display: flex;
     flex-direction: column;
     width: 93.43%;
-    padding-bottom: 40px;
     padding-top: 150px;
+    padding-bottom: 40px;
     margin-left: 0;
     margin-right: 0;
 }
 
+/* Boîte englobant la section profil et les informations personnelles */
 .myAccountBox {
     display: flex;
     margin-left: 130px;
     width: 89.5%;
-    /* height: 538px; */
+    /* height: 538px;  Commenté pour être ajustable */
     margin-bottom: 10px;
-    
 }
 
+/* Bloc du profil utilisateur */
 .boxProfile {
     display: flex;
     flex-direction: column;
-    margin-right: 10px;
     width: 47%;
-    justify-content: center;
-    background-color: #f6f6f6;
+    margin-right: 10px;
     margin-left: 0;
-    border-radius: 20px;
+    justify-content: center;
     background-color: #ffffff;
+    border-radius: 20px;
 }
 
+/* Icône du livre (pour le nombre de livres) */
 .iconBook {
     padding-right: 5px;
 }
+
+/* Bloc contenant la photo de profil et le lien de modification */
 .profileBlock {
     display: flex;
     flex-direction: column;
     align-items: center;
-} 
+}
 
 .profileBlock img {
     width: 135px;
-    
 }
 
 .profileBlock a {
@@ -56,10 +60,11 @@
     font-size: 0.8em;
 }
 
+/* Bloc contenant les informations textuelles du profil */
 .profileText {
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
 }
 
 .profileText h4 {
@@ -71,14 +76,16 @@
 .profileText p {
     color: #292929;
     padding-top: 20px;
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
-#firstP{
+/* Style spécifique pour le premier paragraphe (date d'adhésion) */
+#firstP {
     font-size: 14px;
     color: #a6a6a6;
 }
 
+/* Style pour le second paragraphe (texte "BIBLIOTHÈQUE") */
 #secondP {
     font-size: 8px;
     font-weight: 600;
@@ -89,34 +96,19 @@
     font-size: 0.8em;
 }
 
+/* Bloc d'informations personnelles */
 .boxInformationProfile {
     width: 48%;
     background-color: #ffffff;
     border-radius: 20px;
 }
 
+/* Formulaire des informations personnelles */
 .informationProfile {
     width: 57.85%;
     margin: auto;
     padding-top: 40px;
     padding-bottom: 30px;
-}
-
-
-.save {
-   
-    height: 63px;
-    width: 47%;
-    border: #00AC66 solid 1px;
-    padding: 0;
-    background-color: #f5f3ef;
-    font-weight: bold;
-    color: #00AC66;
-    margin: 0;
-}
-
-.save a {
-    color: #00AC66;
 }
 
 .informationProfile h4 {
@@ -125,16 +117,17 @@
 
 .informationProfile input {
     background-color: #EDF2F6;
-    
 }
 
+/* Ligne de séparation décorative */
 .underline {
-    border: solid #f5f3ef 1px;
+    border: 1px solid #f5f3ef;
     width: 242px;
     margin-top: 40px;
     margin-bottom: 40px;
 }
 
+/* Section listant les livres de l'utilisateur */
 .myBookBlock {
     margin-top: 30px;
     width: 87.5%;
@@ -142,14 +135,13 @@
     margin-bottom: 90px;
 }
 
+/* Table des livres (version desktop) */
 table {
-    /* height: 579px; */
-    margin: 0;
-    overflow: hidden;
     width: 100%;
     border-radius: 20px;
     border-collapse: collapse;
-    
+    margin: 0;
+    overflow: hidden;
 }
 
 th {
@@ -158,60 +150,48 @@ th {
     padding-bottom: 10px;
     text-align: left;
     background-color: #ffffff;
-
-    
 }
-
 
 tbody tr {
     height: 130px;
     font-size: 12px;
-    background-color: #00AC66;
-}
-
-
-.myBookBlock img {
-    width: 78px;
 }
 
 tbody tr:nth-child(odd) {
-    background-color: #ffffff; /* Couleur pour les lignes impaires */
+    background-color: #ffffff; /* Lignes impaires */
 }
 
 tbody tr:nth-child(even) {
-    background-color: #EDF2F6; /* Couleur pour les lignes paires */
+    background-color: #EDF2F6; /* Lignes paires */
 }
 
+/* Définition de la largeur des colonnes de la table */
 .photo {
-    padding-left: 95px; 
     width: 19%;
-
+    padding-left: 95px;
 }
 
 .title {
     width: 15.7%;
-
 }
 
 .author {
     width: 14.3%;
-
 }
 
 .description {
     width: 18.09%;
+    padding-left: 10px;
     padding-right: 71.5px;
     font-style: italic;
-    padding-left: 10px;
-    
 }
 
 .available {
     width: 13.3%;
     padding-left: 30px;
-
 }
 
+/* Style des boutons de disponibilité */
 .available button {
     border: none;
     display: flex;
@@ -223,16 +203,16 @@ tbody tr:nth-child(even) {
     font-size: 0.9em;
     color: white;
     padding: 10px 20px;
-
 }
-/* Disponible (vert) */
+
+/* Bouton indiquant "disponible" */
 .is-available {
-    background-color: #6DC5A1; 
+    background-color: #6DC5A1;
 }
 
-/* Non disponible (rouge) */
+/* Bouton indiquant "non disponible" */
 .not-available {
-    background-color: #c56d6d; 
+    background-color: #c56d6d;
 }
 
 .editDelete {
@@ -244,12 +224,10 @@ tbody tr:nth-child(even) {
     border: none;
     background-color: transparent;
     text-decoration: underline;
-
 }
 
 .btnDelete {
     color: #c56d6d;
-    
 }
 
 .btnEdit {
@@ -261,7 +239,7 @@ tbody tr:nth-child(even) {
     font-weight: bold;
 }
 
-/*** Infobulle description  ***/
+/*** Tooltip pour la description complète ***/
 .tooltip {
     position: relative;
     cursor: pointer;
@@ -292,41 +270,41 @@ tbody tr:nth-child(even) {
     opacity: 1;
 }
 
+.myBookBlock img {
+    width: 79px;
+}
+
+/********** MEDIA QUERIES (MOBILE) **********/
 @media screen and (max-width: 768px) {
     .myAccountBox {
         display: block;
-        margin:0;
+        margin: 0;
         width: 100%;
         height: unset;
-        
     }
 
     .boxProfile {
         width: 100%;
+        padding-top: 50px;
         padding-bottom: 40px;
         margin-bottom: 35px;
-        padding-top: 50px;
-        /* max-width: 335px; */
-        /* margin: 30px auto; */
-
     }
 
     .boxInformationProfile {
         width: 100%;
-        /* max-width: 335px; */
         padding-bottom: 40px;
         margin: 0;
-        /* margin-bottom: 35px; */
     }
 
     .myAccount {
         margin: auto;
+        padding-bottom: 0;
     }
 
     .myAccount h1 {
         margin-left: 20px;
-        padding-bottom: unset;
         margin-bottom: 40px;
+        padding-bottom: unset;
     }
 
     .save {
@@ -334,93 +312,83 @@ tbody tr:nth-child(even) {
     }
 
     .informationProfile {
-        margin-left: 25px;
-        margin-right: 25px;
+        margin: 0 25px;
         padding-bottom: 0;
         width: unset;
     }
-
-
-
-
-
-
 }
 
-
-
-
-
-   /* Par défaut, on affiche la version desktop, on masque la mobile */
-.desktop-version {
+/* Par défaut, on affiche la version desktop et on masque la mobile */
+.desktopVersion {
     display: block;
-  }
-  .mobile-version {
+}
+.mobileVersion {
     display: none;
-  }
-  
-  @media screen and (max-width: 768px) {
-    /* En mobile, on fait l'inverse */
-    .desktop-version {
-      display: none;
+}
+
+@media screen and (max-width: 768px) {
+    /* En mobile, on masque la version desktop et on affiche la version mobile */
+    .desktopVersion {
+        display: none;
     }
-    .mobile-version {
-      display: block;
-      margin-left: 0;
-      margin-right: 0;
-      width: 100%;
-    }
-  
-    .mobile-version .card {
-      background-color: #fff;
-      border-radius: 20px;
-      margin-bottom: 20px;
-      padding: 50px;
-      
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-  
-    .mobile-version .card-photo img {
-      width: 79px;
-      height: auto;
-      display: block;
-      margin-right: 20px;
-    }
-  
-    /* .mobile-version .card-info {
-      flex: 1;
-    } */
-  
-    .card-actions a {
-      margin-right: 10px;
-      text-decoration: underline;
+    .mobileVersion {
+        display: block;
+        margin: 0;
+        width: 100%;
+        margin-bottom: 40px;
     }
 
-    .card-photo {
+    .mobileVersion .card {
+        background-color: #fff;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .mobileVersion .cardPhoto img {
+        width: 79px;
+        height: auto;
+        display: block;
+        margin-right: 20px;
+        border-radius: unset;
+    }
+
+    .cardActions {
+        padding-top: 40px;
+    }
+
+    .cardActions a {
+        margin-right: 10px;
+        text-decoration: underline;
+    }
+
+    .cardPhoto {
         margin-left: 0;
         margin-right: 10px;
     }
 
-    .card-title {
+    .cardTitle {
         margin: 0;
     }
-    .card-title h3 {
+    .cardTitle h3 {
         font-weight: normal;
-        
+        font-size: 0.875em;
     }
-    .photo-title {
+    .cardTitle p {
+        font-size: 0.875em;
+    }
+    .photoTitle {
         margin: 0;
         display: flex;
         align-items: center;
     }
-
-
-
-    .card-info p {
+    .cardInfo p {
         margin-bottom: 40px;
         font-style: italic;
+        font-size: 0.875em;
     }
 
     .is-available, .not-available {
@@ -428,7 +396,7 @@ tbody tr:nth-child(even) {
         color: white;
         padding: 5px 15px;
         border-radius: 20px;
-        font-size: 0.875em;
+        font-size: 0.56em;
     }
 
     .available-notAvailable {
@@ -436,9 +404,10 @@ tbody tr:nth-child(even) {
         margin-top: 10px;
     }
 
-    .card-actions a:last-of-type {
+    .cardActions a:last-of-type {
         color: #cb2d2d;
         margin-left: 25px;
     }
-  }
-  
+
+
+}

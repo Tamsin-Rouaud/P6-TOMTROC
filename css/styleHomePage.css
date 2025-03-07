@@ -1,14 +1,12 @@
-
 /********** HOME **********/
 
-/** First Section **/ 
+/** First Section **/
 
 .firstSection {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding-top: 40px;
-        
 }
 
 .homeFirstSection {
@@ -18,130 +16,109 @@
     width: 60%;
     margin: 0 auto;
     padding-top: 150px;
-        
 }
 
 .homeFirstSection article {
-    
     width: 42%;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding: 0 20px;
     margin-right: 65px;
-        
 }
 
 .homeFirstSection figcaption {
     text-align: right;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-family: inter;
+    padding: 10px 0;
+    font-family: Inter, sans-serif;
     font-size: 12px;
     font-style: italic;
     font-weight: 300;
     color: #A6A6A6;
-
 }
 
 .homeFirstSection aside {
     justify-content: flex-end;
-
 }
 
 .homeFirstSection img {
     object-fit: cover;
     height: 539px;
-
 }
 
 /** Second Section **/
 
- .secondSection {
+.secondSection {
     width: 100%;
-
 }
 
- .homeSecondSection {
+.homeSecondSection {
     background-color: #FAF9F7;
     display: flex;
     align-items: center;
     flex-direction: column;
     padding-bottom: 40px;
-
 }
 
- .homeSecondSection h1 {
+.homeSecondSection h1 {
     text-align: center;
     padding-top: 40px;
-
 }
 
- .imgGroupBlocks {
+.imgGroupBlocks {
     display: flex;
-    padding-top: 60px;
     justify-content: center;
-    
+    padding-top: 60px;
 }
 
- .imgBlock {
-    margin-right: 40px;
+.imgBlock {
     background-color: white;
     height: 324px;
+    margin-right: 40px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-
 }
 
- .imgBlock img {
+.imgBlock img {
     width: 200px;
     height: 200px;
     object-fit: cover;
     padding: 0;
-
 }
 
- .imgBlockText {
+.imgBlockText {
     display: flex;
     flex-direction: column;
-    padding-top: 15px;
-    padding-left: 20px;
+    padding: 15px 0 0 20px;
     font-size: 0.9em;
     font-weight: normal;
-    
 }
 
 .imgBlockText h3 {
     font-size: 1em;
     font-weight: normal;
-
+    padding-bottom: 10px;
 }
 
 .imgBlockText p {
     color: grey;
-    padding-top: 10px;
     font-size: 1em;
-
+    padding-top: 10px;
 }
 
 .imgBlockText p:last-of-type {
     font-size: 0.8em;
     font-style: italic;
     padding-top: 20px;
-    
-
 }
 
 .seeAllBooks {
     display: flex;
     justify-content: center;
     border: none;
-
 }
 
-/** Third section **/
+/** Third Section **/
 
 .thirdSection {
     width: 100%;
-
 }
 
 .homeThirdSection {
@@ -150,61 +127,55 @@
     align-items: center;
     flex-direction: column;
     padding-bottom: 30px;
-
 }
-    
+
 .homeThirdSection h1 {
     text-align: center;
     padding-bottom: 20px;
-    
 }
 
 #ptitle {
     width: 28%;
     text-align: center;
-    
 }
 
 .textGroupBlocks {
     display: flex;
-    padding-top: 50px;
     justify-content: center;
-    
+    padding-top: 50px;
 }
-    
+
 .textBlock {
-    margin-right: 40px;
-    padding-left: 23px;
-    padding-right: 23px;
     background-color: white;
-    height: 139px;
-    width: 215px;
     display: flex;
     align-items: center;
+    justify-content: center;
     text-align: center;
+    width: 215px;
+    height: 139px;
+    margin-right: 40px;
+    padding: 0 23px;
     font-size: 0.85em;
     border-radius: 10px;
-
 }
- 
+
 .seeAllBooksTransparent {
     display: flex;
     justify-content: center;
     border: 2px solid #00AC66;
     background-color: transparent;
     margin-bottom: 40px;
-
 }
 
 .seeAllBooksTransparent a {
     color: #00AC66;
     font-weight: bold;
-
 }
 
-/** Fourth section **/
+/** Fourth Section **/
+/* (Aucun style spécifique n'est défini ici, éventuellement à ajouter selon vos besoins) */
 
-/** Fifth section **/
+/** Fifth Section **/
 
 .fifthSection {
     display: flex;
@@ -212,24 +183,20 @@
     margin: 0;
     padding-bottom: 40px;
 }
+
 .homeFifthSection {
     width: 35%;
-    padding-bottom: 40px;
-    padding-left: 70px;
     margin: 0;
-       
+    padding: 0 0 40px 70px;
 }
 
 .fifthSection h1 {
     padding-bottom: 25px;
-
 }
 
 .fifthSection p {
-    padding-bottom: 20px;
-    padding-right: 45px;
+    padding: 0 45px 20px;
     font-size: 1em;
-
 }
 
 .fifthSection span {
@@ -238,15 +205,20 @@
     color: #A6A6A6;
     font-size: 0.85em;
     padding-bottom: 20px;
-    
 }
 
 .signature {
     display: flex;
     justify-content: space-between;
-    padding-top: 0;
     align-items: center;
-    
+    padding-top: 0;
+}
+
+.titleHome {
+    margin: 0;
+    font-size: 1.125em;
+    font-weight: normal;
+    color: black;
 }
 
 #heart {
@@ -255,6 +227,7 @@
     margin: 0;
 }
 
+/********** MEDIA QUERIES (MOBILE) **********/
 @media screen and (max-width: 768px) {
     .homeFirstSection {
         display: flex;
@@ -268,14 +241,11 @@
     .homeFirstSection article {
         margin: 0;
         width: 100%;
-        /* padding-left: 50px; */
     }
 
     .button {
         margin-top: 30px;
         width: 100%;
-
-       
     }
 
     .seeAllBooks {
@@ -286,7 +256,7 @@
         padding-right: 0;
     }
 
-    .homeFirstSection img{
+    .homeFirstSection img {
         width: 377px;
         height: 503px;
         object-fit: cover;
@@ -299,20 +269,16 @@
     .homeSecondSection {
         padding-top: 0;
         padding-bottom: 80px;
-    
     }
+
     .homeSecondSection h1 {
-        
-        padding-top: 20px;
-        padding-left: 70px;
-        padding-right: 80px;
+        padding: 20px 80px 0 70px;
     }
 
     .imgGroupBlocks {
         display: grid;
         grid-template-columns: 1fr 1fr;
         padding-top: 10px;
-
     }
 
     .imgBlock {
@@ -321,13 +287,11 @@
 
     .homeThirdSection {
         padding-top: 20px;
-
     }
 
     .textGroupBlocks {
         display: block;
         padding-top: 20px;
-
     }
 
     .textBlock {
@@ -337,9 +301,7 @@
 
     #ptitle {
         width: 80%;
-
     }
-
 
     .textBlock p {
         margin: 0 auto;
@@ -358,17 +320,14 @@
     .fifthSection {
         padding-bottom: 20px;
     }
+
     .homeFifthSection {
-        padding-top: 20px;
-        padding-left: 20px;
+        padding: 20px 40px 0 20px;
         width: 100%;
-        padding-right: 40px;
-        padding-bottom: 0;
     }
 
     .signature {
         display: block;
-        /* margin: 0 auto; */
     }
 
     #heart {

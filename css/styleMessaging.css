@@ -1,43 +1,47 @@
+/********** MESSAGING PAGE **********/
 
+/* Masquer par défaut le bloc de texte contenant la flèche retour (sera activé en mobile si besoin) */
+.arrowText {
+    display: none;
+}
+
+/* Conteneur principal de la messagerie */
 .mailing {
     display: flex;
     background-color: #f5f3ef;
-
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
+/* Conteneur de la liste des contacts */
 .mailingContainer {
     width: 22%;
-    
+    margin-left: 130px;
     padding-right: 20px;
     background-color: #faf9f7;
-    margin-left: 130px;
 }
 
+/* Titre de la messagerie */
 .mailingTitle {
-    padding-bottom: 50px;
     margin-left: 35px;
-    
-}
-.mailingTitle h1 {
-    font-family: 'Playfair Display','sans-serif';
-font-size: 1.625em;
-color: black;
-margin-top: 60px;
+    padding-bottom: 50px;
 }
 
+.mailingTitle h1 {
+    font-family: 'Playfair Display', sans-serif;
+    font-size: 1.625em;
+    color: black;
+    margin-top: 60px;
+}
+
+/* Style pour chaque contact */
 .contact {
     display: flex;
+    align-items: center;
     padding-bottom: 25px;
     margin-left: 10px;
-    
-    align-items: center;
- 
-    
 }
 
-
-
+/* Style de l'image de contact */
 .contactImg img {
     width: 48px;
     height: 48px;
@@ -45,6 +49,7 @@ margin-top: 60px;
     object-fit: cover;
 }
 
+/* Texte associé au contact */
 .contactText {
     margin-left: 15px;
     width: 50%;
@@ -60,67 +65,67 @@ margin-top: 60px;
     color: #a6a6a6;
 }
 
+/* Zone pour afficher l'heure du dernier message */
 .contactTime {
     width: 25%;
 }
 
-.contactTime small{
+.contactTime small {
     width: 25%;
     text-align: right;
     font-size: 0.75em;
 }
 
+/* Conteneur de la colonne de messages */
 .containerMessage {
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
-    margin-left: 35px;
+    justify-content: space-between;
     width: 55%;
+    margin-left: 35px;
     margin-right: 120px;
-
-
 }
 
+/* Bloc principal des messages */
 .blockMessage {
     display: flex;
     flex-direction: column;
-    margin: 0;
+    margin: 20px 0 0 0;
     margin-top: 30%;
-
 }
+
+/* Conteneur des messages individuels */
 .messagesContainer {
-    
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-   
     margin: 0;
 }
 
+/* Titre de la conversation */
 .messageContainerTitle {
     margin: 0;
     margin-top: 40px;
 }
+
 .messageContainerTitle h3 {
-    
     font-size: 0.875em;
     font-weight: 600;
     display: flex;
     align-items: center;
     width: 20%;
-    
-
 }
 
+/* Style pour l'image de contact dans le titre de la conversation */
 .mailing h3 img {
     width: 48px;
     height: 48px;
     border-radius: 50%;
     margin: 0;
     margin-right: 10px;
-
 }
 
+/* Style pour le bloc affichant le nom d'utilisateur dans la conversation */
 .messageUsername {
     background-color: #f1f1f1;
     padding: 0.8rem;
@@ -128,124 +133,113 @@ margin-top: 60px;
     margin: 0;
     margin-left: 35px;
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .messageUsername div {
     display: flex;
-
 }
 
+/* Style par défaut des petits textes dans la liste des messages */
 .messagesContainer small {
     display: flex;
     justify-content: flex-start;
     margin: 0;
 }
+
 .messagesContainer p {
     color: #333;
 }
 
+/* Style pour les textarea (formulaire d'envoi de message) */
 textarea {
     width: 80%;
-    margin: 0;
+    height: 50px;
+    padding-left: 20px;
+    padding-top: 15px;
+    border: none;
+    outline: none;
     border-radius: 8px;
     color: #a6a6a6;
     font-size: 0.875em;
-    padding-top: 15px;
-    height: 50px;
-    font-family: 'inter', 'sans serif';
-    padding-left: 20px;
-    outline: none;
-    border: none;
-    
 }
 
-
+/* Conteneur du formulaire d'envoi de message */
 .formMessage {
-    margin: 80px 0 ;
-   
+    margin: 80px 0;
 }
 
 .formMessage form {
     display: flex;
     justify-content: space-between;
-
 }
 
+/* Style du bouton d'envoi de message */
 .buttonMessage {
-    
-    margin: 0;
     width: 132px;
+    margin: 0;
     cursor: pointer;
-    
 }
 
+/* Style du conteneur de chaque message */
 .messageWrapper {
     display: flex;
     flex-direction: column;
     min-width: 60%;
     margin: 20px 0;
-
 }
 
-/* Messages envoyés */
+/* Alignement pour les messages envoyés */
 .sent {
     justify-content: flex-end;
-    margin-left: auto; 
-
+    margin-left: auto;
 }
 
-/* Conteneur pour l'avatar et le contenu */
+/* Conteneur du corps du message */
 .messageBody {
     display: flex;
     flex-direction: column;
     width: 500px;
     margin: 0;
-    
 }
-.messageAvatar  {
+
+/* Conteneur pour l'avatar et les informations associées dans un message */
+.messageAvatar {
     display: flex;
-    flex-direction: row;
     align-items: center;
     margin: 0;
-
 }
 
-/* Avatar */
+/* Style de l'avatar dans un message */
 .messageAvatar img {
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    margin-top: 5px;
-    margin: 0;
-
+    margin: 5px 0 0 0;
 }
 
-/* Heure des messages */
+/* Heure d'affichage des messages */
 .messageTime {
     font-size: 0.75em;
     color: #6c757d;
     margin-bottom: 5px;
     text-align: left;
-
 }
 
 .sent .messageTime {
     text-align: right;
     justify-content: flex-end;
     margin-bottom: 10px;
-
 }
 
-/* Contenu des messages */
+/* Conteneur du contenu textuel d'un message */
 .messageContent {
-    background-color: #fff; /* Couleur pour les messages reçus */
+    background-color: #fff; /* Couleur par défaut pour les messages reçus */
     padding: 10px 20px;
     border-radius: 8px;
     word-wrap: break-word;
     margin: 0;
-    
 }
 
 .sent .messageContent {
@@ -254,17 +248,12 @@ textarea {
     justify-content: flex-start;
 }
 
-
-/* Style par défaut pour les contacts */
-
-/* Contact actif */
+/* Badge pour le contact actif */
 .activeContact {
-    background-color: #ffffff; /* Blanc pour le contact sélectionné */
-   
+    background-color: #ffffff;
 }
 
-
-/* Conteneur pour l'avatar et l'heure */
+/* Conteneur pour l'avatar et l'heure dans un message */
 .messageMeta {
     display: flex;
     align-items: center;
@@ -272,7 +261,7 @@ textarea {
     margin: 0;
 }
 
-/* Avatar des messages */
+/* Ajustement de l'avatar des messages dans messageMeta */
 .messageAvatar img {
     width: 24px;
     height: 24px;
@@ -280,118 +269,113 @@ textarea {
     margin-right: 10px;
 }
 
-/* Heure des messages */
-.messageTime {
-    font-size: 0.75em;
-    color: #6c757d;
-}
-
-/* Pour les messages envoyés, alignement à droite */
+/* Style pour l'heure dans les messages envoyés (texte aligné à droite) */
 .sentTime {
     text-align: right;
     margin-bottom: 5px;
 }
+
+/********** MEDIA QUERIES (MOBILE) **********/
 @media screen and (max-width: 768px) {
-
-    /* On annule l'affichage "flex" horizontal */
+    /* Passage en mode bloc pour la messagerie */
     .mailing {
-      display: block;
-      margin: 0;
-      padding: 0;
+        display: block;
+        margin: 0;
+        padding: 0;
     }
 
-    /* Pour masquer en mobile */
-    .hide-mobile {
-      display: none !important;
+    /* Classes pour masquer/afficher en mobile */
+    .hideMobile {
+        display: none !important;
     }
-    /* Pour afficher en mobile */
-    .show-mobile {
-      display: block !important;
+    .showMobile {
+        display: block !important;
     }
 
-    /* La liste de contacts prend 100% de la largeur en mobile */
+    /* Ajustement de la largeur et des espacements pour la liste des contacts */
     .mailingContainer {
-      width: 100% !important;
-      margin: 0 !important;
-      padding: 20px 20px 200px;
-     
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 20px 20px 200px;
     }
 
     .mailingTitle {
-      margin-left: 0 !important;
+        margin-left: 0 !important;
     }
 
     .contact {
-      margin-left: 0;
-      padding-bottom: 20px;
-      padding-top: 20px;
-      border-bottom: 1px solid #fff;
+        margin-left: 0;
+        padding: 20px 0;
+        border-bottom: 1px solid #fff;
     }
 
     .contactTime {
         text-align: right;
     }
-    /* La zone de messages prend 100% en mobile */
+
+    /* La zone des messages occupe toute la largeur en mobile */
     .containerMessage {
-      width: 100% !important;
-      background-color: #f5f5f5;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-      padding: 1rem;
+        width: 100% !important;
+        background-color: #f5f5f5;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 1rem;
     }
 
     .messageContainerTitle h3 {
-      width: auto;
-      margin-bottom: 1rem;
-      font-size: 1em; /* un peu plus grand */
-      display: flex;
-      align-items: center;
+        width: auto;
+        margin-bottom: 1rem;
+        font-size: 1em;
+        display: flex;
+        align-items: center;
     }
 
     .mailing h3 img {
-      width: 40px;
-      height: 40px;
-      margin-right: 10px;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
     }
 
-    /* Les messages */
+    /* Limitation de la hauteur de la zone des messages en mobile */
     .messagesContainer {
-      max-height: 60vh; /* si tu veux limiter la hauteur en mobile */
-      overflow-y: auto;
+        max-height: 60vh;
+        overflow-y: auto;
     }
 
-    /* Le formulaire d'envoi en bas */
+    /* Formulaire d'envoi de message en mobile */
     .formMessage {
-      margin: 1rem 0;
+        margin: 1rem 0;
     }
 
     .formMessage form {
-      display: flex;
-      gap: 15px;
-      flex-direction: column;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
     }
 
     textarea {
-      width: 100%;
-      height: 60px; /* plus haut en mobile */
+        width: 100%;
+        height: 60px;
     }
 
     .buttonMessage {
-      width: 100%; /* largeur du bouton */
+        width: 100%;
     }
 
-    /* On peut réduire la largeur du messageBody en mobile */
+    /* Ajustement de la largeur du conteneur des messages */
     .messageBody {
-      width: 100% !important;
+        width: 100% !important;
     }
 
+    /* Affichage de la flèche retour sur mobile */
     .arrowText {
+        display: block;
+        padding-top: 15px;
         padding-bottom: 15px;
     }
 
     .arrowText a {
-       
         color: #a6a6a6;
         font-size: 0.925em;
     }
-  }
+}

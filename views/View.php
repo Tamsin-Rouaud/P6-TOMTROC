@@ -1,23 +1,28 @@
 <?php
-
-//view/View.php
-
+// view/View.php
 
 /**
- * Cette classe génère les vues en fonction de ce que chaque contrôleur lui passe en paramètre. 
+ * Classe View
+ *
+ * Cette classe est responsable de la génération des vues.
+ * Elle prend en charge l'injection des variables passées par les contrôleurs
+ * et intègre le contenu généré dans le template principal.
  */
 class View 
 {
     /**
      * Le titre de la page.
+     *
+     * @var string
      */
     private string $title;
         
     /**
-     * Constructeur. 
-     * Le constructeur initialise la propriété $title avec le titre de la page.
-     * 
-     * @param string $title : Le titre de la page.
+     * Constructeur.
+     *
+     * Initialise la propriété $title avec le titre de la page.
+     *
+     * @param string $title Le titre de la page.
      */
     public function __construct($title) 
     {
@@ -25,62 +30,69 @@ class View
     }
     
     /**
-     * Cette méthode retourne une page complète.
-     * Elle prend le nom de la vue et les paramètres envoyés par le contrôleur, génère le contenu et l'affiche dans le template principal.
-     * 
-     * @param string $viewName : le chemin de la vue demandée par le contrôleur. 
-     * @param array $params : les paramètres que le contrôleur a envoyés à la vue. (par exemple, les variables à afficher dans la vue)
+     * Génère et affiche la page complète.
+     *
+     * Cette méthode construit le chemin vers la vue demandée, y injecte les variables
+     * fournies par le contrôleur, puis intègre le contenu généré dans le template principal.
+     *
+     * @param string $viewName Le nom (ou chemin relatif) de la vue à afficher.
+     * @param array $params Les variables à injecter dans la vue.
      * @return void
      */
     public function render(string $viewName, array $params = []) : void 
     {
-        // On s'occupe de la vue envoyée
+        // Construit le chemin complet vers le fichier de la vue
         $viewPath = $this->buildViewPath($viewName);
         
-        // Les deux variables ci-dessous sont utilisées dans le "main.php" qui est le template principal.
+        // Génère le contenu de la vue en injectant les paramètres
         $content = $this->_renderViewFromTemplate($viewPath, $params);
+        // Récupère le titre de la page pour l'affichage dans le template principal
         $title = $this->title;
         
-        // On démarre la mise en tampon de sortie et on inclut le template principal
+        // Démarre la mise en tampon de sortie et inclut le template principal
         ob_start();
-        require(MAIN_VIEW_PATH);  // Ce fichier doit être le template principal de la page
-        echo ob_get_clean();      // On affiche le contenu tamponné et on le vide
+        require(MAIN_VIEW_PATH);  // MAIN_VIEW_PATH doit pointer vers le template principal (ex: views/templates/main.php)
+        echo ob_get_clean();      // Affiche et vide le contenu tamponné
     }
     
     /**
-     * Coeur de la classe, c'est ici qu'est généré ce que le contrôleur a demandé.
-     * Elle charge le fichier de la vue et y insère les variables envoyées.
-     * 
-     * @param string $viewPath : le chemin de la vue demandée par le contrôleur.
-     * @param array $params : les paramètres que le contrôleur a envoyés à la vue.
-     * @throws Exception : si la vue n'existe pas.
-     * @return string : le contenu de la vue générée.
+     * Génère le contenu de la vue à partir d'un fichier template.
+     *
+     * Cette méthode charge le fichier de la vue, injecte les variables passées en paramètres
+     * (via extract) et retourne le contenu généré.
+     *
+     * @param string $viewPath Le chemin complet vers le fichier de la vue.
+     * @param array $params Les variables à injecter dans la vue.
+     * @throws Exception Si le fichier de la vue n'existe pas.
+     * @return string Le contenu généré par la vue.
      */
     private function _renderViewFromTemplate(string $viewPath, array $params = []) : string
     {  
-        // On vérifie si le fichier de la vue existe
+        // Vérifie si le fichier de la vue existe
         if (file_exists($viewPath)) {
-            extract($params); // On transforme le tableau de paramètres en variables individuelles accessibles dans le template
-            ob_start();        // On démarre la mise en tampon de la sortie
-            require($viewPath);  // On inclut la vue demandée
-            return ob_get_clean();  // On récupère le contenu tamponné et on le renvoie
+            // Transforme le tableau de paramètres en variables accessibles dans la vue
+            extract($params);
+            // Démarre la mise en tampon de sortie
+            ob_start();
+            // Inclut le fichier de la vue
+            require($viewPath);
+            // Retourne le contenu mis en tampon et le vide
+            return ob_get_clean();
         } else {
             throw new Exception("La vue '$viewPath' est introuvable.");
         }
     }
 
     /**
-     * Cette méthode construit le chemin vers la vue demandée.
-     * Elle est utilisée pour localiser le fichier de la vue à partir de son nom.
-     * 
-     * @param string $viewName : le nom de la vue demandée.
-     * @return string : le chemin vers le fichier de la vue.
+     * Construit le chemin complet vers la vue demandée.
+     *
+     * La méthode utilise la constante TEMPLATE_VIEW_PATH pour localiser le fichier.
+     *
+     * @param string $viewName Le nom de la vue (sans extension).
+     * @return string Le chemin complet vers le fichier de la vue.
      */
     private function buildViewPath(string $viewName) : string
     {
-        // Construit le chemin complet de la vue à partir du nom de la vue
         return TEMPLATE_VIEW_PATH . $viewName . '.php';
     }
-
-
 }

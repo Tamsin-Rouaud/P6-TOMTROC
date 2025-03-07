@@ -1,8 +1,12 @@
+/********** SEARCH RESULT **********/
+
+/* Conteneur principal de la section de résultats de recherche */
 .searchResult {
-    padding-top: 100px;
-    padding-bottom: 40px;
+    padding-top: 100px;    /* Espace au-dessus de la section */
+    padding-bottom: 40px;  /* Espace en dessous de la section */
 }
 
+/* Style pour le titre (h2) dans la section de résultats de recherche */
 .searchResult h2 {
-    padding-bottom: 40px;
+    padding-bottom: 40px;  /* Espace sous le titre */
 }

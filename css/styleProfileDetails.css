@@ -24,7 +24,7 @@
     display: flex;
 }
 
-.myBookBlock-mobile {
+.myBookBlockMobile {
     display: none;
 }
 
@@ -35,14 +35,14 @@
       display: none;
     }
     /* On affiche la version mobile */
-    .mobile-version {
+    .mobileVersion {
       display: block;
     }
     
     /* Layout mobile simplifié : 
        on peut tout passer en bloc ou en flex
     */
-    .profileDetailsBlock.mobile-version {
+    .profileDetailsBlock.mobileVersion {
       padding: 20px; /* Ex. un padding plus léger */
       display: block;
     }
@@ -66,10 +66,11 @@
       width: 120px;  /* exemple */
       height: auto;
       border-radius: 50%;
+      padding-top: 30px;
     }
   
     /* Les "cartes" de livres */
-    .myBookBlock-mobile {
+    .myBookBlockMobile {
       display: flex;
       flex-direction: column;
       gap: 20px; /* espace entre cartes */
@@ -86,33 +87,36 @@
      
     }
   
-    .card-photo img {
+    .cardPhoto img {
       width: 80px;
       height: auto;
       object-fit: cover;
       border-radius: 8px;
     }
   
-    .card-info {
+    .cardInfo {
         margin: 0;
     }
-    .card-info h3 {
+    .cardInfo h3 {
       font-size: 1.1em;
       margin-bottom: 10px;
     }
   
-    .card-info p {
+    .cardInfo p {
       margin: 5px 0;
+      
     }
 
-    .myBookBlock-mobile p:last-child {
+    .myBookBlockMobile p:last-child {
         font-style: unset;
     }
 
     .card h3 {
         font-weight: normal;
-
+      
     }
+
+
 
     section.profileDetailsBlock {
       margin-bottom: 40px;

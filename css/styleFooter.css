@@ -1,49 +1,49 @@
 /********** FOOTER **********/
 
+/* Style global du footer */
 footer {
     display: flex;
-    font-size: 0.9em;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: flex-end; /* Aligne le contenu à droite */
+    align-items: center;       /* Centre verticalement le contenu */
     width: 100%;
     height: 61px;
+    font-size: 0.9em;
     background-color: white;
-
 }
 
+/* Conteneur interne du footer */
 .footerUl {
     display: flex;
     justify-content: flex-end;
     margin: 0;
-
 }
 
+/* Style des listes à l'intérieur du footer */
 footer ul {
     display: flex;
-    list-style: none;
+    list-style: none;      /* Suppression des puces */
     align-items: center;
-    
 }
 
+/* Espacement entre les éléments de liste */
 li {
     padding-right: 30px;
-    
 }
 
+/* Taille de l'image du logo dans le footer */
 #logoTT {
     width: 22px;
-    
 }
 
-/* MOBILE */
+/* Styles pour les écrans mobiles */
 @media screen and (max-width: 768px) {
     footer {
-        justify-content: center;
-        height: unset;
+        justify-content: center; /* Centre le contenu sur mobile */
+        height: unset;           /* La hauteur s'adapte au contenu */
     }
 
     footer ul {
-        flex-direction: column;
+        flex-direction: column;  /* Affichage vertical des éléments */
         justify-content: center;
     }
 

@@ -1,28 +1,40 @@
 <?php
+// Activation des erreurs pour le débogage (à décommenter en cas de besoin)
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
+/**
+ * Contrôleur pour la gestion des livres.
+ * Il orchestre les interactions entre la vue, le modèle et les services liés aux livres.
+ */
 class BookController {
 
+    // Gestionnaires pour manipuler les livres et les utilisateurs
     private BookManager $bookManager;
     private UserManager $userManager;
 
+    /**
+     * Constructeur : instancie les gestionnaires nécessaires.
+     */
     public function __construct() {
         $this->bookManager = new BookManager();
         $this->userManager = new UserManager(); // Initialisation de UserManager
     }
 
+    /**
+     * Redirige l'utilisateur vers la page de son compte.
+     */
     private function redirectToMyAccount(): void {
         header('Location: index.php?action=myAccount');
         exit;
     }
 
-    private function validateBookForm(array $data): bool {
-        return !empty($data['addBookTitle']) && 
-               !empty($data['addBookAuthor']) && 
-               !empty($data['addBookDescription']);
-    }
+    // ----------------- Méthodes de lecture -----------------
 
-    
-
+    /**
+     * Affiche tous les livres associés à l'utilisateur connecté.
+     */
     public function showAllBooks(): void {
         $userId = $_SESSION['id_user'] ?? null;
         if (!$userId) {
@@ -35,71 +47,72 @@ class BookController {
         $view->render('myAccount', ['books' => $books]);
     }
 
-       
-    // Contrôleur BookController
+    /**
+     * Affiche les détails d'un livre et du propriétaire.
+     *
+     * @param int $id L'identifiant du livre.
+     * @throws Exception si le livre ou le propriétaire est introuvable.
+     */
     public function showBookDetails($id) {
         $bookManager = new BookManager();
         $userManager = new UserManager();
     
-        // Récupérer les informations du livre avec l'ID
+        // Récupère le livre à partir de son ID
         $book = $bookManager->findBookById($id);
     
-        // Vérifier si le livre existe
         if (!$book) {
             throw new Exception("Livre introuvable avec l'ID : $id");
         }
     
-        // Récupérer l'ID du propriétaire du livre
+        // Récupère l'ID du propriétaire et ses informations
         $ownerId = $book->getOwnerId();
-    
-        // Récupérer les informations du propriétaire
         $user = $userManager->findUserById($ownerId);
     
-
-        // Vérifier si le propriétaire existe
         if (!$user) {
             throw new Exception("Propriétaire introuvable pour ce livre");
         }
     
-               
-        // Afficher la vue avec les données du livre et du propriétaire
+        // Affiche la vue avec les données du livre et du propriétaire
         $view = new View("Afficher un livre");
         $view->render("bookDetails", [
             'book' => $book,
-            'user' => $user // Ajout des informations du propriétaire
+            'user' => $user
         ]);
     }
-    
 
-    
-
-
-
+    /**
+     * Affiche le formulaire d'ajout de livre.
+     */
     public function showAddBookForm(): void {
         $view = new View('Ajouter un livre');
         $view->render('addBookForm');
     }
 
-    public function editBook(): void { //Modifier le nom pour showEditBookForm
+    // ----------------- Méthodes de modification -----------------
+
+    /**
+     * Affiche le formulaire d'édition d'un livre et gère sa mise à jour.
+     */
+    public function editBook(): void {
+        // Vérifie que l'utilisateur est connecté
         Utils::checkIfUserIsConnected();
 
         $bookId = $_GET['id_book'] ?? null;
-        
         if (!$bookId) {
             $this->redirectToMyAccount();
         }
 
         $book = $this->bookManager->findBookById((int) $bookId);
-        
+        // Vérifie que le livre existe et que l'utilisateur connecté est bien le propriétaire
         if (!$book || $book->getOwnerId() !== $_SESSION['user']['id']) {
-        
             $this->redirectToMyAccount();
         }
 
+        // Traitement du formulaire de modification en méthode POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
             $imagePath = $book->getImagePath();
            
+            // Gestion de l'upload de l'image si une nouvelle image est fournie
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $imagePath = Utils::handleImageUpload(
                     $_FILES['image'],
@@ -109,6 +122,7 @@ class BookController {
                 );
             }
 
+            // Mise à jour des informations du livre
             $book->setTitle(trim($_POST['getBookTitle']));
             $book->setAuthorName(trim($_POST['getBookAuthor']));
             $book->setDescription(trim($_POST['getBookDescription']));
@@ -116,242 +130,231 @@ class BookController {
             $book->setImagePath($imagePath);
             
             $this->bookManager->updateBook($book);
-            
             $this->redirectToMyAccount();
         }
 
+        // Affiche le formulaire d'édition du livre
         $view = new View("Modifier un livre");
         $view->render("editBookForm", ['book' => $book]);
     }
 
+    // ----------------- Méthodes de création -----------------
 
-
-// CREATE
-
-public function addBook()
- {
-     // Vérifie si la méthode de requête est POST (soumission de formulaire).
-     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-          
-         // Vérifie si un utilisateur est connecté (basé sur la session).
-         if (isset($_SESSION['user']) && isset($_SESSION['user']['id'])) {
-             $ownerId = $_SESSION['user']['id']; // Récupère l'ID de l'utilisateur connecté.
-            
-             // **1. Validation et traitement des données envoyées par le formulaire**
-             $title = trim($_POST['addBookTitle'] ?? '');       // Titre du livre (supprime les espaces inutiles).
-             
-             $author = trim($_POST['addBookAuthor'] ?? '');     // Auteur du livre.
-             
-             $description = trim($_POST['addBookDescription'] ?? ''); // Description du livre.
-             
-             $isAvailable = $_POST['addBookIsAvailable'] ?? 1; // Disponibilité du livre (par défaut : disponible).
-             
-             // **2. Gestion de l'image**
-             $bookManager = new BookManager(); // Instancie le gestionnaire de livres.
-                                    
-            $imageUploadResult = Utils::handleImageUpload(
-                $_FILES['addBookImage'] ?? null, // Fichier envoyé
-                'books',                         // Dossier cible
-                'defaultBook.png',               // Image par défaut
-                // $oldImagePath                    // Ancienne image (si applicable)
-            );
-            // Vérifiez si l'upload a réussi avant d'extraire le chemin
-if ($imageUploadResult['success']) {
-    $imagePath = $imageUploadResult['path']; // Récupère uniquement le chemin
-} else {
-    // Gérez le cas où l'upload échoue, par exemple en définissant une image par défaut
-    $imagePath = "./uploads/books/defaultBook.png";
-}
-                         
-             // **3. Validation des données requises**
-             if (!empty($title) && !empty($author) && !empty($description)) {
-                 // Si toutes les données sont valides, crée un nouvel objet `Book`.
-                 $book = new Book();
-                 $book->setTitle($title);                  // Définit le titre du livre.
-                 $book->setAuthorName($author);            // Définit l'auteur.
-                 $book->setDescription($description);      // Définit la description.
-                 $book->setIsAvailable($isAvailable);      // Définit la disponibilité.
-                 $book->setImagePath($imagePath);          // Définit le chemin de l'image.
-                 $book->setOwnerId($ownerId);              // Définit l'identifiant du propriétaire.
- 
-                 // Enregistre le livre dans la base de données.
-                 $bookManager->createBook($book);
- 
-                 // Redirige l'utilisateur vers sa page "Mon Compte".
-                 header('Location: index.php?action=myAccount');
-                 exit; // Arrête l'exécution du script après la redirection.
-             } else {
-                 // Si des champs sont manquants ou invalides, affiche un message d'erreur.
-                 echo "Erreur : Tous les champs du formulaire ne sont pas remplis.";
-             }
-         } else {
-             // Si aucun utilisateur n'est connecté, affiche une erreur.
-             echo "Erreur : Aucun utilisateur connecté.";
-         }
-     }
- }
+    /**
+     * Ajoute un nouveau livre.
+     * Valide les données du formulaire, gère l'upload de l'image et enregistre le livre.
+     */
+    public function addBook() {
+        // Vérifie que la méthode HTTP utilisée est POST (soumission du formulaire)
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Vérifie qu'un utilisateur est connecté
+            if (isset($_SESSION['user']) && isset($_SESSION['user']['id'])) {
+                $ownerId = $_SESSION['user']['id'];
+                
+                // Récupération et nettoyage des données du formulaire
+                $title = trim($_POST['addBookTitle'] ?? '');
+                $author = trim($_POST['addBookAuthor'] ?? '');
+                $description = trim($_POST['addBookDescription'] ?? '');
+                $isAvailable = $_POST['addBookIsAvailable'] ?? 1;
+                
+                // Gestion de l'image : upload ou utilisation de l'image par défaut
+                $bookManager = new BookManager();
+                $imageUploadResult = Utils::handleImageUpload(
+                    $_FILES['addBookImage'] ?? null,
+                    'books',
+                    'defaultBook.png'
+                );
+                if ($imageUploadResult['success']) {
+                    $imagePath = $imageUploadResult['path'];
+                } else {
+                    $imagePath = "./uploads/books/defaultBook.png";
+                }
+                
+                // Vérifie que les champs obligatoires sont remplis
+                if (!empty($title) && !empty($author) && !empty($description)) {
+                    // Création et configuration d'un nouvel objet Book
+                    $book = new Book();
+                    $book->setTitle($title);
+                    $book->setAuthorName($author);
+                    $book->setDescription($description);
+                    $book->setIsAvailable($isAvailable);
+                    $book->setImagePath($imagePath);
+                    $book->setOwnerId($ownerId);
     
+                    // Enregistrement du livre dans la base de données
+                    $bookManager->createBook($book);
+    
+                    // Redirection vers la page "Mon Compte" après ajout
+                    header('Location: index.php?action=myAccount');
+                    exit;
+                } else {
+                    echo "Erreur : Tous les champs du formulaire ne sont pas remplis.";
+                }
+            } else {
+                echo "Erreur : Aucun utilisateur connecté.";
+            }
+        }
+    }
 
-// READ
+    // ----------------- Autres méthodes de lecture -----------------
+
+    /**
+     * Affiche tous les livres disponibles pour l'échange.
+     */
     public function showBooks(): void {
         $books = $this->bookManager->getAllBooks();
         $view = new View('Nos livres à l\'échange');
         $view->render('availableBooks', ['books' => $books]);
     }
 
+    // ----------------- Méthodes de mise à jour -----------------
 
-
-// UPDATE
-public function updateBook()
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $id_book = $_POST['id_book'] ?? null;
-        $title = $_POST['getBookTitle'] ?? '';
-        $author_name = $_POST['getBookAuthor'] ?? '';
-        $description = $_POST['getBookDescription'] ?? '';
-        $is_available = isset($_POST['getBookIsAvailable']) ? (int)$_POST['getBookIsAvailable'] : 0;
-
-        $bookManager = new BookManager();
-        $existingBook = $bookManager->findBookById($id_book);
-
-        if (!$existingBook) {
-            header("Location: index.php?action=myAccount&error=book_not_found");
-            exit;
-        }
-
-        // Chemin de l'image actuelle
-        $currentImagePath = $existingBook->getImagePath();
-
-        // Gestion de l'image (si un fichier est téléchargé)
-        if (isset($_FILES['updateBookImage']) && $_FILES['updateBookImage']['error'] === UPLOAD_ERR_OK) {
-            $uploadResult = Utils::handleImageUpload(
-                $_FILES['updateBookImage'],  // Fichier envoyé
-                'books',                      // Sous-dossier
-                'defaultBook.png',            // Image par défaut
-                $currentImagePath            // Ancien chemin d'image
-            );
-
-            if ($uploadResult['success']) {
-                $currentImagePath = $uploadResult['path']; // Nouveau chemin si l'upload réussit
-            } else {
-                // Facultatif : gérer une redirection ou afficher un message d'erreur
-                error_log("Erreur lors de l'upload de l'image : " . $uploadResult['error']);
-            }
-        }
-
-        // Instanciation du livre
-        $book = new Book();
-        $book->setIdBook($id_book);
-        $book->setTitle($title);
-        $book->setAuthorName($author_name);
-        $book->setDescription($description);
-        $book->setIsAvailable($is_available);
-        $book->setImagePath($currentImagePath); // Utilisation du chemin d'image final
-
-        // Mise à jour via BookManager
-        try {
-            $bookManager->updateBook($book);
-            header("Location: index.php?action=myAccount&success=update");
-            exit;
-        } catch (Exception $e) {
-            error_log("Erreur lors de la mise à jour du livre : " . $e->getMessage());
-            header("Location: index.php?action=myAccount&error=update_failed");
-            exit;
-        }
-    } else {
-        header("Location: index.php?action=myAccount");
-        exit;
-    }
-}
-
-
-// DELETE
-public function deleteBook(): void
-{
-    // Vérifie si un ID valide est passé dans l'URL
-    if (isset($_GET['id_book']) && is_numeric($_GET['id_book'])) {
-        $bookId = (int)$_GET['id_book'];
-
-        // Instancie le BookManager
-        $bookManager = new BookManager();
-        $book = $bookManager->findBookById($bookId);
-
-        if ($book) {
-            // Supprime l'image si elle n'est pas celle par défaut
-            if ($book->getImagePath() !== './uploads/books/defaultBook.png' && 
-                file_exists($book->getImagePath())) {
-                unlink($book->getImagePath());
-            }
-
-            // Supprime le livre de la base de données
-            $bookManager->deleteBook($bookId);
-
-            // Redirection après suppression
-            header("Location: index.php?action=myAccount&message=deleted");
-            exit;
-        } else {
-            // Si le livre n'existe pas
-            echo "Erreur : Livre introuvable.";
-        }
-    } else {
-        // Si l'ID est manquant ou invalide, redirige vers la page "Mon compte"
-        header("Location: index.php?action=myAccount");
-        exit;
-    }
-}
-
-public function showLastAddedBooks() {
-    $bookManager = new BookManager();
-    $lastBooks = $bookManager->getLastAddedBooks();
-
-    // // Debugging: Affiche les résultats
-    // var_dump($lastBooks); 
-    // exit;
-
-    $view = new View('Accueil');
-    $view->render('home', ['lastBooks' => $lastBooks]);
-}
-
-
-public function searchResults() {
-    // Récupérer le terme de recherche saisi par l'utilisateur
-    $searchTerm = Utils::request('search', '');
-
-    if (empty($searchTerm)) {
-        // Si aucun terme n'est saisi, redirige vers la page des livres disponibles
-        Utils::redirect('availableBooks');
-        return;
-    }
-
-    // Effectuer une recherche dans la base de données pour les livres correspondants
-    $books = $this->bookManager->searchBooksByTitleOrAuthor($searchTerm);
-
-    if (count($books) === 1) {
-        // Si un seul livre correspond, redirige directement vers sa page de détails
-        $book = $books[0];
-        Utils::redirect('bookDetails', ['id' => $book->getIdBook()]);
-        return;
-    } elseif (empty($books)) {
-        // Si aucun livre ne correspond, affiche un message d'erreur
-        $view = new View('Aucun résultat');
-        $view->render('searchResults', [
-            'books' => [],
-            'searchTerm' => $searchTerm,
-            'errorMessage' => 'Aucun livre ne correspond à votre recherche.'
-        ]);
-        return;
-    }
-
-    // Si plusieurs livres correspondent, afficher une vue avec les résultats
-    $view = new View('Résultats de recherche');
-    $view->render('searchResults', [
-        'books' => $books,
-        'searchTerm' => $searchTerm,
-        'errorMessage' => ''
-    ]);
-}
-
-
-
+    /**
+     * Met à jour les informations d'un livre existant.
+     */
+    public function updateBook() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id_book = $_POST['id_book'] ?? null;
+            $title = $_POST['getBookTitle'] ?? '';
+            $author_name = $_POST['getBookAuthor'] ?? '';
+            $description = $_POST['getBookDescription'] ?? '';
+            $is_available = isset($_POST['getBookIsAvailable']) ? (int)$_POST['getBookIsAvailable'] : 0;
     
+            $bookManager = new BookManager();
+            $existingBook = $bookManager->findBookById($id_book);
+    
+            if (!$existingBook) {
+                header("Location: index.php?action=myAccount&error=book_not_found");
+                exit;
+            }
+    
+            // Gestion de l'image : récupération du chemin actuel et mise à jour si nécessaire
+            $currentImagePath = $existingBook->getImagePath();
+            if (isset($_FILES['updateBookImage']) && $_FILES['updateBookImage']['error'] === UPLOAD_ERR_OK) {
+                $uploadResult = Utils::handleImageUpload(
+                    $_FILES['updateBookImage'],
+                    'books',
+                    'defaultBook.png',
+                    $currentImagePath
+                );
+    
+                if ($uploadResult['success']) {
+                    $currentImagePath = $uploadResult['path'];
+                } else {
+                    error_log("Erreur lors de l'upload de l'image : " . $uploadResult['error']);
+                }
+            }
+    
+            // Instanciation d'un objet Book et mise à jour de ses propriétés
+            $book = new Book();
+            $book->setIdBook($id_book);
+            $book->setTitle($title);
+            $book->setAuthorName($author_name);
+            $book->setDescription($description);
+            $book->setIsAvailable($is_available);
+            $book->setImagePath($currentImagePath);
+    
+            // Tentative de mise à jour dans la base de données
+            try {
+                $bookManager->updateBook($book);
+                header("Location: index.php?action=myAccount&success=update");
+                exit;
+            } catch (Exception $e) {
+                error_log("Erreur lors de la mise à jour du livre : " . $e->getMessage());
+                header("Location: index.php?action=myAccount&error=update_failed");
+                exit;
+            }
+        } else {
+            header("Location: index.php?action=myAccount");
+            exit;
+        }
+    }
+
+    // ----------------- Méthodes de suppression -----------------
+
+    /**
+     * Supprime un livre à partir de son ID.
+     */
+    public function deleteBook(): void {
+        if (isset($_GET['id_book']) && is_numeric($_GET['id_book'])) {
+            $bookId = (int)$_GET['id_book'];
+    
+            $bookManager = new BookManager();
+            $book = $bookManager->findBookById($bookId);
+    
+            if ($book) {
+                // Supprime le fichier image si ce n'est pas l'image par défaut
+                if ($book->getImagePath() !== './uploads/books/defaultBook.png' && 
+                    file_exists($book->getImagePath())) {
+                    unlink($book->getImagePath());
+                }
+    
+                // Supprime le livre de la base de données
+                $bookManager->deleteBook($bookId);
+    
+                header("Location: index.php?action=myAccount&message=deleted");
+                exit;
+            } else {
+                echo "Erreur : Livre introuvable.";
+            }
+        } else {
+            header("Location: index.php?action=myAccount");
+            exit;
+        }
+    }
+
+    // ----------------- Autres fonctionnalités -----------------
+
+    /**
+     * Affiche les derniers livres ajoutés.
+     */
+    public function showLastAddedBooks() {
+        $bookManager = new BookManager();
+        $lastBooks = $bookManager->getLastAddedBooks();
+    
+        $view = new View('Accueil');
+        $view->render('home', ['lastBooks' => $lastBooks]);
+    }
+
+    /**
+     * Gère la recherche de livres par titre ou auteur.
+     * Redirige vers la page des détails si un seul livre est trouvé,
+     * ou affiche une liste de résultats sinon.
+     */
+    public function searchResults() {
+        // Récupère le terme de recherche
+        $searchTerm = Utils::request('search', '');
+    
+        if (empty($searchTerm)) {
+            Utils::redirect('availableBooks');
+            return;
+        }
+    
+        // Recherche des livres correspondants dans la base de données
+        $books = $this->bookManager->searchBooksByTitleOrAuthor($searchTerm);
+    
+        if (count($books) === 1) {
+            // Redirige directement vers la page de détails du livre si un seul résultat est trouvé
+            $book = $books[0];
+            Utils::redirect('bookDetails', ['id' => $book->getIdBook()]);
+            return;
+        } elseif (empty($books)) {
+            // Affiche un message d'erreur si aucun livre n'est trouvé
+            $view = new View('Aucun résultat');
+            $view->render('searchResults', [
+                'books' => [],
+                'searchTerm' => $searchTerm,
+                'errorMessage' => 'Aucun livre ne correspond à votre recherche.'
+            ]);
+            return;
+        }
+    
+        // Affiche la liste des livres correspondants si plusieurs résultats sont trouvés
+        $view = new View('Résultats de recherche');
+        $view->render('searchResults', [
+            'books' => $books,
+            'searchTerm' => $searchTerm,
+            'errorMessage' => ''
+        ]);
+    }
 }

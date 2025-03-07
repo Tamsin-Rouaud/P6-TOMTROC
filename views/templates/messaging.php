@@ -1,34 +1,39 @@
 <?php
-// Récupération de l'ID du contact (uniquement si non vide)
+// Récupère l'ID du contact depuis l'URL, ou le définit à null s'il n'est pas fourni
 $contactId = !empty($_GET['contact_id']) ? $_GET['contact_id'] : null;
 ?>
 <section class="mailing">
 
-  <!-- Liste des contacts -->
-  <!-- Si un contact est sélectionné, on masque la liste en mobile -->
-  <div class="mailingContainer <?php echo $contactId ? 'hide-mobile' : 'show-mobile'; ?>">
+  <!-- Bloc Liste des contacts -->
+  <!-- La classe CSS change en fonction de la sélection d'un contact pour gérer l'affichage en mobile -->
+  <div class="mailingContainer <?= $contactId ? 'hideMobile' : 'show-mobile'; ?>">
     <div class="mailingTitle">
       <h1>Messagerie</h1>
     </div>
+
     <?php if (!empty($contacts)): ?>
       <?php foreach ($contacts as $contact): ?>
+        <!-- Lien pour sélectionner un contact et afficher la conversation -->
         <a href="?action=messaging&contact_id=<?= htmlspecialchars($contact['id_user']) ?>">
           <div class="contact <?= (isset($_GET['contact_id']) && $_GET['contact_id'] == $contact['id_user']) ? 'activeContact' : '' ?>">
             <div class="contactImg">
+              <!-- Affiche l'avatar du contact ou une image par défaut -->
               <img src="<?= htmlspecialchars($contact['image_path'] ?? 'uploads/defaultAvatar.png') ?>" alt="Image contact">
             </div>
             <div class="contactText">
+              <!-- Affiche le nom du contact -->
               <p class="contactName"><?= htmlspecialchars($contact['username'] ?? 'Inconnu') ?></p>
+              <!-- Affiche le dernier message (limité à 30 caractères) ou un message par défaut -->
               <p class="contactLastMessage">
                 <?= !empty($contact['message_text']) 
-                  ? htmlspecialchars(mb_strimwidth($contact['message_text'], 0, 30, "...")) 
-                  : "Aucun message" ?>
+                      ? htmlspecialchars(mb_strimwidth($contact['message_text'], 0, 30, "...")) 
+                      : "Aucun message" ?>
               </p>
             </div>
             <div class="contactTime">
-  <!-- Affichage de la date du dernier message (format jour/mois/année) -->
-  <small><?= isset($contact['created_at']) ? date('d.m', strtotime($contact['created_at'])) : '' ?></small>
-</div>
+              <!-- Affiche la date du dernier message au format jour.mois -->
+              <small><?= isset($contact['created_at']) ? date('d.m', strtotime($contact['created_at'])) : '' ?></small>
+            </div>
           </div>
         </a>
       <?php endforeach; ?>
@@ -37,14 +42,18 @@ $contactId = !empty($_GET['contact_id']) ? $_GET['contact_id'] : null;
     <?php endif; ?>
   </div>
 
-  <!-- Colonne des messages -->
-  <!-- Si aucun contact n'est sélectionné, on masque la conversation en mobile -->
-  <div class="containerMessage <?php echo !$contactId ? 'hide-mobile' : 'show-mobile'; ?>">
+  <!-- Bloc Colonne des messages -->
+  <!-- La conversation s'affiche en fonction de la sélection d'un contact et est masquée en mobile si aucun contact n'est choisi -->
+  <div class="containerMessage <?= !$contactId ? 'hideMobile' : 'showMobile'; ?>">
     <div class="messageContainerTitle">
       <?php if (!empty($activeContact)): ?>
+        <!-- Lien retour pour revenir à la liste des contacts (visible en mobile) -->
         <p class="arrowText">
-        <a  href="index.php?action=messaging"><img class="arrow" src="./images/arrow.png" alt="Retour">retour</a>
-    </p>
+          <a href="index.php?action=messaging">
+            <img class="arrow" src="./images/arrow.png" alt="Retour">retour
+          </a>
+        </p>
+        <!-- Affiche le nom et l'image du contact actif -->
         <h3>
           <img src="<?= htmlspecialchars($activeContact['image_path'] ?? 'uploads/defaultAvatar.png') ?>" alt="Image contact">
           <?= htmlspecialchars($activeContact['username'] ?? 'Contact') ?>
@@ -58,10 +67,13 @@ $contactId = !empty($_GET['contact_id']) ? $_GET['contact_id'] : null;
       <div class="messagesContainer">
         <?php if (!empty($messages)): ?>
           <?php foreach ($messages as $message): ?>
-            <?php $isSent = ($message->getFromUser() == $_SESSION['user']['id']); ?>
+            <?php 
+              // Détermine si le message a été envoyé par l'utilisateur connecté
+              $isSent = ($message->getFromUser() == $_SESSION['user']['id']);
+            ?>
             <div class="messageWrapper <?= $isSent ? 'sent' : 'received' ?>">
               <?php if (!$isSent): ?>
-                <!-- Affiche l'avatar et l'heure pour les messages reçus -->
+                <!-- Pour les messages reçus, affiche l'avatar du contact et l'heure -->
                 <div class="messageMeta">
                   <div class="messageAvatar">
                     <img src="<?= htmlspecialchars($message->getContactImage()) ?>" alt="Avatar">
@@ -71,12 +83,13 @@ $contactId = !empty($_GET['contact_id']) ? $_GET['contact_id'] : null;
                   </small>
                 </div>
               <?php else: ?>
-                <!-- Affiche uniquement l'heure pour les messages envoyés -->
+                <!-- Pour les messages envoyés, affiche uniquement l'heure -->
                 <small class="messageTime sentTime">
                   <?= htmlspecialchars(date('d.m H:i', strtotime($message->getCreatedAt()))) ?>
                 </small>
               <?php endif; ?>
 
+              <!-- Corps du message -->
               <div class="messageBody">
                 <div class="messageContent">
                   <p><?= htmlspecialchars($message->getMessageText()) ?></p>
@@ -87,7 +100,7 @@ $contactId = !empty($_GET['contact_id']) ? $_GET['contact_id'] : null;
         <?php endif; ?>
       </div>
 
-      <!-- Formulaire pour envoyer un message -->
+      <!-- Formulaire d'envoi d'un message, affiché uniquement si un contact est actif -->
       <?php if (!empty($activeContact)): ?>
         <div class="formMessage">
           <form action="?action=sendMessage&contact_id=<?= htmlspecialchars($activeContact['id_user']) ?>" method="POST">

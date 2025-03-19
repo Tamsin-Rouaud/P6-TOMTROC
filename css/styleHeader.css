@@ -24,15 +24,18 @@ nav {
     align-items: center;
 }
 
+.liContainer {
+    list-style: none;
+}
 /* Style pour les éléments de la navigation dans les div situées dans les ul */
-nav ul div li {
+.liContainer ul li{
     display: flex;
     align-items: center;
     padding-right: 60px;
 }
 
 /* Style des liens dans ces éléments de navigation */
-ul div li a {
+.liContainer ul li a {
     color: black;
     display: flex;
     margin: 0;
@@ -41,7 +44,7 @@ ul div li a {
 }
 
 /* Style pour un lien actif (par exemple, la page actuelle) */
-nav ul li a.active {
+.liContainer ul li a.active {
     font-weight: bold;
 }
 
@@ -143,10 +146,11 @@ header span {
     }
     
     /* Style pour les éléments de navigation sur mobile */
-    .firstPart li,
-    .secondPart li {
+  
+    .liContainer ul li {
         margin-left: 40px;
         padding-bottom: 5px;
+        padding-right: 75px;
     }
     
     /* Réduction du margin pour le logo sur mobile */

@@ -1,6 +1,6 @@
 <section class="connexionBlock">
     <!-- Formulaire de connexion -->
-    <form class="connexionText" method="post" action="">
+    <form class="connexionText" method="post" >
         <!-- Titre du formulaire -->
         <h1 id="connexionTitle">Connexion</h1>
         <!-- Champ de saisie de l'adresse email -->

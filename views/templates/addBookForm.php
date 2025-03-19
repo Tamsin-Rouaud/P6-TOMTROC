@@ -1,6 +1,6 @@
 <section class="addEditBookProfileForm">
     <!-- Lien de retour vers "Mon compte" -->
-    <p>
+    <p class="pBackAdd">
         <a href="index.php?action=myAccount">
             <img class="arrow pBack" src="./images/arrow.png" alt="Retour">retour
         </a>
@@ -29,7 +29,7 @@
         <!-- Formulaire d'ajout de livre -->
         <form method="POST" enctype="multipart/form-data" action="./index.php?action=addBook">
             <!-- Champ caché pour l'upload de l'image -->
-            <input type="file" id="addBookImage" name="addBookImage" style="display: none;" accept="image/*">
+            <input type="file" id="addBookImage" aria-label="addBookImage" name="addBookImage" style="display: none;" accept="image/*">
 
             <!-- Champ pour le titre du livre -->
             <div class="formInput">

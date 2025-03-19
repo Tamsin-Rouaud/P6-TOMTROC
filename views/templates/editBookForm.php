@@ -1,6 +1,6 @@
 <section class="addEditBookProfileForm">
     <!-- Lien de retour vers "Mon compte" -->
-    <p>
+    <p class="pBackAdd">
         <a href="index.php?action=myAccount">
             <img class="arrow pBack" src="./images/arrow.png" alt="Retour">retour
         </a>
@@ -29,7 +29,7 @@
         <!-- Formulaire de modification des informations du livre -->
         <form method="POST" action="index.php?action=updateBook" enctype="multipart/form-data">
             <!-- Champ caché pour l'upload de l'image -->
-            <input type="file" id="updateBookImage" name="updateBookImage" style="display: none;" accept="image/*">
+            <input type="file" id="updateBookImage" aria-label="updateBookImage" name="updateBookImage" style="display: none;" accept="image/*">
             <!-- Champ caché pour transmettre l'identifiant du livre -->
             <input type="hidden" name="id_book" value="<?= htmlspecialchars($book->getIdBook()) ?>">
 

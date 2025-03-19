@@ -77,12 +77,15 @@ P6-TOMTROC/
 │-- images/            # Images de base du projet
 │-- models/            # Modèles interagissant avec la base de données
 │-- services/          # Classes utilitaires (routeur, gestion des images, validations, etc.)
+|   |-- Router.php     # Fichier Routeur
+|   |-- Utils.php      # Fichier des principales méthodes utilitaires du projet
 │-- uploads/           # Images des utilisateurs et des livres
 │   │-- books/         # Image des livres téchargés (par un utilisateur)
 │   │-- users/         # Image des profils téléchargés (par un utilisateur)
 │-- views/             # Templates HTML/PHP pour l'affichage
 │   │-- partials/      # Fichiers partagés (header, footer)
 │   │-- templates/     # Fichiers partagés (main)
+|   |-- View.php       # Fichier Class View principal
 │-- index.php          # Point d'entrée principal
 │-- menu.js            # JavaScript pour menu burger
 │-- README.md          # Documentation

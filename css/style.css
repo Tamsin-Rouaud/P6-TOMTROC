@@ -38,7 +38,7 @@ body {
 }
 
 /* Style pour les titres principaux */
-h1 {
+h1, h2 {
     font-family: 'playFair-display';
     font-size: 36px;
     font-weight: normal;

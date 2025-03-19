@@ -19,7 +19,7 @@ error_reporting(E_ALL);
                     <!-- Lien permettant de modifier la photo de profil -->
                     <a href="./index.php?action=addProfilePicture">Modifier</a>
                     <!-- Champ de type file pour l'upload de la photo (inclus ici pour la prévisualisation via JS, bien que la modification se fasse sur une autre page) -->
-                    <input type="file" id="addProfileImage" name="addProfileImage" enctype="multipart/form-data" accept="image/*" style="display:none;">
+                    <input type="file" id="addProfileImage" aria-label="addProfileImage" name="addProfileImage"  accept="image/*" style="display:none;">
                 </div>
                 <div class="underline"></div>
                 <div class="profileText">
@@ -37,16 +37,16 @@ error_reporting(E_ALL);
                         ?>
                     </p>
                     <!-- Bouton pour ajouter un livre -->
-                    <button class="button btnAddBook">
-                        <a href="./index.php?action=addBookForm">Ajouter un livre</a>
-                    </button>
+                    <!-- <button class="button btnAddBook"> -->
+                        <a class="buttonLink btnAddBook" href="./index.php?action=addBookForm">Ajouter un livre</a>
+                    <!-- </button> -->
                 </div>
             </div>
         </div>
 
         <!-- Bloc informations personnelles : formulaire de mise à jour -->
         <div class="boxInformationProfile">
-            <form class="informationProfile" method="POST" action="index.php?action=updateUser">
+            <form class="informationProfile" enctype="multipart/form-data" method="POST" action="index.php?action=updateUser">
                 <h4>Vos informations personnelles</h4>
                 <div class="formInputLogin">
                     <!-- Champ caché pour transmettre l'ID utilisateur -->
@@ -64,7 +64,7 @@ error_reporting(E_ALL);
                     <input type="text" id="username" name="username" value="<?= htmlspecialchars($user->getUsername() ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
                 <div class="buttonSave">
-                    <button class="button save" type="submit">Enregistrer</button>
+                    <button id="save"  type="submit">Enregistrer</button>
                 </div>
             </form>
         </div>

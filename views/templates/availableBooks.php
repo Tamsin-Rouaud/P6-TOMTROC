@@ -8,9 +8,9 @@
                 <img src="images/union.png" alt="Loupe recherche">
             </button>
             <!-- Champ de recherche pour saisir un livre -->
-            <label for="search">
-                <input type="text" id="search" name="search" placeholder="Rechercher un livre">
-            </label>
+            <!-- <label for="search"> -->
+                <input type="text" aria-label="Recherche" id="search" name="search" placeholder="Rechercher un livre">
+            <!-- </label> -->
             <!-- Champ caché pour préciser l'action de recherche -->
             <input type="hidden" name="action" value="searchResults">
         </form>

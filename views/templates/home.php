@@ -1,27 +1,27 @@
 <!-- Première section : Présentation et appel à l'action -->
 <div class="firstSection">
-    <section class="homeFirstSection">
+    <div class="homeFirstSection">
         <article>
-            <h1>Rejoignez nos lecteurs passionnés</h1>
+            <h2 class="principalTitle">Rejoignez nos lecteurs passionnés</h2>
             <p>
                 Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux 
                 de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.
             </p>
-            <button class="button">
-                <a href="index.php?action=availableBooks">Découvrir</a>
-            </button>
+            
+                <a class="buttonLink" href="index.php?action=availableBooks">Découvrir</a>
+            
         </article>
         <aside>
             <img src="images/homeFirstImg.jpg" alt="Image d'accueil">
-            <figcaption>Hamza</figcaption>
+            <span class="imgSubtitle">Hamza</span>
         </aside>
-    </section>
+    </div>
 </div>
 
 <!-- Deuxième section : Affichage des derniers livres ajoutés -->
 <div class="secondSection">
     <section class="homeSecondSection">
-        <h1>Les derniers livres ajoutés</h1>
+        <h2 class="principalTitle">Les derniers livres ajoutés</h2>
         <div class="imgGroupBlocks">
             <?php if (!empty($lastBooks)): ?>
                 <?php foreach ($lastBooks as $book): ?>
@@ -30,7 +30,7 @@
                         <img src="<?= htmlspecialchars($book->getImagePath()) ?>" alt="<?= htmlspecialchars($book->getTitle()) ?>">
                         <div class="imgBlockText">
                             <!-- Titre du livre -->
-                            <h2 class="titleHome"><?= htmlspecialchars($book->getTitle()) ?></h2>
+                            <h3 class="titleHome"><?= htmlspecialchars($book->getTitle()) ?></h3>
                             <!-- Auteur du livre -->
                             <p><?= htmlspecialchars($book->getAuthorName()) ?></p>
                             <!-- Nom du propriétaire -->
@@ -42,16 +42,15 @@
                 <p>Aucun livre ajouté récemment.</p>
             <?php endif; ?>
         </div>
-        <button class="button seeAllBooks">
-            <a href="index.php?action=availableBooks">Voir tous les livres</a>
-        </button>
+        <a class="buttonLink" href="index.php?action=availableBooks">Voir tous les livres</a>
+        
     </section>
 </div>
 
 <!-- Troisième section : Explication du fonctionnement de la plateforme -->
 <div class="thirdSection">
     <section class="homeThirdSection">
-        <h1>Comment ça marche ?</h1>
+        <h2 class="principalTitle">Comment ça marche ?</h2>
         <p id="ptitle">
             Échanger des livres avec TomTroc c'est simple et amusant ! Suivez ces étapes pour commencer :
         </p>
@@ -69,9 +68,8 @@
                 <p>Proposez un échange et discutez avec d'autres passionnés de lecture.</p>
             </div>
         </div>
-        <button class="button seeAllBooksTransparent">
-            <a href="index.php?action=availableBooks">Voir tous les livres</a>
-        </button>
+        <a class="buttonLink" href="index.php?action=availableBooks">Voir tous les livres</a>
+        
     </section>
 </div>
 
@@ -83,7 +81,7 @@
 <!-- Cinquième section : Présentation des valeurs de Tom Troc -->
 <div class="fifthSection">
     <section class="homeFifthSection">
-        <h1>Nos valeurs</h1>
+        <h2 class="principalTitle">Nos valeurs</h2>
         <p>
             Chez Tom Troc, nous mettons l'accent sur le partage, la découverte et la communauté.
             Nos valeurs sont ancrées dans notre passion pour les livres et notre désir de créer

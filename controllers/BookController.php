@@ -1,8 +1,4 @@
 <?php
-// Activation des erreurs pour le débogage (à décommenter en cas de besoin)
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
 
 /**
  * Contrôleur pour la gestion des livres.
@@ -42,7 +38,7 @@ class BookController {
             return;
         }
 
-        $books = $this->bookManager->getBooksByUser($userId);
+        $books = $this->bookManager->findBooksByUserId($userId);
         $view = new View('Mon compte');
         $view->render('myAccount', ['books' => $books]);
     }

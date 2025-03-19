@@ -113,6 +113,7 @@
 
 .informationProfile h4 {
     padding-bottom: 20px;
+    font-weight: normal;
 }
 
 .informationProfile input {
@@ -237,6 +238,7 @@ tbody tr:nth-child(even) {
 
 .btnAddBook {
     font-weight: bold;
+    padding: 20px;
 }
 
 /*** Tooltip pour la description complète ***/
@@ -273,6 +275,15 @@ tbody tr:nth-child(even) {
 .myBookBlock img {
     width: 79px;
 }
+#save {
+    width: 47%;
+    font-weight: bold;
+    color: #00AC66;
+    background-color: #f5f3ef;
+    border: #00AC66 solid 1px;
+    margin-top: 0;
+    padding: 20px;
+}
 
 /********** MEDIA QUERIES (MOBILE) **********/
 @media screen and (max-width: 768px) {
@@ -281,6 +292,7 @@ tbody tr:nth-child(even) {
         margin: 0;
         width: 100%;
         height: unset;
+        margin-bottom: 25px;
     }
 
     .boxProfile {
@@ -299,6 +311,7 @@ tbody tr:nth-child(even) {
     .myAccount {
         margin: auto;
         padding-bottom: 0;
+        padding-top: 100px;
     }
 
     .myAccount h1 {
@@ -307,9 +320,7 @@ tbody tr:nth-child(even) {
         padding-bottom: unset;
     }
 
-    .save {
-        width: 100%;
-    }
+
 
     .informationProfile {
         margin: 0 25px;

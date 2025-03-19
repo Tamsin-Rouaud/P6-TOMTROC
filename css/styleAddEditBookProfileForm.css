@@ -7,14 +7,18 @@
     margin-left: 20px;
 }
 
+.pBackAdd {
+    margin-left: 120px;
+}
+
 /* Conteneur global du formulaire d'ajout/édition d'un livre */
 .addEditBookProfileForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: #faf9f7;
-    margin-left: 130px;
-    margin-right: 130px;
+    /* margin-left: 130px;
+    margin-right: 130px; */
 }
 
 /* Bouton à l'intérieur du formulaire : espacement et largeur */
@@ -29,6 +33,7 @@
     padding-left: 20px;
     padding-bottom: 25px;
     font-size: 1.625em;
+    margin-left: 120px;
 }
 
 /* Style des paragraphes dans le formulaire */
@@ -59,14 +64,18 @@
     background-color: #fff;
     padding: 20px 40px 60px;
     border-radius: 15px;
-    margin-left: 20px;
+   margin-left: 120px;
     width: 84.8%;
+}
+
+.addEditBookContainer form {
+    width: 45%;
 }
 
 /* Style des inputs dans un bloc "formInput" à l'intérieur d'AddBookContainer */
 .addEditBookContainer .formInput input {
     background-color: #edf2f6;
-    width: 435px;
+    
     padding-left: 20px;
 }
 
@@ -77,7 +86,9 @@
 
 /* Style appliqué aux images à l'intérieur du conteneur */
 .addEditBookContainer img {
-    width: 488px;
+    width: 100%;
+    height: 523px;
+    object-fit: cover;
     border: solid 1px #edf2f6;
 }
 
@@ -99,6 +110,8 @@
 /* Espace à droite pour le bloc gauche */
 .leftBlock {
     padding-right: 80px;
+    margin: 0
+    ;
 }
 
 /* Premier paragraphe du LeftBlock : alignement et couleur */
@@ -209,24 +222,38 @@
     /* Adaptation du conteneur AddEditBook pour les petits écrans */
     .addEditBookContainer {
         flex-direction: column;
-        margin-left: 10px;
+        margin:0;
         width: 100%;
+        padding: 15px;
     }
 
+    .addEditBookContainer .formInput input {
+        width: unset;
+    }
     .addEditBookContainer img {
+        height: unset;
+    }
+
+    .addEditBookContainer form {
         width: 100%;
     }
 
+    .addEditBookContainer .formInput {
+        display: flex;
+        flex-direction: column;
+    }
     /* Réduction des espacements pour les paragraphes dans AddEditBookProfileForm */
     .addEditBookProfileForm p {
         padding-bottom: 10px;
         padding-left: 0;
+        margin: 0;
     }
 
     /* Ajustement du titre dans AddEditBookProfileForm pour mobile */
     .addEditBookProfileForm h1 {
         font-size: 2em;
-        padding-left: 40px;
+        
+        margin: 0;
     }
 
     /* Le formulaire AddEditBookProfileForm occupe toute la largeur */
@@ -241,13 +268,15 @@
         margin: 0;
     }
 
-    /* Ajustement du lien dans AddEditBookProfileForm pour mobile */
-    .addEditBookProfileForm p a {
-        padding-left: 40px;
-    }
+
 
     /* Bouton du formulaire occupe toute la largeur */
     .addEditBookProfileForm button {
         width: 100%;
+        margin-bottom: 25px;
+    }
+
+    #addBookDescription, #getBookDescription {
+        margin-bottom: 25px;
     }
 }

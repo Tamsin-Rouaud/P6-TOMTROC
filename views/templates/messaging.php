@@ -104,7 +104,7 @@ $contactId = !empty($_GET['contact_id']) ? $_GET['contact_id'] : null;
       <?php if (!empty($activeContact)): ?>
         <div class="formMessage">
           <form action="?action=sendMessage&contact_id=<?= htmlspecialchars($activeContact['id_user']) ?>" method="POST">
-            <textarea name="message" rows="3" placeholder="Tapez votre message ici"></textarea>
+            <textarea name="message" aria-label="message" rows="3" placeholder="Tapez votre message ici"></textarea>
             <button class="buttonMessage" type="submit">Envoyer</button>
           </form>
         </div>

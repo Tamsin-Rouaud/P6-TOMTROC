@@ -35,8 +35,11 @@
             </a>
         </div>
         <!-- Bouton permettant d'envoyer un message au propriétaire -->
-        <a href="index.php?action=messaging&contact_id=<?= htmlspecialchars($user->getIdUser()) ?>">
-            <button class="button subscribe" type="submit">Envoyer un message</button>
-        </a>
+         <!-- Bouton permettant d'envoyer un message au propriétaire -->
+<a class="buttonLink subscribe" href="index.php?action=messaging&contact_id=<?= htmlspecialchars($user->getIdUser()) ?>">
+    Envoyer un message
+</a>
+
+        
     </div>
 </section>

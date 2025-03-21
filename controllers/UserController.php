@@ -138,7 +138,8 @@ class UserController {
 
             if (empty($errors)) {
                 // Crée l'utilisateur en hachant le mot de passe
-                $userManager->createUser($username, $email, password_hash($password, PASSWORD_DEFAULT));
+                $userManager->createUser($username, $email, $password);
+
                 Utils::redirect('loginForm');
             }
         }

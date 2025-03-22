@@ -50,11 +50,10 @@ class BookController {
      * @throws Exception si le livre ou le propriétaire est introuvable.
      */
     public function showBookDetails($id) {
-        $bookManager = new BookManager();
         $userManager = new UserManager();
     
         // Récupère le livre à partir de son ID
-        $book = $bookManager->findBookById($id);
+        $book = $this->bookManager->findBookById($id);
     
         if (!$book) {
             throw new Exception("Livre introuvable avec l'ID : $id");
@@ -154,7 +153,7 @@ class BookController {
                 $isAvailable = $_POST['addBookIsAvailable'] ?? 1;
                 
                 // Gestion de l'image : upload ou utilisation de l'image par défaut
-                $bookManager = new BookManager();
+                
                 $imageUploadResult = Utils::handleImageUpload(
                     $_FILES['addBookImage'] ?? null,
                     'books',
@@ -178,7 +177,7 @@ class BookController {
                     $book->setOwnerId($ownerId);
     
                     // Enregistrement du livre dans la base de données
-                    $bookManager->createBook($book);
+                    $this->bookManager->createBook($book);
     
                     // Redirection vers la page "Mon Compte" après ajout
                     header('Location: index.php?action=myAccount');
@@ -216,8 +215,8 @@ class BookController {
             $description = $_POST['getBookDescription'] ?? '';
             $is_available = isset($_POST['getBookIsAvailable']) ? (int)$_POST['getBookIsAvailable'] : 0;
     
-            $bookManager = new BookManager();
-            $existingBook = $bookManager->findBookById($id_book);
+            
+            $existingBook = $this->bookManager->findBookById($id_book);
     
             if (!$existingBook) {
                 header("Location: index.php?action=myAccount&error=book_not_found");
@@ -252,7 +251,7 @@ class BookController {
     
             // Tentative de mise à jour dans la base de données
             try {
-                $bookManager->updateBook($book);
+                $this->bookManager->updateBook($book);
                 header("Location: index.php?action=myAccount&success=update");
                 exit;
             } catch (Exception $e) {
@@ -275,8 +274,8 @@ class BookController {
         if (isset($_GET['id_book']) && is_numeric($_GET['id_book'])) {
             $bookId = (int)$_GET['id_book'];
     
-            $bookManager = new BookManager();
-            $book = $bookManager->findBookById($bookId);
+            
+            $book = $this->bookManager->findBookById($bookId);
     
             if ($book) {
                 // Supprime le fichier image si ce n'est pas l'image par défaut
@@ -286,7 +285,7 @@ class BookController {
                 }
     
                 // Supprime le livre de la base de données
-                $bookManager->deleteBook($bookId);
+                $this->bookManager->deleteBook($bookId);
     
                 header("Location: index.php?action=myAccount&message=deleted");
                 exit;
@@ -305,8 +304,8 @@ class BookController {
      * Affiche les derniers livres ajoutés.
      */
     public function showLastAddedBooks() {
-        $bookManager = new BookManager();
-        $lastBooks = $bookManager->getLastAddedBooks();
+        
+        $lastBooks = $this->bookManager->getLastAddedBooks();
     
         $view = new View('Accueil');
         $view->render('home', ['lastBooks' => $lastBooks]);
